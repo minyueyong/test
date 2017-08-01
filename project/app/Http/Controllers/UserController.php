@@ -10,6 +10,7 @@ use Validator;
 use Auth;
 use App\User;
 use Illuminate\Support\Facades\Input;
+use Image;
 
 class UserController extends Controller
 {
@@ -50,11 +51,11 @@ class UserController extends Controller
             $user->phone = $request->input('phone');
             $user->campus = $request->input('campus');
             $user->gender = $request->input('gender');
-            $image = $request->file('image')->getClientOriginalName();
-            $filename = time().$image;
-            $file = $request->file('image');
-            $file->move('upload',$filename);
-            $user->image = $filename;
+            $image = $request->file('image');
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('/images/userpic/' . $filename);
+            Image::make($image->getRealPath())->resize(150, 150)->save($path);
+            $user->image = '/images/userpic/'.$filename;
             $user->save();
             Auth::login($user);
             return redirect()->intended('/dashboard');
