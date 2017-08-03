@@ -1,7 +1,7 @@
 <title>Sign Up</title>
 @extends('header')
 @section('content')
-    <link href="{{ asset('/css/default.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/>
 
     <script type="text/javascript">
     function CheckCampus(campusname)

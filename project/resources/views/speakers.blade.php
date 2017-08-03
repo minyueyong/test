@@ -1,7 +1,7 @@
 <title>Past Speakers</title>
 @extends('header')
 @section('content')
-<link href="{{ asset('/css/default.css') }}" rel="stylesheet"> 
+<link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 
 <style>
 	.carousel-inner > .item > img,
@@ -28,15 +28,15 @@
 
         <div class = "carousel-inner" role = "listbox">
             <div class = "item active">
-                <img src = "images/speaker1.jpg" alt = "speaker1" height = "200" width = "100">
+                <img src = "images/speaker1.jpg" alt = "speaker1">
             </div>
 
             <div class = "item">
-                <img src = "images/speaker2.jpg" alt = "speaker2" height = "200" width = "100">
+                <img src = "images/speaker2.jpg" alt = "speaker2">
             </div>
 
             <div class = "item">
-                <img src = "images/speaker3.jpg" alt = "speaker3" height = "200" width = "100">
+                <img src = "images/speaker3.jpg" alt = "speaker3">
             </div>
         </div>
 

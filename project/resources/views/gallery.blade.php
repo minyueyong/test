@@ -1,7 +1,7 @@
 <title>Gallery</title>
 @extends('header')
 @section('content')
-<link href="{{ asset('/css/default.css') }}" rel="stylesheet"> 
+<link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 <style>
 	.carousel-inner > .item > img,
     .carousel-inner > .item > a > img 

@@ -1,6 +1,6 @@
 @extends('header')
 @section('content')
-<link href="{{ asset('/css/default.css') }}" rel="stylesheet"> 
+<link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 
 <div class = "container">
     <br><br>
@@ -18,11 +18,11 @@
 
         <div class = "carousel-inner" role = "listbox">
             <div class = "item active">
-                <img src = "images/featuredevent1.jpg" alt = "featuredevent1" height = "200" width = "100">
+                <img src = "images/featuredevent1.png" alt = "featuredevent1" height = "200" width = "100">
             </div>
 
             <div class = "item">
-                <img src = "images/featuredevent2.jpg" alt = "featuredevent2" height = "200" width = "100">
+                <img src = "images/featuredevent2.png" alt = "featuredevent2" height = "200" width = "100">
             </div>
         </div>
 

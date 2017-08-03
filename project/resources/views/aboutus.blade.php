@@ -1,7 +1,7 @@
 <title>About Us</title>
 @extends('header')
 @section('content')
-<link href="{{ asset('/css/default.css') }}" rel="stylesheet"> 
+<link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 
 <div class = "container">
         <div class = "page-header">

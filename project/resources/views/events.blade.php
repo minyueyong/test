@@ -1,7 +1,7 @@
 <title>Events</title>
 @extends('header')
 @section('content')
-<link href="{{ asset('/css/default.css') }}" rel="stylesheet"> 
+<link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 <style>
 	.carousel-inner > .item > img,
     .carousel-inner > .item > a > img 
@@ -20,14 +20,14 @@
     <ul class="list-inline">
 	  	<li data-toggle="modal" data-target="#myModal">
 		  	<a href="#myGallery" data-slide-to="0" id="thumbnail">
-		  		<img class="img-thumbnail" src="/images/featuredevent1.jpg">
+		  		<img class="img-thumbnail" src="/images/featuredevent1.png">
 		  		<br>
 				Featured Event 1
 			</a>
 		</li>
 	  	<li data-toggle="modal" data-target="#myModal">
 		  	<a href="#myGallery" data-slide-to="1" id="thumbnail">
-		  		<img class="img-thumbnail" src="/images/featuredevent2.jpg">
+		  		<img class="img-thumbnail" src="/images/featuredevent2.png">
 		  		<br>
 				Featured Event 2
 			</a>
@@ -48,14 +48,14 @@
 					<div id="myGallery" class="carousel slide" data-interval="false">
 						<div class="carousel-inner">
 							<div class="item active"> 
-								<img src="/images/featuredevent1.jpg" alt="featuredevent1">
+								<img src="/images/featuredevent1.png" alt="featuredevent1">
 								<div class="carousel-caption">
 									<h3>Featured Event 1</h3>
 									<p>Date: 27/5/17</p>
 								</div>
 							</div>
 							<div class="item"> 
-								<img src="/images/featuredevent2.jpg" alt="featuredevent2">
+								<img src="/images/featuredevent2.png" alt="featuredevent2">
 								<div class="carousel-caption">
 									<h3>Featured Event 2</h3>
 									<p>Date: 29/4/17</p>
