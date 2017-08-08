@@ -10,7 +10,8 @@
     }
 
     input[type=text], input[type=password], 
-    input[type=number], input[type=email], input[type=file], #campus, #gender
+    input[type=number], input[type=email], input[type=file], #campus, #gender,
+    #education, #interest, #aboutme
     {
         width: 40%;
         padding: 10px 15px;

@@ -12,6 +12,24 @@
             document.getElementById('div1').innerHTML='';
     }
 
+
+
+    function CheckEducation(education)
+    {
+        if (education == 'other')
+            document.getElementById('div2').innerHTML = '<span class="glyphicon glyphicon-book"></span> <input type = "text" name = "Other" id = "Other" placeholder = "Education Name"/>'
+        else
+            document.getElementById('div2').innerHTML='';
+    }
+
+    function CheckInterest(interest)
+    {
+        if (interest == 'other')
+            document.getElementById('div3').innerHTML = '<span class="glyphicon glyphicon-list-alt"></span> <input type = "text" name = "Other" id = "Other" placeholder = "Area of Interest"/>'
+        else
+            document.getElementById('div3').innerHTML='';
+    }
+
     function CheckPassword(input) 
     {
         if (input.value != document.getElementById('password').value) 
@@ -106,7 +124,43 @@
             </div>
 
             <div class="form-group">
+                <div class="input-icon"> <span class="glyphicon glyphicon-book"></span>
+                <select name = "education" id ="education" onchange='CheckEducation(this.options[this.selectedIndex].value);' required>
+                    <option value = "" selected disabled>Education </option>
+                    <option value="business">Bachelor of Business </option>
+                    <option value="accounting">Bachelor of Accounting </option>
+                    <option value="cs">Bachelor of Computer Science </option>
+                    <option value="commerce">Bachelor of Commerce </option>
+                    <option value="engineering">Bachelor of Engineering </option>
+                    <option value="other">Other </option>
+                </select>
+                <div id = "div2"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-icon"> <span class="glyphicon glyphicon-list-alt"></span>
+                <select name = "interest" id ="interest" onchange='CheckInterest(this.options[this.selectedIndex].value);' required>
+                    <option value = "" selected disabled>Area of Interest </option>
+                    <option value="art">Art </option>
+                    <option value="it">Information Technology</option>
+                    <option value="business">Business </option>
+                    <option value="mass">Mass Comm </option>
+                    <option value="law">Law</option>
+                    <option value="other">Other </option>
+                </select>
+                <div id = "div3"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <div class="input-icon"> <span class="glyphicon glyphicon-camera"></span> <input type="file" id="image" name="image" required/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-icon">
+                    <span style="vertical-align:top;" class="glyphicon glyphicon-Pencil"></span> <textarea rows="3" cols="60" maxlength="100" id="aboutme" placeholder = "About me" required></textarea>
                 </div>
             </div>
 

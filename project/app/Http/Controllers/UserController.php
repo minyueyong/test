@@ -51,6 +51,9 @@ class UserController extends Controller
             $user->phone = $request->input('phone');
             $user->campus = $request->input('campus');
             $user->gender = $request->input('gender');
+            $user->education = $request->input('education');
+            $user->interest = $request->input('interest');
+            $user->aboutme = $request->input('aboutme');
             $image = $request->file('image');
             $filename  = time() . '.' . $image->getClientOriginalExtension();
             $path = public_path('/images/userpic/' . $filename);
