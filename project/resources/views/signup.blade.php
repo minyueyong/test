@@ -7,7 +7,7 @@
     function CheckCampus(campusname)
     {
         if (campusname == 'other')
-            document.getElementById('div1').innerHTML = '<span class="glyphicon glyphicon-education"></span> <input type = "text" name = "Other" id = "Other" placeholder = "Campus Name"/>'
+            document.getElementById('div1').innerHTML = '<span class="glyphicon glyphicon-education"></span> <input type = "text" name = "OtherCampus" id = "OtherCampus" placeholder = "Campus Name"/>'
         else
             document.getElementById('div1').innerHTML='';
     }
@@ -17,7 +17,7 @@
     function CheckEducation(education)
     {
         if (education == 'other')
-            document.getElementById('div2').innerHTML = '<span class="glyphicon glyphicon-book"></span> <input type = "text" name = "Other" id = "Other" placeholder = "Education Name"/>'
+            document.getElementById('div2').innerHTML = '<span class="glyphicon glyphicon-book"></span> <input type = "text" name = "OtherEducation" id = "OtherEducation" placeholder = "Education Name"/>'
         else
             document.getElementById('div2').innerHTML='';
     }
@@ -25,7 +25,7 @@
     function CheckInterest(interest)
     {
         if (interest == 'other')
-            document.getElementById('div3').innerHTML = '<span class="glyphicon glyphicon-list-alt"></span> <input type = "text" name = "Other" id = "Other" placeholder = "Area of Interest"/>'
+            document.getElementById('div3').innerHTML = '<span class="glyphicon glyphicon-list-alt"></span> <input type = "text" name = "OtherInterest" id = "OtherInterest" placeholder = "Area of Interest"/>'
         else
             document.getElementById('div3').innerHTML='';
     }

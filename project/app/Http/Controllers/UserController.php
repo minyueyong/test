@@ -49,10 +49,36 @@ class UserController extends Controller
             $user->password = bcrypt($request->input('password'));
             $user->dob = $request->input('dob');
             $user->phone = $request->input('phone');
-            $user->campus = $request->input('campus');
+            
+            if ($request->input('campus') == "other")
+            {
+                $user->campus = $request->input('OtherCampus');
+            }
+            else
+            {
+                $user->campus = $request->input('campus');
+            }
+
             $user->gender = $request->input('gender');
-            $user->education = $request->input('education');
-            $user->interest = $request->input('interest');
+
+            if ($request->input('education') == "other")
+            {
+                $user->education = $request->input('OtherEducation');
+            }
+            else
+            {
+                $user->education = $request->input('education');
+            }
+            
+            if ($request->input('interest') == "other")
+            {
+                $user->interest = $request->input('OtherInterest');
+            }
+            else
+            {
+                $user->interest = $request->input('interest');
+            }
+            
             $user->aboutme = $request->input('aboutme');
             $image = $request->file('image');
             $filename  = time() . '.' . $image->getClientOriginalExtension();
