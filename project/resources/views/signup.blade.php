@@ -46,7 +46,7 @@
 
     <div class="container">
     <div class="imgcontainer">
-        <img src="images/blogo2.png" alt = "blogo2" class = "img-rounded center-block img-responsive">
+        <img src="{{ asset('images/blogo2.png') }}" alt = "blogo2" class = "img-rounded center-block img-responsive">
     </div>
         
     <h4>Come join the MONSTA community! Let's set up your account. Already have one? <a href="signin" id = "signin">Sign in</a> here.</h4>

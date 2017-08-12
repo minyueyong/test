@@ -15,15 +15,15 @@
 		</blockquote>
 
         <div class="imgcontainer">
-                <img src="images/perks.jpg" alt = "perks" class = "img-rounded center-block img-responsive">
+                <img src="{{ asset('images/perks.jpg') }}" alt = "perks" class = "img-rounded center-block img-responsive">
         </div>
 
         <div class="imgcontainer">
-                <img src="images/perks2.jpg" alt = "perks2" class = "img-rounded center-block img-responsive">
+                <img src="{{ asset('images/perks2.jpg') }}" alt = "perks2" class = "img-rounded center-block img-responsive">
         </div>
 
         <div class="imgcontainer">
-                <img src="images/perks3.jpg" alt = "perks3" class = "img-rounded center-block img-responsive">
+                <img src="{{ asset('images/perks3.jpg') }}" alt = "perks3" class = "img-rounded center-block img-responsive">
         </div>
 </div>
 

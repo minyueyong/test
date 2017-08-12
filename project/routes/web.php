@@ -105,4 +105,9 @@ Route::get('postevent', function ()
 });
 Route::post('viewevent', 'EventController@storeEvent');
 
+Route::get('viewevent/{id}', function ($id) 
+{
+    return view('/viewevent')->with('id',$id);
+});
+
 Route::get('logout','UserController@logout');

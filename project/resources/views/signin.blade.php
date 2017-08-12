@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="imgcontainer">
-        <img src="images/blogo2.png" alt = "blogo2" class = "img-rounded   center-block img-responsive">
+        <img src="{{ asset('images/blogo2.png') }}" alt = "blogo2" class = "img-rounded   center-block img-responsive">
     </div>
 
     <div class="page-login-form box">

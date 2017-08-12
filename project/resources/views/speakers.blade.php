@@ -28,15 +28,15 @@
 
         <div class = "carousel-inner" role = "listbox">
             <div class = "item active">
-                <img src = "images/speaker1.jpg" alt = "speaker1">
+                <img src = "{{ asset('images/speaker1.jpg') }}" alt = "speaker1">
             </div>
 
             <div class = "item">
-                <img src = "images/speaker2.jpg" alt = "speaker2">
+                <img src = "{{ asset('images/speaker2.jpg') }}" alt = "speaker2">
             </div>
 
             <div class = "item">
-                <img src = "images/speaker3.jpg" alt = "speaker3">
+                <img src = "{{ asset('images/speaker3.jpg') }}" alt = "speaker3">
             </div>
         </div>
 

@@ -4,7 +4,7 @@
 
 <div class = "container">
     <br><br>
-    <img src = "images/blogo.png" alt = "blogo" class = "img-rounded center-block img-responsive">
+    <img src = "{{ asset('images/blogo.png') }}" alt = "blogo" class = "img-rounded center-block img-responsive">
                 
     <br><br>
     <div class = "page-header">
@@ -18,11 +18,11 @@
 
         <div class = "carousel-inner" role = "listbox">
             <div class = "item active">
-                <img src = "images/featuredevent1.png" alt = "featuredevent1" height = "200" width = "100">
+                <img src = "{{ asset('images/featuredevent1.png') }}" alt = "featuredevent1" height = "200" width = "100">
             </div>
 
             <div class = "item">
-                <img src = "images/featuredevent2.png" alt = "featuredevent2" height = "200" width = "100">
+                <img src = "{{ asset('images/featuredevent2.png') }}" alt = "featuredevent2" height = "200" width = "100">
             </div>
         </div>
 
@@ -48,11 +48,11 @@
 
         <div class = "carousel-inner" role = "listbox">
             <div class = "item active">
-                <img src = "images/upcomingevent1.png" alt = "featuredevent1" height = "200" width = "100">
+                <img src = "{{ asset('images/upcomingevent1.png') }}" alt = "featuredevent1" height = "200" width = "100">
             </div>
 
             <div class = "item">
-                <img src = "images/upcomingevent2.png" alt = "featuredevent2" height = "200" width = "100">
+                <img src = "{{ asset('images/upcomingevent2.png') }}" alt = "featuredevent2" height = "200" width = "100">
             </div>
         </div>
 

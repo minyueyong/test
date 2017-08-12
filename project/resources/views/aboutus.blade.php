@@ -17,7 +17,7 @@
         </blockquote>
 
         <div class="imgcontainer">
-                <img src="images/subscriptionfees.png" alt = "subscriptionfees" class = "img-rounded center-block img-responsive">
+                <img src="{{ asset('images/subscriptionfees.png') }}" alt = "subscriptionfees" class = "img-rounded center-block img-responsive">
         </div>
 </div>
 

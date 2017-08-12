@@ -27,37 +27,37 @@
     <ul class="list-inline">
 		<li data-toggle="modal" data-target="#myModal">
 			<a href="#myGallery" data-slide-to="0" id="thumbnail">
-			  	<img class="img-thumbnail" src="/images/event1.jpg">
+			  	<img class="img-thumbnail" src="{{ asset('images/event1.jpg') }}">
 			  	<br>
 			</a>
 		</li>
 		<li data-toggle="modal" data-target="#myModal">
 			<a href="#myGallery" data-slide-to="1" id="thumbnail">
-			  	<img class="img-thumbnail" src="/images/event2.jpg">
+			  	<img class="img-thumbnail" src="{{ asset('images/event2.jpg') }}">
 			  	<br>
 			</a>
 		</li>
 		<li data-toggle="modal" data-target="#myModal">
 			<a href="#myGallery" data-slide-to="2" id="thumbnail">
-			  	<img class="img-thumbnail" src="/images/event3.jpg">
+			  	<img class="img-thumbnail" src="{{ asset('images/event3.jpg') }}">
 			  	<br>
 			</a>
 		</li>
 		<li data-toggle="modal" data-target="#myModal">
 			<a href="#myGallery" data-slide-to="3" id="thumbnail">
-			  	<img class="img-thumbnail" src="/images/event4.jpg">
+			  	<img class="img-thumbnail" src="{{ asset('images/event4.jpg') }}">
 			  	<br>
 			</a>
 		</li>
 		<li data-toggle="modal" data-target="#myModal">
 			<a href="#myGallery" data-slide-to="4" id="thumbnail">
-			  	<img class="img-thumbnail" src="/images/event5.jpg">
+			  	<img class="img-thumbnail" src="{{ asset('images/event5.jpg') }}">
 			  	<br>
 			</a>
 		</li>
 		<li data-toggle="modal" data-target="#myModal">
 			<a href="#myGallery" data-slide-to="5" id="thumbnail">
-			  	<img class="img-thumbnail" src="/images/event6.jpg">
+			  	<img class="img-thumbnail" src="{{ asset('images/event6.jpg') }}">
 			  	<br>
 			</a>
 		</li>

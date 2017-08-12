@@ -103,7 +103,7 @@
                         <span class="icon-bar"></span>                   
                         </button>
                         <a class = "navbar-brand" href = "{{ url('home') }}">
-                            <img src = "images/slogo.png" class = "img-rounded" alt = "slogo" width = "110" height = "30">
+                            <img src = "{{ asset('images/slogo.png') }}" class = "img-rounded" alt = "slogo" width = "110" height = "30"/>
                         </a>
                     </div>
 
