@@ -81,4 +81,27 @@ class EventController extends Controller
     {
         //
     }
+
+    public function viewLatestEvent ()
+    {
+        $event = DB::table('event')
+            ->latest()
+            ->first();
+        return view('/viewLatestEvent')->with('event',$event);
+    }
+
+    public function storeEvent (Request $request)
+    {
+        $name = $request->input('eventname');
+        $date = $request->input('eventdate');
+        $venue = $request->input('eventvenue');
+        $image = $request->file('eventimage');
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('/images/eventpic/' . $filename);
+            Image::make($image->getRealPath())->resize(150, 150)->save($path);
+            $newimage = '/images/eventpic/'.$filename;
+        $description = $request->input('eventdescription');
+        $id = DB::table('events')->insertGetId(['eventname'=>$name, 'eventdate'=>$date, 'eventvenue'=>$venue, 'eventimage'=>$newimage, 'eventdescription'=>$description]);
+        return view('/viewEvent');
+    }
 }

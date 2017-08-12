@@ -91,4 +91,9 @@ Route::get('dashboard', function ()
     return view('dashboard');
 });
 
+Route::get('postevent', function () 
+{
+    return view('postevent');
+});
+
 Route::get('logout','UserController@logout');
