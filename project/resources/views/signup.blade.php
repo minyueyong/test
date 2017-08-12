@@ -102,11 +102,11 @@
                 <div class="input-icon"> <span class="glyphicon glyphicon-education"></span>
                 <select name = "campus" id ="campus" onchange='CheckCampus(this.options[this.selectedIndex].value);' required>
                     <option value = "" selected disabled>Campus </option>
-                    <option value="iics">INTI SUBANG UNIVERSITY </option>
-                    <option value="sunway">SUNWAY UNIVERSITY </option>
-                    <option value="taylor">TAYLOR UNIVERSITY </option>
-                    <option value="segi">SEGI UNIVERSITY </option>
-                    <option value="tarc">TARC UNIVERSITY </option>
+                    <option value="INTI">INTI UNIVERSITY </option>
+                    <option value="SUNWAY">SUNWAY UNIVERSITY </option>
+                    <option value="TAYLOAR">TAYLOR UNIVERSITY </option>
+                    <option value="SEGI">SEGI UNIVERSITY </option>
+                    <option value="TARC">TARC UNIVERSITY </option>
                     <option value="other">Other </option>
                 </select>
                 <div id = "div1"></div>
@@ -117,8 +117,8 @@
                 <div class="input-icon"> <span class="glyphicon glyphicon-user"></span>
                 <select name = "gender" id ="gender" required>
                     <option value = "" selected disabled>Gender </option>
-                    <option value="male">Male </option>
-                    <option value="female">Female </option>
+                    <option value="Male">Male </option>
+                    <option value="Female">Female </option>
                 </select>
                 </div>
             </div>
@@ -127,11 +127,11 @@
                 <div class="input-icon"> <span class="glyphicon glyphicon-book"></span>
                 <select name = "education" id ="education" onchange='CheckEducation(this.options[this.selectedIndex].value);' required>
                     <option value = "" selected disabled>Education </option>
-                    <option value="business">Bachelor of Business </option>
-                    <option value="accounting">Bachelor of Accounting </option>
-                    <option value="cs">Bachelor of Computer Science </option>
-                    <option value="commerce">Bachelor of Commerce </option>
-                    <option value="engineering">Bachelor of Engineering </option>
+                    <option value="Business">Bachelor of Business </option>
+                    <option value="Accounting">Bachelor of Accounting </option>
+                    <option value="Computer Science">Bachelor of Computer Science </option>
+                    <option value="Commerce">Bachelor of Commerce </option>
+                    <option value="Engineering">Bachelor of Engineering </option>
                     <option value="other">Other </option>
                 </select>
                 <div id = "div2"></div>
@@ -142,11 +142,11 @@
                 <div class="input-icon"> <span class="glyphicon glyphicon-list-alt"></span>
                 <select name = "interest" id ="interest" onchange='CheckInterest(this.options[this.selectedIndex].value);' required>
                     <option value = "" selected disabled>Area of Interest </option>
-                    <option value="art">Art </option>
-                    <option value="it">Information Technology</option>
-                    <option value="business">Business </option>
-                    <option value="mass">Mass Comm </option>
-                    <option value="law">Law</option>
+                    <option value="Art">Art </option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Business">Business </option>
+                    <option value="Mass Comm">Mass Comm </option>
+                    <option value="Law">Law</option>
                     <option value="other">Other </option>
                 </select>
                 <div id = "div3"></div>
