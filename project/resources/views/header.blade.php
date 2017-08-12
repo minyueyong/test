@@ -119,7 +119,7 @@
                             <li class = "dropdown">
                                 <a href = "#" data-toggle = "dropdown" class = "dropbtn">Events<b class = "caret"></b></a>
                                 <ul class = "dropdown-menu">
-                                    <li><a href = "{{ url('events') }}">Past Events</a></li>
+                                    <li><a href = "{{ url('events') }}">Featured Events</a></li>
                                 </ul>
                             </li>
                             
