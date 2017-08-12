@@ -93,7 +93,16 @@ Route::get('dashboard', function ()
 
 Route::get('postevent', function () 
 {
-    return view('postevent');
+    if (Auth::check())
+    {
+        return view('/postevent');
+    }
+
+    else
+    {
+        return view('/signin');
+    }
 });
+Route::post('checkevent', 'EventController@storeEvent');
 
 Route::get('logout','UserController@logout');

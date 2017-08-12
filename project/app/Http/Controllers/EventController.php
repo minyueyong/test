@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
+
+use Validator;
+use Illuminate\Support\Facades\Input;
+use Image;
 
 class EventController extends Controller
 {
@@ -87,7 +93,7 @@ class EventController extends Controller
         $event = DB::table('event')
             ->latest()
             ->first();
-        return view('/viewLatestEvent')->with('event',$event);
+        return view('/viewlatestevent')->with('event',$event);
     }
 
     public function storeEvent (Request $request)
@@ -96,12 +102,12 @@ class EventController extends Controller
         $date = $request->input('eventdate');
         $venue = $request->input('eventvenue');
         $image = $request->file('eventimage');
-            $filename  = time() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('/images/eventpic/' . $filename);
-            Image::make($image->getRealPath())->resize(150, 150)->save($path);
-            $newimage = '/images/eventpic/'.$filename;
+        $filename  = time() . '.' . $image->getClientOriginalExtension();
+        $path = public_path('/images/eventpic/' . $filename);
+        Image::make($image->getRealPath())->resize(150, 150)->save($path);
+        $newimage = '/images/eventpic/'.$filename;
         $description = $request->input('eventdescription');
         $id = DB::table('events')->insertGetId(['eventname'=>$name, 'eventdate'=>$date, 'eventvenue'=>$venue, 'eventimage'=>$newimage, 'eventdescription'=>$description]);
-        return view('/viewEvent');
+        return view('/viewevent');
     }
 }
