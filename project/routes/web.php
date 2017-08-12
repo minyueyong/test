@@ -103,6 +103,6 @@ Route::get('postevent', function ()
         return view('/signin');
     }
 });
-Route::post('checkevent', 'EventController@storeEvent');
+Route::post('viewevent', 'EventController@storeEvent');
 
 Route::get('logout','UserController@logout');

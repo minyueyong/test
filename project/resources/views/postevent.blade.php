@@ -8,7 +8,7 @@
         </div>
 
 		<div class="page-login-form box">
-        	<form role="form" class="login-form" method="POST" action="/checkevent" enctype="multipart/form-data">
+        	<form role="form" class="login-form" method="POST" action="/viewevent" enctype="multipart/form-data">
         		<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
         			<div class = "form-group">
             				<div class="input-icon">
@@ -42,7 +42,7 @@
                 
                 <button type="submit" class = "btn btn-default login-btn">Create It</button>
 		  </form>
-    </div>
+        </div>
 	</div>
 @include('footer')
 @stop
