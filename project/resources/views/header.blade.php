@@ -136,7 +136,7 @@
                             </li>
 
                             <li>
-                                <a href = "#">Forum</a>
+                                <a href = "{{ url('forum') }}">Forum</a>
                             </li>
                         </ul>
 

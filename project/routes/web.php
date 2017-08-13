@@ -110,4 +110,17 @@ Route::get('viewevent/{id}', function ($id)
     return view('/viewevent')->with('id',$id);
 });
 
+Route::get('forum', function () 
+{
+    if (Auth::check())
+    {
+        return view('/forum');
+    }
+
+    else
+    {
+        return view('/signin');
+    }
+});
+
 Route::get('logout','UserController@logout');
