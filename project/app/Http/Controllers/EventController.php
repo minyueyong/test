@@ -107,7 +107,7 @@ class EventController extends Controller
         Image::make($image->getRealPath())->resize(500, 550)->save($path);
         $newimage = '/images/eventpic/'.$filename;
         $description = $request->input('eventdescription');
-        $id = DB::table('events')->insertGetId(['eventname'=>$name, 'eventdate'=>$date, 'eventvenue'=>$venue, 'eventimage'=>$newimage, 'eventdescription'=>$description, 'created_at' => date("Y-m-d H:i:s")]);
+        $id = DB::table('events')->insertGetId(['eventname'=>$name, 'eventdate'=>$date, 'eventvenue'=>$venue, 'eventimage'=>$newimage, 'eventdescription'=>$description]);
         return view('/viewevent')->with('id',$id);
     }
 }
