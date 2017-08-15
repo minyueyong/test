@@ -160,7 +160,7 @@
 
             <div class="form-group">
                 <div class="input-icon">
-                    <span style="vertical-align:top;" class="glyphicon glyphicon-Pencil"></span> <textarea rows="3" cols="60" maxlength="100" id="aboutme" name="aboutme" placeholder = "About me" required></textarea>
+                    <span style="vertical-align:top;" class="glyphicon glyphicon-Pencil"></span> <textarea rows="3" cols="60" maxlength="100" id="aboutme" name="aboutme" placeholder = "About Me" required></textarea>
                 </div>
             </div>
 
