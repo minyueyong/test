@@ -52,7 +52,7 @@
     <h4>Come join the MONSTA community! Let's set up your account. Already have one? <a href="signin" id = "signin">Sign in</a> here.</h4>
 
     <div class="page-login-form box">
-        <form role="form" class="login-form" method="POST" action="/checksignup" enctype="multipart/form-data">
+        <form role="form" class="login-form" method="POST" action="/checkstudentsignup" enctype="multipart/form-data">
          <input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
             <div class="form-group">
                 <div class="input-icon">
@@ -160,7 +160,7 @@
 
             <div class="form-group">
                 <div class="input-icon">
-                    <span style="vertical-align:top;" class="glyphicon glyphicon-Pencil"></span> <textarea rows="3" cols="60" maxlength="100" id="aboutme" name="aboutme" placeholder = "About Me" required></textarea>
+                    <span style="vertical-align:top;" class="glyphicon glyphicon-Pencil"></span> <textarea rows="5" cols="60" maxlength="100" id="aboutme" name="aboutme" placeholder = "About Me" required></textarea>
                 </div>
             </div>
 

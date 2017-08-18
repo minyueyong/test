@@ -20,18 +20,7 @@ Route::get('home', function ()
     return view('home');
 });
 
-Route::get('dashboard', function()
-{
-    if (Auth::check())
-    {
-        return view('dashboard');
-    }
-
-    else
-    {
-        return view('signin');
-    }
-});
+Route::get('dashboard', 'UserController@showDashboard');
 
 Route::get('signin', function () 
 {
@@ -72,7 +61,21 @@ Route::get('studentsignup', function ()
         return view('studentsignup');
     }
 });
-Route::post('checksignup', 'UserController@storeUser');
+Route::post('checkstudentsignup', 'UserController@storeStudentUser');
+
+Route::get('companysignup', function () 
+{  
+    if (Auth::check())
+    {
+        return redirect()->intended('/dashboard');
+    }
+
+    else
+    {
+        return view('companysignup');
+    }
+});
+Route::post('checkcompanysignup', 'UserController@storeCompanyUser');
 
 Route::get('aboutus', function () 
 {
@@ -97,11 +100,6 @@ Route::get('events', function ()
 Route::get('joinus', function () 
 {
     return view('joinus');
-});
-
-Route::get('dashboard', function () 
-{
-    return view('dashboard');
 });
 
 Route::get('postevent', function () 

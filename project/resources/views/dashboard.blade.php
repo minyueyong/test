@@ -4,49 +4,73 @@
 
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/>
 
-<div class = "container table-responsive">
-	<table>
-		<tr>
-			<td rowspan="2">
-				<img src = "{!!Auth::user()->image!!}" alt="profilepic" class="img-circle img-responsive"/>
-			</td>
-			<td>
-				<h3 style="font-weight: bold">{!!Auth::user()->firstName!!} {!!Auth::user()->lastName!!}</h3>
-			</td>
-		</tr>
+@if (Auth::user()->role === 1)
+	<div class = "container table-responsive">
+		<table>
+			<tr>
+				<td rowspan="2">
+					<img src = "{!!$results[0]->image!!}" alt="profilepic" class="img-circle img-responsive"/>
+				</td>
+				<td>
+					<h3 style="font-weight: bold">{!!$results[0]->firstName!!} {!!$results[0]->lastName!!}</h3>
+				</td>
+			</tr>
 
-		<tr>
-			<td>
-				<h4 style="font-weight:bold">Member since {!!Auth::user()->created_at!!}</h4>
-			</td>
-		</tr>
-	</table>
+			<tr>
+				<td>
+					<h4 style="font-weight:bold">Member since {!!Auth::user()->created_at!!}</h4>
+				</td>
+			</tr>
+		</table>
 
-	<div class = "page-header">
-		<h3 class="text-uppercase" style="font-weight:bold">Community Stats</h3>
-	</div>
-	<div style="font-size:18px">
-		<div>Campus: {!!Auth::user()->campus!!} University </div>
-		<div>Education: Bachelor of {!!Auth::user()->education!!} </div>
-		<div>Area of Interest: {!!Auth::user()->interest!!} </div>
-		<div>Birthday: {!!Auth::user()->dob!!} </div>
-		<div>Gender: {!!Auth::user()->gender!!} </div>
-	</div>
-	
-	<div class = "page-header">
-		<h3 class ="text-uppercase" style="font-weight:bold">Contact Information</h3>
-	</div>
-	<div style="font-size:18px">
-		<div>Email: {!!Auth::user()->email!!} </div>
-		<div>Phone: +60{!!Auth::user()->phone!!} </div>
+		<div class = "page-header">
+			<h3 class="text-uppercase" style="font-weight:bold">Community Stats</h3>
+		</div>
+		<div style="font-size:18px">
+			<div>Campus: {!!$results[0]->campus!!} University </div>
+			<div>Education: Bachelor of {!!$results[0]->education!!} </div>
+			<div>Area of Interest: {!!$results[0]->interest!!} </div>
+			<div>Birthday: {!!$results[0]->dob!!} </div>
+			<div>Gender: {!!$results[0]->gender!!} </div>
+		</div>
+		
+		<div class = "page-header">
+			<h3 class ="text-uppercase" style="font-weight:bold">Contact Information</h3>
+		</div>
+		<div style="font-size:18px">
+			<div>Email: {!!$results[0]->email!!} </div>
+			<div>Phone: +60{!!$results[0]->phone!!} </div>
+		</div>
+
+		<div class = "page-header">
+			<h3 class ="text-uppercase" style="font-weight:bold">About Me</h3>
+		</div>
+		<div style="font-size:18px">
+			<div> @php echo nl2br($results[0]->aboutme); @endphp </div>
+		</div>
 	</div>
 
-	<div class = "page-header">
-		<h3 class ="text-uppercase" style="font-weight:bold">About Me</h3>
+@elseif (Auth::user()->role === 2)
+	<div class = "container table-responsive">
+		<table>
+			<tr>
+				<td rowspan="2">
+					<img src = "{!!$results[0]->image!!}" alt="profilepic" class="img-circle img-responsive"/>
+				</td>
+				<td>
+					<h3 style="font-weight: bold">{!!$results[0]->companyName!!}</h3>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<h4 style="font-weight:bold">Member since {!!Auth::user()->created_at!!}</h4>
+				</td>
+			</tr>
+		</table>
+
+		
 	</div>
-	<div style="font-size:18px">
-		<div> @php echo nl2br(Auth::user()->aboutme); @endphp </div>
-	</div>
-</div>
+@endif
 @include('footer')
 @stop

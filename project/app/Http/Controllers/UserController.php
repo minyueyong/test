@@ -40,7 +40,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeUser(Request $request)
+    public function storeStudentUser(Request $request)
     {
             $user = new User;
             $user->email = $request->input('email');
@@ -87,13 +87,71 @@ class UserController extends Controller
             Image::make($image->getRealPath())->resize(150, 150)->save($path);
             $imageName = '/images/userpic/'.$filename;
 
+            $user->role = 1;
+            $user->save();
+            Auth::login($user);
+            $userid = Auth::user()->id;
+
+            DB::table('students')->insertGetId(['firstName'=>$firstName,'lastName'=>$lastName,'dob'=>$dob,'phone'=>$phone,'campus'=>$campus,'gender'=>$gender,'education'=>$education,'interest'=>$interest,'image'=>$imageName,'aboutme'=>$aboutme,'userid'=>$userid]);
+            
+            return redirect()->intended('/dashboard');
+    }
+
+    public function storeCompanyUser(Request $request)
+    {
+            $user = new User;
+            $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
+
+            $companyName = $request->input('companyName');
+            $phone = $request->input('phone');
+            $aboutcompany = $request->input('aboutcompany');
+            if ($request->input('interest') == "other")
+            {
+                $interest = $request->input('OtherInterest');
+            }
+            else
+            {
+                $interest = $request->input('interest');
+            }
+
+            $image = $request->file('image');
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('/images/userpic/' . $filename);
+            Image::make($image->getRealPath())->resize(150, 150)->save($path);
+            $imageName = '/images/userpic/'.$filename;
+
+            $user->role = 2;
             $user->save();
             Auth::login($user);
             $userid = Auth::user()->id;
             
-            DB::table('students')->insertGetId(['firstName'=>$firstName,'lastName'=>$lastName,'dob'=>$dob,'phone'=>$phone,'campus'=>$campus,'gender'=>$gender,'education'=>$education,'interest'=>$interest,'image'=>$imageName,'aboutme'=>$aboutme,'userid'=>$userid]);
-            
+            DB::table('companies')->insertGetId(['companyName'=>$companyName,'phone'=>$phone,'aboutcompany'=>$aboutcompany,'interest'=>$interest,'image'=>$imageName,'userid'=>$userid]);
+
             return redirect()->intended('/dashboard');
+    }
+
+    public function showDashboard(Request $request)
+    {
+        if (Auth::check())
+        {
+            if (Auth::user()->role == 1)
+            {
+                $results = DB::table('students')->join('users','students.userid','=','users.id')->get();
+                return view('/dashboard')->with('results',$results);
+            }
+
+            else if (Auth::user()->role == 2)
+            {
+                $results = DB::table('companies')->join('users','companies.userid','=','users.id')->get();
+                return view('/dashboard')->with('results',$results);
+            }
+        }
+
+        else
+        {
+            return view('/signin');
+        }
     }
 
     public function signin(Request $request)
