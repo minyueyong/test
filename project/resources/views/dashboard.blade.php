@@ -69,6 +69,22 @@
 			</tr>
 		</table>
 
+		<div class = "page-header">
+			<h3 class ="text-uppercase" style="font-weight:bold">Contact Information</h3>
+		</div>
+		<div style="font-size:18px">
+			<div>Email: {!!$results[0]->email!!} </div>
+			<div>Phone: +60{!!$results[0]->phone!!} </div>
+			<div>Area of Interest: {!!$results[0]->interest!!} </div>
+		</div>
+
+		<div class = "page-header">
+			<h3 class ="text-uppercase" style="font-weight:bold">About Company</h3>
+		</div>
+		<div style="font-size:18px">
+			<div> @php echo nl2br($results[0]->aboutcompany); @endphp </div>
+		</div>
+
 		
 	</div>
 @endif

@@ -88,7 +88,7 @@
 
              <div class="form-group">
                 <div class="input-icon">
-                    <span style="vertical-align:top;" class="glyphicon glyphicon-Pencil"></span> <textarea rows="5" cols="60" maxlength="100" id="aboutcompany" name="aboutcompany" placeholder = "Company Motive" required></textarea>
+                    <span style="vertical-align:top;" class="glyphicon glyphicon-Pencil"></span> <textarea rows="5" cols="60" maxlength="100" id="aboutcompany" name="aboutcompany" placeholder = "About Company" required></textarea>
                 </div>
             </div>
 
