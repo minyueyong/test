@@ -8,7 +8,7 @@
                 
     <br><br>
     <div class = "page-header">
-        <h3 class = "text-uppercase">Upcoming Events</h3>
+        <h3 class = "text-uppercase">Upcoming Activities</h3>
     </div>
     <div id = "featuredevent" class = "carousel slide" data-ride = "carousel" data-interval = "3000">
         <ol class = "carousel-indicators">
@@ -38,7 +38,7 @@
 
     <br><br>
     <div class = "page-header">
-        <h3 class = "text-uppercase">Past Events</h3>
+        <h3 class = "text-uppercase">Past Activities</h3>
     </div>
     <div id = "upcomingevent" class = "carousel slide" data-ride = "carousel" data-interval = "3000">
         <ol class = "carousel-indicators">

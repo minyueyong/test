@@ -1,4 +1,4 @@
-<title>Events</title>
+<title>Activities</title>
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
@@ -14,7 +14,7 @@
 
 <div class = "container">
     <div class = "page-header">
-        <h3 class = "text-uppercase">Events</h3>
+        <h3 class = "text-uppercase">Activities</h3>
     </div>
     
     <ul class="list-inline">
@@ -22,14 +22,14 @@
 		  	<a href="#myGallery" data-slide-to="0" id="thumbnail">
 		  		<img class="img-thumbnail" src="{{ asset('images/featuredevent1.png') }}">
 		  		<br>
-				Featured Event 1
+				Featured Activities 1
 			</a>
 		</li>
 	  	<li data-toggle="modal" data-target="#myModal">
 		  	<a href="#myGallery" data-slide-to="1" id="thumbnail">
 		  		<img class="img-thumbnail" src="{{ asset('images/featuredevent2.png') }}">
 		  		<br>
-				Featured Event 2
+				Featured Activities 2
 			</a>
 		</li>
 	<!--end of thumbnails-->
@@ -40,7 +40,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<div class="pull-left">Featured Event Gallery</div>
+					<div class="pull-left">Featured Activities Gallery</div>
 						<button type="button" class="close" data-dismiss="modal" title="Close"> <span class="glyphicon glyphicon-remove"></span></button>
 				</div>
 				<div class="modal-body">
@@ -50,14 +50,14 @@
 							<div class="item active"> 
 								<img src="{{ asset('images/featuredevent1.png') }}" alt="featuredevent1">
 								<div class="carousel-caption">
-									<h3>Featured Event 1</h3>
+									<h3>Featured Activities 1</h3>
 									<p>Date: 27/5/17</p>
 								</div>
 							</div>
 							<div class="item"> 
 								<img src="{{ asset('images/featuredevent2.png') }}" alt="featuredevent2">
 								<div class="carousel-caption">
-									<h3>Featured Event 2</h3>
+									<h3>Featured Activities 2</h3>
 									<p>Date: 29/4/17</p>
 								</div>
 							</div>

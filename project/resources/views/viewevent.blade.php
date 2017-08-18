@@ -1,11 +1,11 @@
-<title>Event Page</title>
+<title>Activity Page</title>
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 
 <div class = "container">
     <div class = "page-header">
-        <h3 class = "text-uppercase">Event Page</h3>
+        <h3 class = "text-uppercase">Activity Page</h3>
     </div>
         
     @php 

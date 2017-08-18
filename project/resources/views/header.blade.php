@@ -117,9 +117,9 @@
                             </li>
 
                             <li class = "dropdown">
-                                <a href = "#" data-toggle = "dropdown" class = "dropbtn">Events<b class = "caret"></b></a>
+                                <a href = "#" data-toggle = "dropdown" class = "dropbtn">Activities<b class = "caret"></b></a>
                                 <ul class = "dropdown-menu">
-                                    <li><a href = "{{ url('events') }}">Featured Events</a></li>
+                                    <li><a href = "{{ url('events') }}">Featured Activities</a></li>
                                 </ul>
                             </li>
                             
