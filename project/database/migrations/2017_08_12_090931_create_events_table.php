@@ -21,6 +21,10 @@ class CreateEventsTable extends Migration
             $table->string('eventVenue');
             $table->string('eventImage');
             $table->string('eventDescription');
+            $table->integer('companyid')->unsigned();
+            $table->foreign('companyid')
+            ->references('id')->on('companies')
+            ->onDelete('cascade');
         });
     }
 

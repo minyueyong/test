@@ -85,7 +85,7 @@
 			<div> @php echo nl2br($results[0]->aboutcompany); @endphp </div>
 		</div>
 
-		
+		<a href="{{ url('postevent') }}" class = "btn btn-default login-btn pull-right">Post an Activity</a> 
 	</div>
 @endif
 @include('footer')
