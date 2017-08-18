@@ -43,50 +43,56 @@ class UserController extends Controller
     public function storeUser(Request $request)
     {
             $user = new User;
-            $user->firstName = $request->input('firstName');
-            $user->lastName = $request->input('lastName');
             $user->email = $request->input('email');
             $user->password = bcrypt($request->input('password'));
-            $user->dob = $request->input('dob');
-            $user->phone = $request->input('phone');
+
+            $firstName = $request->input('firstName');
+            $lastName = $request->input('lastName');
+            $dob = $request->input('dob');
+            $phone = $request->input('phone');
             
             if ($request->input('campus') == "other")
             {
-                $user->campus = $request->input('OtherCampus');
+                $campus = $request->input('OtherCampus');
             }
             else
             {
-                $user->campus = $request->input('campus');
+                $campus = $request->input('campus');
             }
 
-            $user->gender = $request->input('gender');
+            $gender = $request->input('gender');
 
             if ($request->input('education') == "other")
             {
-                $user->education = $request->input('OtherEducation');
+                $education = $request->input('OtherEducation');
             }
             else
             {
-                $user->education = $request->input('education');
+                $education = $request->input('education');
             }
             
             if ($request->input('interest') == "other")
             {
-                $user->interest = $request->input('OtherInterest');
+                $interest = $request->input('OtherInterest');
             }
             else
             {
-                $user->interest = $request->input('interest');
+                $interest = $request->input('interest');
             }
             
-            $user->aboutme = $request->input('aboutme');
+            $aboutme = $request->input('aboutme');
             $image = $request->file('image');
             $filename  = time() . '.' . $image->getClientOriginalExtension();
             $path = public_path('/images/userpic/' . $filename);
             Image::make($image->getRealPath())->resize(150, 150)->save($path);
-            $user->image = '/images/userpic/'.$filename;
+            $imageName = '/images/userpic/'.$filename;
+
             $user->save();
             Auth::login($user);
+            $userid = Auth::user()->id;
+            
+            DB::table('students')->insertGetId(['firstName'=>$firstName,'lastName'=>$lastName,'dob'=>$dob,'phone'=>$phone,'campus'=>$campus,'gender'=>$gender,'education'=>$education,'interest'=>$interest,'image'=>$imageName,'aboutme'=>$aboutme,'userid'=>$userid]);
+            
             return redirect()->intended('/dashboard');
     }
 
