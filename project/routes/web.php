@@ -59,6 +59,19 @@ Route::get('signup', function ()
         return view('signup');
     }
 });
+
+Route::get('studentsignup', function () 
+{  
+    if (Auth::check())
+    {
+        return redirect()->intended('/dashboard');
+    }
+
+    else
+    {
+        return view('studentsignup');
+    }
+});
 Route::post('checksignup', 'UserController@storeUser');
 
 Route::get('aboutus', function () 
