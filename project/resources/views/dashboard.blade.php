@@ -85,6 +85,13 @@
 			<div> @php echo nl2br($results[0]->aboutcompany); @endphp </div>
 		</div>
 
+		<div class = "page-header">
+			<h3 class ="text-uppercase" style="font-weight:bold">Upcoming Activites</h3>
+		</div>
+		<div style="font-size:18px">
+			<div> </div>
+		</div>
+
 		<a href="{{ url('postevent') }}" class = "btn btn-default login-btn pull-right">Post an Activity</a> 
 	</div>
 @endif

@@ -7,6 +7,8 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 
 use Validator;
+use Auth;
+use App\User;
 use Illuminate\Support\Facades\Input;
 use Image;
 
@@ -107,7 +109,9 @@ class EventController extends Controller
         Image::make($image->getRealPath())->resize(500, 550)->save($path);
         $newimage = '/images/eventpic/'.$filename;
         $description = $request->input('eventdescription');
-        $id = DB::table('events')->insertGetId(['eventname'=>$name, 'eventdate'=>$date, 'eventvenue'=>$venue, 'eventimage'=>$newimage, 'eventdescription'=>$description]);
+        $userid = Auth::user()->id;
+        $companyid = DB::table('companies')->join('users','users.id','=','companies.userid')->value('companies.id');
+        $id = DB::table('events')->insertGetId(['eventname'=>$name, 'eventdate'=>$date, 'eventvenue'=>$venue, 'eventimage'=>$newimage, 'eventdescription'=>$description,'companyid'=>$companyid]);
         return view('/viewevent')->with('id',$id);
     }
 }
