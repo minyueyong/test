@@ -89,7 +89,17 @@
 			<h3 class ="text-uppercase" style="font-weight:bold">Upcoming Activites</h3>
 		</div>
 		<div style="font-size:18px">
-			<div> </div>
+			<div>
+				@php 
+					$userid = Auth::user()->id;
+					$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.id');
+					$events = DB::table('events')->where('events.companyid','=',$companyid)->get();
+				@endphp
+
+				@foreach($events as $event)
+					{{$event->eventName}}<br>
+				@endforeach
+			</div>
 		</div>
 
 		<a href="{{ url('postevent') }}" class = "btn btn-default login-btn pull-right">Post an Activity</a> 

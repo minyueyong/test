@@ -138,6 +138,10 @@
                             <li>
                                 <a href = "{{ url('forum') }}">Forum</a>
                             </li>
+
+                            <li>
+                                <a href = "{{ url('dashboard') }}">Dashboard</a>
+                            </li>
                         </ul>
 
                         <ul class = "nav navbar-nav navbar-right">
