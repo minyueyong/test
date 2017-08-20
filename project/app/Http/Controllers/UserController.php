@@ -92,7 +92,7 @@ class UserController extends Controller
             Auth::login($user);
             $userid = Auth::user()->id;
 
-            DB::table('students')->insertGetId(['firstName'=>$firstName,'lastName'=>$lastName,'dob'=>$dob,'phone'=>$phone,'campus'=>$campus,'gender'=>$gender,'education'=>$education,'interest'=>$interest,'image'=>$imageName,'aboutme'=>$aboutme,'userid'=>$userid]);
+            DB::table('students')->insertGetId(['firstName'=>$firstName,'lastName'=>$lastName,'dob'=>$dob,'phone'=>$phone,'campus'=>$campus,'gender'=>$gender,'education'=>$education,'interest'=>$interest,'image'=>$imageName,'aboutme'=>$aboutme,'status'=>"Newbie",'userid'=>$userid]);
             
             return redirect()->intended('/dashboard');
     }

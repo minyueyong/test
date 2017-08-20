@@ -27,6 +27,7 @@
 			<h3 class="text-uppercase" style="font-weight:bold">Community Stats</h3>
 		</div>
 		<div style="font-size:18px">
+			<div>Status: {!!$results[0]->status!!}</div>
 			<div>Campus: {!!$results[0]->campus!!} University </div>
 			<div>Education: Bachelor of {!!$results[0]->education!!} </div>
 			<div>Area of Interest: {!!$results[0]->interest!!} </div>
@@ -107,6 +108,9 @@
 
 @elseif (Auth::user()->role === 3)
 	<div class = "container table-responsive">
+		<div class = "page-header">
+			<h3 class ="text-uppercase" style="font-weight:bold">Waiting for Approval Company</h3>
+		</div>
 	</div>
 @endif
 @include('footer')

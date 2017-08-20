@@ -26,6 +26,7 @@ class CreateStudentsTable extends Migration
             $table->string('interest');
             $table->string('image');
             $table->string('aboutme');
+            $table->string('status');
             $table->integer('userid')->unsigned();
             $table->foreign('userid')
             ->references('id')->on('users')

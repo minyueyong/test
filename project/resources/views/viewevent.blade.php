@@ -21,6 +21,9 @@
 	<div style="font-size:18px">Date: {!!$date!!} </div>
 	<div style="font-size:18px">Venue: {!!$venue!!} </div>
 	<div style="font-size:18px">Description: <br>@php echo nl2br($description); @endphp </div>
+    @if(Auth::user()->role === 1)
+        <button type="submit" class = "btn btn-default login-btn">Participate It!</button>
+    @endif
 </div>
 @include('footer')
 @stop
