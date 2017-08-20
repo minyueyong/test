@@ -97,7 +97,7 @@
 				@endphp
 
 				@foreach($events as $event)
-					{{$event->eventName}}<br>
+					<a href="{{ url('viewevent/'.$event->id) }}">{{$event->eventName}}</a><br>
 				@endforeach
 			</div>
 		</div>

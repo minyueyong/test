@@ -1,20 +1,20 @@
-<title>Activity Page</title>
+@php 
+        $name = DB::table('events')->where('id', $id)->value('eventName');
+        $date = DB::table('events')->where('id', $id)->value('eventDate');
+        $venue= DB::table('events')->where('id', $id)->value('eventVenue');
+        $image = DB::table('events')->where('id', $id)->value('eventImage');
+        $description = DB::table('events')->where('id', $id)->value('eventDescription');
+@endphp
+
+<title>{!!$name!!}</title>
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 
 <div class = "container">
     <div class = "page-header">
-        <h3 class = "text-uppercase">Activity Page</h3>
-    </div>
-        
-    @php 
-       	$name = DB::table('events')->where('id', $id)->value('eventName');
-       	$date = DB::table('events')->where('id', $id)->value('eventDate');
-       	$venue= DB::table('events')->where('id', $id)->value('eventVenue');
-       	$image = DB::table('events')->where('id', $id)->value('eventImage');
-       	$description = DB::table('events')->where('id', $id)->value('eventDescription');
-	@endphp
+        <h3 class = "text-uppercase">{!!$name!!}</h3>
+    </div>  
 
 	<img src = "{!!$image!!}" alt="eventpic" class="img-square img-responsive" style="margin: auto;"/>
 	<div style="font-size:18px">Name: {!!$name!!} </div>
