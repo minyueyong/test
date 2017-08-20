@@ -82,11 +82,6 @@ Route::get('aboutus', function ()
     return view('aboutus');
 });
 
-Route::get('speakers', function () 
-{
-    return view('speakers');
-});
-
 Route::get('gallery', function () 
 {
     return view('gallery');

@@ -59,6 +59,16 @@
         text-align: center;
     }
 
+    #viewevent:link, #viewevent:visited, #viewevent:active
+    {
+        color: black;
+    }
+
+    #viewevent:hover
+    {
+        color: red;
+    }
+
     .login-btn:hover
     {
         color: white !important;

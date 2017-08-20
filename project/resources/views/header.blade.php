@@ -122,10 +122,6 @@
                                     <li><a href = "{{ url('events') }}">Featured Activities</a></li>
                                 </ul>
                             </li>
-                            
-                            <li>
-                                <a href = "{{ url('speakers') }}">Past Speakers</a>
-                            </li>
 
                             <li>
                                 <a href = "{{ url('joinus') }}">Join Us</a>
