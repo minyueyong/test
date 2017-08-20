@@ -2,6 +2,15 @@
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/>
+<script type="text/javascript">
+    function CheckFees(fees)
+    {
+        if (fees == 'paid')
+            document.getElementById('div1').innerHTML = '<span class="glyphicon glyphicon-shopping-cart"></span> <input type = "text" name = "feespaid" id = "feespaid" placeholder = "Fees Required"/>'
+        else
+            document.getElementById('div1').innerHTML='';
+    }
+</script>
 	<div class="container">
         <div class = "page-header">
             <h3 class = "text-uppercase">Post an Activity</h3>
@@ -28,6 +37,17 @@
             	   </div>
                 </div>
 				
+                <div class="form-group">
+                <div class="input-icon"> <span class="glyphicon glyphicon-shopping-cart"></span>
+                <select name = "fees" id ="fees" onchange='CheckFees(this.options[this.selectedIndex].value);' required>
+                    <option value = "" selected disabled>Fees </option>
+                    <option value="free">Free </option>
+                    <option value="paid">Paid </option>
+                </select>
+                <div id = "div1"></div>
+                </div>
+                </div>
+
 				<div class = "form-group">
             	   <div class="input-icon">
                 	   <span class="glyphicon glyphicon-camera"></span> <input type="file" placeholder=" Activity Image" name="eventimage" id = "eventimage" required/>

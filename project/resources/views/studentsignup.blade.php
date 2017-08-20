@@ -12,8 +12,6 @@
             document.getElementById('div1').innerHTML='';
     }
 
-
-
     function CheckEducation(education)
     {
         if (education == 'other')

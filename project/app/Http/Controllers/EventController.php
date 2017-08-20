@@ -103,6 +103,14 @@ class EventController extends Controller
         $name = $request->input('eventname');
         $date = $request->input('eventdate');
         $venue = $request->input('eventvenue');
+        if ($request->input('fees') == "paid")
+        {
+            $fees = $request->input('feespaid');
+        }
+        else
+        {
+            $fees = $request->input('fees');
+        }
         $image = $request->file('eventimage');
         $filename  = time() . '.' . $image->getClientOriginalExtension();
         $path = public_path('/images/eventpic/' . $filename);
@@ -111,7 +119,7 @@ class EventController extends Controller
         $description = $request->input('eventdescription');
         $userid = Auth::user()->id;
         $companyid = DB::table('companies')->join('users','users.id','=','companies.userid')->value('companies.id');
-        $id = DB::table('events')->insertGetId(['eventname'=>$name, 'eventdate'=>$date, 'eventvenue'=>$venue, 'eventimage'=>$newimage, 'eventdescription'=>$description,'companyid'=>$companyid]);
+        $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
         return view('/viewevent')->with('id',$id);
     }
 }

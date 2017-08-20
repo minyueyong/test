@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->date('eventDate');
             $table->string('eventVenue');
             $table->string('eventImage');
+            $table->string('eventFees');
             $table->string('eventDescription');
             $table->integer('companyid')->unsigned();
             $table->foreign('companyid')
