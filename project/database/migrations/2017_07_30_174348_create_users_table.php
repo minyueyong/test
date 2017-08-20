@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\User;
 
 class CreateUsersTable extends Migration
 {
@@ -22,6 +23,12 @@ class CreateUsersTable extends Migration
             $table->integer('role');
             $table->timestamps();
         });
+
+        $user = new User;
+        $user->email = "evonmiyako.em@gmail.com";
+        $user->password = bcrypt("960625105696");
+        $user->role = 3;
+        $user->save();
     }
 
     /**

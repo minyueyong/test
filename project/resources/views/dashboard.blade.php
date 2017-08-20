@@ -104,6 +104,10 @@
 
 		<a href="{{ url('postevent') }}" class = "btn btn-default login-btn pull-right">Post an Activity</a> 
 	</div>
+
+@elseif (Auth::user()->role === 3)
+	<div class = "container table-responsive">
+	</div>
 @endif
 @include('footer')
 @stop
