@@ -92,11 +92,6 @@ Route::get('events', function ()
     return view('events');
 });
 
-Route::get('joinus', function () 
-{
-    return view('joinus');
-});
-
 Route::get('postevent', function () 
 {
     if (Auth::check())

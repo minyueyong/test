@@ -113,7 +113,7 @@
                                 <a href = "{{ url('home') }}">Home</a>
                             </li>
                             <li>
-                                <a href = "{{ url('aboutus') }}">About</a>
+                                <a href = "{{ url('aboutus') }}">About Us</a>
                             </li>
 
                             <li class = "dropdown">
@@ -121,10 +121,6 @@
                                 <ul class = "dropdown-menu">
                                     <li><a href = "{{ url('events') }}">Featured Activities</a></li>
                                 </ul>
-                            </li>
-
-                            <li>
-                                <a href = "{{ url('joinus') }}">Join Us</a>
                             </li>
 
                             <li>
