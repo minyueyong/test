@@ -21,6 +21,8 @@ class CreateCompaniesTable extends Migration
             $table->string('image');
             $table->string('aboutcompany');
             $table->string('interest');
+            $table->string('status');
+            $table->date('membershipDate');
             $table->integer('userid')->unsigned();
             $table->foreign('userid')
             ->references('id')->on('users')

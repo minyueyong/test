@@ -111,6 +111,8 @@ Route::get('viewevent/{id}', function ($id)
     return view('/viewevent')->with('id',$id);
 });
 
+Route::post('participateevent','EventController@participateEvent');
+
 Route::get('forum', function () 
 {
     if (Auth::check())

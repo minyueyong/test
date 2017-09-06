@@ -23,12 +23,18 @@
 	<div style="font-size:18px">Venue: {!!$venue!!} </div>
     <div style="font-size:18px">Fees: {!!$fees!!} </div>
 	<div style="font-size:18px">Description: <br>@php echo nl2br($description); @endphp </div>
-    @if(Auth::user()->role === 1)
-        <a href="#" class = "btn btn-default login-btn">Participate It!</a>
-    @elseif(Auth::user()->role === 2)
-        <a href="#" class = "btn btn-default login-btn">Mark Attendance!</a>
-    @elseif(Auth::user()->role === 3)
-        <a href="#" class = "btn btn-default login-btn">Stats Analytic!</a>
+    
+    @php
+        $currentDate = date('Y-m-d');
+    @endphp
+    @if($date > $currentDate)
+        @if(Auth::user()->role === 1)
+            <a href="/participateevent" class = "btn btn-default login-btn">Participate It!</a>
+        @elseif(Auth::user()->role === 2)
+            <a href="/participateevent" class = "btn btn-default login-btn">Mark Attendance!</a>
+        @elseif(Auth::user()->role === 3)
+            <a href="/participateevent" class = "btn btn-default login-btn">Stats Analytic!</a>
+        @endif
     @endif
 </div>
 @include('footer')

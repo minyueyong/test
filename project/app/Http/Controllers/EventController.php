@@ -122,4 +122,22 @@ class EventController extends Controller
         $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
         return view('/viewevent')->with('id',$id);
     }
+
+    public function participateEvent()
+    {
+        if(Auth::user()->role == 1)
+        {
+            
+        }
+
+        else if (Auth::user()->role == 2)
+        {
+            
+        }
+
+        else if (Auth::user()->role == 3)
+        {
+
+        }
+    }
 }

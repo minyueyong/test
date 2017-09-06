@@ -92,7 +92,7 @@ class UserController extends Controller
             Auth::login($user);
             $userid = Auth::user()->id;
 
-            DB::table('students')->insertGetId(['firstName'=>$firstName,'lastName'=>$lastName,'dob'=>$dob,'phone'=>$phone,'campus'=>$campus,'gender'=>$gender,'education'=>$education,'interest'=>$interest,'image'=>$imageName,'aboutme'=>$aboutme,'status'=>"Newbie",'userid'=>$userid]);
+            DB::table('students')->insertGetId(['firstName'=>$firstName,'lastName'=>$lastName,'dob'=>$dob,'phone'=>$phone,'campus'=>$campus,'gender'=>$gender,'education'=>$education,'interest'=>$interest,'image'=>$imageName,'aboutme'=>$aboutme,'status'=>"Newbie",'experience'=>1000,'userid'=>$userid]);
             
             return redirect()->intended('/dashboard');
     }
@@ -115,6 +115,7 @@ class UserController extends Controller
                 $interest = $request->input('interest');
             }
 
+            $membershipDate = date('Y-m-d');
             $image = $request->file('image');
             $filename  = time() . '.' . $image->getClientOriginalExtension();
             $path = public_path('/images/userpic/' . $filename);
@@ -126,7 +127,7 @@ class UserController extends Controller
             Auth::login($user);
             $userid = Auth::user()->id;
             
-            DB::table('companies')->insertGetId(['companyName'=>$companyName,'phone'=>$phone,'aboutcompany'=>$aboutcompany,'interest'=>$interest,'image'=>$imageName,'userid'=>$userid]);
+            DB::table('companies')->insertGetId(['companyName'=>$companyName,'phone'=>$phone,'aboutcompany'=>$aboutcompany,'interest'=>$interest, 'status'=>'Basic', 'membershipDate'=>$membershipDate ,'image'=>$imageName,'userid'=>$userid]);
 
             return redirect()->intended('/dashboard');
     }
@@ -137,13 +138,19 @@ class UserController extends Controller
         {
             if (Auth::user()->role == 1)
             {
-                $results = DB::table('students')->join('users','students.userid','=','users.id')->get();
+                $results = DB::table('students')->join('users',function ($join)
+                {
+                    $join->on('students.userid','=','users.id')->where('students.userid','=',Auth::user()->id);
+                })->get();
                 return view('/dashboard')->with('results',$results);
             }
 
             else if (Auth::user()->role == 2)
             {
-                $results = DB::table('companies')->join('users','companies.userid','=','users.id')->get();
+                $results = DB::table('companies')->join('users',function ($join)
+                {
+                    $join->on('companies.userid','=','users.id')->where('companies.userid','=',Auth::user()->id);
+                })->get();
                 return view('/dashboard')->with('results',$results);
             }
 

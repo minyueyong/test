@@ -102,7 +102,7 @@
                     <option value = "" selected disabled>Campus </option>
                     <option value="INTI">INTI UNIVERSITY </option>
                     <option value="SUNWAY">SUNWAY UNIVERSITY </option>
-                    <option value="TAYLOAR">TAYLOR UNIVERSITY </option>
+                    <option value="TAYLOR">TAYLOR'S UNIVERSITY </option>
                     <option value="SEGI">SEGI UNIVERSITY </option>
                     <option value="TARC">TARC UNIVERSITY </option>
                     <option value="other">Other </option>
