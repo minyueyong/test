@@ -17,7 +17,7 @@
         <h3 class = "text-uppercase">{!!$name!!}</h3>
     </div>  
 
-	<img src = "{!!$image!!}" alt="eventpic" class="img-square img-responsive" style="margin: auto;"/>
+	<img src = "{!!$image!!}" alt="eventpic" class="img-square img-responsive" style="height: 45%; width:35%; margin: auto;"/>
 	<div style="font-size:18px">Name: {!!$name!!} </div>
 	<div style="font-size:18px">Date: {!!$date!!} </div>
 	<div style="font-size:18px">Venue: {!!$venue!!} </div>
