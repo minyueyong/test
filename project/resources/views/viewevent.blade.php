@@ -31,7 +31,7 @@
         @if(Auth::user()->role === 1)
             <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Participate It!</a>
         @elseif(Auth::user()->role === 2)
-            <a href="/participateevent" class = "btn btn-default login-btn">Mark Attendance!</a>
+            <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Mark Attendance!</a>
         @elseif(Auth::user()->role === 3)
             <a href="/participateevent" class = "btn btn-default login-btn">Stats Analytic!</a>
         @endif

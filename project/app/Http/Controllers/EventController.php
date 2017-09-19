@@ -122,12 +122,14 @@ class EventController extends Controller
             $userid = Auth::user()->id;
             $studentid = DB::table('students')->join('users','users.id','=','students.userid')->value('students.studentid');
             $id = DB::table('studentsnevents')->insert(['studentid'=>$studentid, 'eventid'=>$eventid]);
+            $experience = DB::table('students')->join('users','users.id','=','students.userid')->value('students.experience') + 100;
+            DB::table('students')->where('studentid',$studentid)->update(['experience'=> $experience]);
             return redirect()->intended('/dashboard');
         }
 
         else if (Auth::user()->role == 2)
         {
-            
+            return view('/markattendance')->with('eventid',$eventid);
         }
 
         else if (Auth::user()->role == 3)

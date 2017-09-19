@@ -74,6 +74,30 @@
 				@endforeach
 			</div>
 		</div>
+
+		<div class = "page-header">
+			<h3 class ="text-uppercase" style="font-weight:bold">Upcoming Activities</h3>
+		</div>
+		<div style="font-size:18px">
+			<div>
+				@php 
+		  			$events = DB::table('studentsnevents')->where('studentid', $results[0]->studentid)->pluck('eventid');
+				@endphp
+
+				@foreach($events as $event)
+					@php 
+						$currentDate = date('Y-m-d');
+        				$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
+						$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
+					@endphp
+				<div>
+					@if($eventDate > $currentDate)
+						<a href="{{ url('viewevent/'.$event) }}" id="thumbnail">{!!$eventName!!}</a>
+					@endif
+				</div>
+				@endforeach
+			</div>
+		</div>
 	</div>
 
 @elseif (Auth::user()->role === 2)
@@ -150,7 +174,7 @@
 					$date = date('Y-m-d');
 				@endphp
 				@if($event->eventDate <= $date)
-					<a id = "viewevent" href="{{ url('viewevent/'.$event->eventid) }}">{{$event->eventName}}</a><br>
+					{{$event->eventName}}<br>
 				@endif
 			@endforeach
 		</div>
