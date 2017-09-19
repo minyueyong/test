@@ -18,15 +18,15 @@
     
     <ul class="list-inline">
     	@php 
-		  	$id = DB::table('events')->pluck('id');
+		  	$id = DB::table('events')->pluck('eventid');
 		@endphp
 
 		@foreach ($id as $eventid)
 	  	<li>
 	  		@php
         		$currentDate = date('Y-m-d');
-        		$date = DB::table('events')->where('id', $eventid)->value('eventDate');
-        		$image = DB::table('events')->where('id', $eventid)->value('eventImage');
+        		$date = DB::table('events')->where('eventid', $eventid)->value('eventDate');
+        		$image = DB::table('events')->where('eventid', $eventid)->value('eventImage');
     		@endphp
     		
     		@if($date > $currentDate)

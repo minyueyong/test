@@ -144,7 +144,7 @@ class UserController extends Controller
                 })->get();
                 return view('/dashboard')->with('results',$results);
             }
-
+            
             else if (Auth::user()->role == 2)
             {
                 $results = DB::table('companies')->join('users',function ($join)

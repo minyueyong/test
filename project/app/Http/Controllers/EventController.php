@@ -90,14 +90,6 @@ class EventController extends Controller
         //
     }
 
-    public function viewLatestEvent ()
-    {
-        $event = DB::table('event')
-            ->latest()
-            ->first();
-        return view('/viewlatestevent')->with('event',$event);
-    }
-
     public function storeEvent (Request $request)
     {
         $name = $request->input('eventname');
@@ -118,16 +110,19 @@ class EventController extends Controller
         $newimage = '/images/eventpic/'.$filename;
         $description = $request->input('eventdescription');
         $userid = Auth::user()->id;
-        $companyid = DB::table('companies')->join('users','users.id','=','companies.userid')->value('companies.id');
+        $companyid = DB::table('companies')->join('users','users.id','=','companies.userid')->value('companies.companyid');
         $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
         return view('/viewevent')->with('id',$id);
     }
 
-    public function participateEvent()
+    public function participateEvent($eventid)
     {
         if(Auth::user()->role == 1)
         {
-            
+            $userid = Auth::user()->id;
+            $studentid = DB::table('students')->join('users','users.id','=','students.userid')->value('students.studentid');
+            $id = DB::table('studentsnevents')->insert(['studentid'=>$studentid, 'eventid'=>$eventid]);
+            return redirect()->intended('/dashboard');
         }
 
         else if (Auth::user()->role == 2)

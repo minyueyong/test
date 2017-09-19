@@ -55,7 +55,24 @@
 			<h3 class ="text-uppercase" style="font-weight:bold">Participated Activities</h3>
 		</div>
 		<div style="font-size:18px">
-			<div></div>
+			<div>
+				@php 
+		  			$events = DB::table('studentsnevents')->where('studentid', $results[0]->studentid)->pluck('eventid');
+				@endphp
+
+				@foreach($events as $event)
+					@php 
+						$currentDate = date('Y-m-d');
+        				$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
+						$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
+					@endphp
+				<div>
+					@if($eventDate < $currentDate)
+						{!!$eventName!!}
+					@endif
+				</div>
+				@endforeach
+			</div>
 		</div>
 	</div>
 
@@ -103,7 +120,7 @@
 			<div>
 				@php 
 					$userid = Auth::user()->id;
-					$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.id');
+					$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.companyid');
 					$events = DB::table('events')->where('events.companyid','=',$companyid)->get();
 				@endphp
 
@@ -112,7 +129,7 @@
 						$date = date('Y-m-d');
 					@endphp
 					@if($event->eventDate > $date)
-						<a id = "viewevent" href="{{ url('viewevent/'.$event->id) }}">{{$event->eventName}}</a><br>
+						<a id = "viewevent" href="{{ url('viewevent/'.$event->eventid) }}">{{$event->eventName}}</a><br>
 					@endif
 				@endforeach
 			</div>
@@ -124,7 +141,7 @@
 		<div style="font-size:18px">
 			@php 
 				$userid = Auth::user()->id;
-				$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.id');
+				$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.companyid');
 				$events = DB::table('events')->where('events.companyid','=',$companyid)->get();
 			@endphp
 
@@ -133,7 +150,7 @@
 					$date = date('Y-m-d');
 				@endphp
 				@if($event->eventDate <= $date)
-					<a id = "viewevent" href="{{ url('viewevent/'.$event->id) }}">{{$event->eventName}}</a><br>
+					<a id = "viewevent" href="{{ url('viewevent/'.$event->eventid) }}">{{$event->eventName}}</a><br>
 				@endif
 			@endforeach
 		</div>

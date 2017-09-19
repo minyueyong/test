@@ -1,10 +1,10 @@
 @php 
-        $name = DB::table('events')->where('id', $id)->value('eventName');
-        $date = DB::table('events')->where('id', $id)->value('eventDate');
-        $venue = DB::table('events')->where('id', $id)->value('eventVenue');
-        $fees = DB::table('events')->where('id',$id)->value('eventFees');
-        $image = DB::table('events')->where('id', $id)->value('eventImage');
-        $description = DB::table('events')->where('id', $id)->value('eventDescription');
+        $name = DB::table('events')->where('eventid', $id)->value('eventName');
+        $date = DB::table('events')->where('eventid', $id)->value('eventDate');
+        $venue = DB::table('events')->where('eventid', $id)->value('eventVenue');
+        $fees = DB::table('events')->where('eventid',$id)->value('eventFees');
+        $image = DB::table('events')->where('eventid', $id)->value('eventImage');
+        $description = DB::table('events')->where('eventid', $id)->value('eventDescription');
 @endphp
 
 <title>{!!$name!!}</title>
@@ -29,7 +29,7 @@
     @endphp
     @if($date > $currentDate)
         @if(Auth::user()->role === 1)
-            <a href="/participateevent" class = "btn btn-default login-btn">Participate It!</a>
+            <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Participate It!</a>
         @elseif(Auth::user()->role === 2)
             <a href="/participateevent" class = "btn btn-default login-btn">Mark Attendance!</a>
         @elseif(Auth::user()->role === 3)

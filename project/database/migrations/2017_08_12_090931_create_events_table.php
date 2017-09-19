@@ -15,7 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) 
         {
-            $table->increments('id');
+            $table->increments('eventid');
             $table->string('eventName');
             $table->date('eventDate');
             $table->string('eventVenue');
@@ -24,7 +24,7 @@ class CreateEventsTable extends Migration
             $table->string('eventDescription');
             $table->integer('companyid')->unsigned();
             $table->foreign('companyid')
-            ->references('id')->on('companies')
+            ->references('companyid')->on('companies')
             ->onDelete('cascade');
         });
     }
