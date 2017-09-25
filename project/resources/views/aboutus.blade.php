@@ -2,6 +2,12 @@
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
+<style>
+.image 
+{
+    text-align:center;
+}
+</style>
 
 <div class = "container">
         <div class = "page-header">
@@ -30,19 +36,12 @@
                         <p>You can improve your skill that will provide a platform for you to explore the suitable career path for your future.</p>
                 </blockquote>
 
-        <div class="imgcontainer">
-                <img src="{{ asset('images/perks.jpg') }}" alt = "perks" class = "img-rounded center-block img-responsive">
-        </div>
-
-        <div class="imgcontainer">
-                <img src="{{ asset('images/perks2.jpg') }}" alt = "perks2" class = "img-rounded center-block img-responsive">
-        </div>
-
-        <div class="imgcontainer">
-                <img src="{{ asset('images/perks3.jpg') }}" alt = "perks3" class = "img-rounded center-block img-responsive">
+        <div class="image">
+                <img src="{{ asset('images/perks.jpg') }}" height = "300" width ="350" alt = "perks">
+                <img src="{{ asset('images/perks2.jpg') }}" height = "300" width ="350" alt = "perks2">
+                <img src="{{ asset('images/perks3.jpg') }}" height = "300" width ="350" alt = "perks3">
         </div>
 </div>
 
 @include('footer')
 @stop
-

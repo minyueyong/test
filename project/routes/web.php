@@ -12,12 +12,12 @@
 */
 Route::get('/', function () 
 {
-    return view('home');
+    return view('landingpage');
 });
 
 Route::get('home', function () 
 {
-    return view('home');
+    return view('landingpage');
 });
 
 Route::get('dashboard', 'UserController@showDashboard');
@@ -76,6 +76,7 @@ Route::get('companysignup', function ()
     }
 });
 Route::post('checkcompanysignup', 'UserController@storeCompanyUser');
+Route::post('/checkcompanyapproval','UserController@checkCompanyApproval');
 
 Route::get('aboutus', function () 
 {
@@ -105,6 +106,7 @@ Route::get('postevent', function ()
     }
 });
 Route::post('viewevent', 'EventController@storeEvent');
+Route::post('/checkeventapproval','EventController@checkEventApproval');
 
 Route::get('viewevent/{id}', function ($id) 
 {
@@ -112,6 +114,8 @@ Route::get('viewevent/{id}', function ($id)
 });
 
 Route::get('viewevent/{id}/participateevent','EventController@participateEvent');
+Route::post('/checkstudentattendance','EventController@checkStudentAttendance');
+Route::get('/viewevent/{id}/participantdetails','EventController@participantDetails');
 
 Route::get('forum', function () 
 {

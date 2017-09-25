@@ -25,15 +25,17 @@
 	  	<li>
 	  		@php
         		$currentDate = date('Y-m-d');
+        		$eventname = DB::table('events')->where('eventid', $eventid)->value('eventName');
         		$date = DB::table('events')->where('eventid', $eventid)->value('eventDate');
         		$image = DB::table('events')->where('eventid', $eventid)->value('eventImage');
+                $approval = DB::table('events')->where('eventid',$eventid)->value('eventApproval');
     		@endphp
     		
-    		@if($date > $currentDate)
+    		@if($date >= $currentDate && $approval === 1)
 		  	<a href="{{ url('viewevent/'.$eventid) }}" id="thumbnail">
 		  		<img class="img-thumbnail" src="{!!$image!!}">
 		  		<br>
-				Upcoming Activities {!!$eventid!!}
+				{!!$eventname!!}
 			</a>
 			@endif
 		</li>
@@ -41,6 +43,5 @@
 	<!--end of thumbnails-->
 	</ul>
 </div>
-
 @include('footer')
 @stop

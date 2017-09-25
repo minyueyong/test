@@ -110,7 +110,10 @@ class EventController extends Controller
         $newimage = '/images/eventpic/'.$filename;
         $description = $request->input('eventdescription');
         $userid = Auth::user()->id;
-        $companyid = DB::table('companies')->join('users','users.id','=','companies.userid')->value('companies.companyid');
+        $companyid = DB::table('companies')->join('users',function ($join)
+        {
+            $join->on('companies.userid','=','users.id')->where('companies.userid','=', Auth::user()->id);
+        })->value('companies.companyid');
         $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
         return view('/viewevent')->with('id',$id);
     }
@@ -119,11 +122,17 @@ class EventController extends Controller
     {
         if(Auth::user()->role == 1)
         {
-            $userid = Auth::user()->id;
-            $studentid = DB::table('students')->join('users','users.id','=','students.userid')->value('students.studentid');
-            $id = DB::table('studentsnevents')->insert(['studentid'=>$studentid, 'eventid'=>$eventid]);
-            $experience = DB::table('students')->join('users','users.id','=','students.userid')->value('students.experience') + 100;
-            DB::table('students')->where('studentid',$studentid)->update(['experience'=> $experience]);
+            $studentid = DB::table('students')->join('users',function ($join)
+            {
+                    $join->on('students.userid','=','users.id')->where('students.userid','=', Auth::user()->id);
+            })->value('students.studentid');
+
+            $studentParticipate = DB::table('studentsnevents')->where('studentid',$studentid)->where(DB::raw('eventid'), $eventid)->count();
+            
+            if ($studentParticipate == 0)
+            {
+                $id = DB::table('studentsnevents')->insert(['studentid'=>$studentid, 'eventid'=>$eventid]);
+            }
             return redirect()->intended('/dashboard');
         }
 
@@ -131,10 +140,51 @@ class EventController extends Controller
         {
             return view('/markattendance')->with('eventid',$eventid);
         }
+    }
 
-        else if (Auth::user()->role == 3)
+    public function checkStudentAttendance(Request $request)
+    {
+        $aStudent = $request->input('student');
+        $eventid = $request->input('eventid');
+
+        if(!empty($aStudent))
         {
-
+            $N = count($aStudent);
+            for ($i = 0; $i < $N; $i++)
+            {
+                $experience = DB::table('students')->where('studentid',$aStudent[$i])->value('experience') + 100;
+                DB::table('students')->where('studentid',$aStudent[$i])->update(['experience'=> $experience]);
+                DB::table('studentsnevents')->where('studentid',$aStudent[$i])->where(DB::raw('eventid'), $eventid)->update(['participate'=> 1]);
+            }
         }
+       return view('/markattendance')->with('eventid',$eventid);
+    }
+
+    public function participantDetails($eventid)
+    {
+        if(Auth::user()->role === 2)
+        {
+            return view('/participantdetails')->with('eventid',$eventid);
+        }
+
+        else if(Auth::user()->role === 3)
+        {
+            return view('/participantdetails')->with('eventid',$eventid);
+        }
+    }
+
+    public function checkEventApproval(Request $request)
+    {
+        $aEvent = $request->input('event');
+
+        if(!empty($aEvent))
+        {
+            $N = count($aEvent);
+            for ($i = 0; $i < $N; $i++)
+            {
+                DB::table('events')->where('eventid',$aEvent[$i])->update(['eventApproval'=> 1]);
+            }
+        }
+       return view('/dashboard');
     }
 }

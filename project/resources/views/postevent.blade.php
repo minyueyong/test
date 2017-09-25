@@ -41,7 +41,7 @@
                 <div class="input-icon"> <span class="glyphicon glyphicon-shopping-cart"></span>
                 <select name = "fees" id ="fees" onchange='CheckFees(this.options[this.selectedIndex].value);' required>
                     <option value = "" selected disabled>Fees </option>
-                    <option value="free">Free </option>
+                    <option value="Free">Free </option>
                     <option value="paid">Paid </option>
                 </select>
                 <div id = "div1"></div>

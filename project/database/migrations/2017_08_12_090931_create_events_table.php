@@ -26,6 +26,7 @@ class CreateEventsTable extends Migration
             $table->foreign('companyid')
             ->references('companyid')->on('companies')
             ->onDelete('cascade');
+            $table->integer('eventApproval')->default('0');
         });
     }
 

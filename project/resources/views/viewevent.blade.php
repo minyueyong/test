@@ -5,6 +5,8 @@
         $fees = DB::table('events')->where('eventid',$id)->value('eventFees');
         $image = DB::table('events')->where('eventid', $id)->value('eventImage');
         $description = DB::table('events')->where('eventid', $id)->value('eventDescription');
+        $companyid = DB::table('events')->where('eventid', $id)->value('companyid');
+        $totalRegistered = DB::table('studentsnevents')->where('eventid',$id)->count('studentid');
 @endphp
 
 <title>{!!$name!!}</title>
@@ -23,17 +25,32 @@
 	<div style="font-size:18px">Venue: {!!$venue!!} </div>
     <div style="font-size:18px">Fees: {!!$fees!!} </div>
 	<div style="font-size:18px">Description: <br>@php echo nl2br($description); @endphp </div>
+    <div style="font-size:18px">Total Students Registered: {!!$totalRegistered!!} </div>
     
-    @php
-        $currentDate = date('Y-m-d');
-    @endphp
-    @if($date > $currentDate)
-        @if(Auth::user()->role === 1)
-            <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Participate It!</a>
-        @elseif(Auth::user()->role === 2)
-            <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Mark Attendance!</a>
-        @elseif(Auth::user()->role === 3)
-            <a href="/participateevent" class = "btn btn-default login-btn">Stats Analytic!</a>
+    @if(Auth::check())
+        @php
+            $currentDate = date('Y-m-d');
+        @endphp
+        @if($date > $currentDate)
+            @if(Auth::user()->role === 1)
+                <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Participate It!</a>
+            @elseif(Auth::user()->role === 2)
+                @php
+                    $verifyCompanyId = DB::table('companies')->join('users',function ($join)
+                    {
+                        $join->on('companies.userid','=','users.id')->where('companies.userid','=', Auth::user()->id);
+                    })->value('companies.companyid');
+                @endphp
+                @if($companyid === $verifyCompanyId)
+                    <a href="/viewevent/{!!$id!!}/participantdetails" class = "btn btn-default login-btn">Stats Analytic!</a>
+                @endif
+            @elseif(Auth::user()->role === 3)
+                <a href="/viewevent/{!!$id!!}/participantdetails" class = "btn btn-default login-btn">Stats Analytic!</a>
+            @endif
+        @elseif($date == $currentDate)
+            @if(Auth::user()->role === 2)
+                <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Mark Attendance!</a>
+            @endif
         @endif
     @endif
 </div>

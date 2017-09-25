@@ -65,9 +65,10 @@
 						$currentDate = date('Y-m-d');
         				$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
 						$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
+						$studentParticipate = DB::table('studentsnevents')->where('studentid',$results[0]->studentid)->where(DB::raw('eventid'), $event)->value('participate');
 					@endphp
 				<div>
-					@if($eventDate < $currentDate)
+					@if($eventDate < $currentDate && $studentParticipate == 1)
 						{!!$eventName!!}
 					@endif
 				</div>
@@ -91,7 +92,7 @@
 						$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
 					@endphp
 				<div>
-					@if($eventDate > $currentDate)
+					@if($eventDate >= $currentDate)
 						<a href="{{ url('viewevent/'.$event) }}" id="thumbnail">{!!$eventName!!}</a>
 					@endif
 				</div>
@@ -102,6 +103,7 @@
 
 @elseif (Auth::user()->role === 2)
 	<div class = "container table-responsive">
+	@if ($results[0]->companyApproval === 1)
 		<table>
 			<tr>
 				<td rowspan="2">
@@ -152,7 +154,7 @@
 					@php
 						$date = date('Y-m-d');
 					@endphp
-					@if($event->eventDate > $date)
+					@if($event->eventDate >= $date && $event->eventApproval === 1)
 						<a id = "viewevent" href="{{ url('viewevent/'.$event->eventid) }}">{{$event->eventName}}</a><br>
 					@endif
 				@endforeach
@@ -173,21 +175,141 @@
 				@php
 					$date = date('Y-m-d');
 				@endphp
-				@if($event->eventDate <= $date)
+				@if($event->eventDate < $date && $event->eventApproval === 1)
 					{{$event->eventName}}<br>
 				@endif
 			@endforeach
 		</div>
 
-		<a href="{{ url('postevent') }}" class = "btn btn-default login-btn pull-right">Post an Activity</a> 
-	</div>
+		<a href="{{ url('postevent') }}" class = "btn btn-default login-btn pull-right">Post an Activity</a>
 
+	@else
+		<h3 class ="text-uppercase" style="font-weight:bold">Still waiting for approval from admin</h3>
+	@endif
+</div>
 @elseif (Auth::user()->role === 3)
 	<div class = "container table-responsive">
 		<div class = "page-header">
 			<h3 class ="text-uppercase" style="font-weight:bold">Waiting for Approval Company</h3>
 		</div>
-	</div>
+
+		<div>
+			@php
+				$companies = DB::table('companies')->where('companyApproval',0)->pluck('companyid');
+			@endphp
+
+			<table class = "table table-condensed">
+	    		<thead>
+	    			<tr>
+	    				<th>Check Box</th>
+	    				<th>Company Name</th>
+	    				<th>Email</th>
+	    			</tr>
+	    		</thead>
+
+	    		<tbody>
+					@foreach($companies as $company)
+						@php
+							$companyName = DB::table('companies')->where('companyid', $company)->value('companyName');
+							$companyUserId = DB::table('companies')->where('companyid', $company)->value('userid');
+							$companyApproval = DB::table('companies')->where('companyid',$company)->value('companyApproval');
+							$companyEmail = DB::table('users')->where('id',$companyUserId)->value('email');
+						@endphp
+
+					@if ($companyApproval === 0)
+				    	<tr>
+				    		<form action="/checkcompanyapproval" method="post" enctype="multipart/form-data">
+				    		<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
+				    		<td><input name="company[]" type="checkbox" value="{!!$company!!}"></td>
+					    	<td>{!!$companyName!!}</td>
+					    	<td>{!!$companyEmail!!}</td>
+				    	</tr>
+				    @endif
+					@endforeach
+				</tbody>
+			</table>
+			<input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Submit" />
+		</div>
+
+		<div class = "page-header">
+			<h3 class ="text-uppercase" style="font-weight:bold">Waiting for Approval Event</h3>
+		</div>
+
+		<div>
+			@php
+				$events = DB::table('events')->where('eventApproval',0)->pluck('eventid');
+			@endphp
+
+			<table class = "table table-condensed">
+	    		<thead>
+	    			<tr>
+	    				<th>Check Box</th>
+	    				<th>Event Name</th>
+	    				<th>Date</th>
+	    				<th>Venue</th>
+	    			</tr>
+	    		</thead>
+
+	    		<tbody>
+					@foreach($events as $event)
+						@php
+							$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
+							$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
+							$eventVenue = DB::table('events')->where('eventid', $event)->value('eventVenue'); 
+						@endphp
+
+				    <tr>
+				    	<form action="/checkeventapproval" method="post" enctype="multipart/form-data">
+				    	<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
+				    	<td><input name="event[]" type="checkbox" value="{!!$event!!}"></td>
+					    <td>{!!$eventName!!}</td>
+					    <td>{!!$eventDate!!}</td>
+					    <td>{!!$eventVenue!!}</td>
+				    </tr>
+					@endforeach
+				</tbody>
+			</table>
+			<input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Submit" />
+		</div>
+
+		<div class = "page-header">
+			<h3 class ="text-uppercase" style="font-weight:bold">All Events Statistics</h3>
+		</div>
+
+		<div>
+			@php
+				$eventsStats = DB::table('events')->where('eventApproval',1)->pluck('eventid');
+			@endphp
+			<table class = "table table-condensed">
+	    		<thead>
+	    			<tr>
+	    				<th>Event Name</th>
+	    				<th>Date</th>
+	    				<th>Venue</th>
+	    				<th>Total Students Registered</th>
+	    			</tr>
+	    		</thead>
+
+	    		<tbody>
+					@foreach($eventsStats as $eventStat)
+						@php
+							$eventSName = DB::table('events')->where('eventid', $eventStat)->value('eventName');
+							$eventSDate = DB::table('events')->where('eventid', $eventStat)->value('eventDate');
+							$eventSVenue = DB::table('events')->where('eventid', $eventStat)->value('eventVenue'); 
+							$totalRegistered = DB::table('studentsnevents')->where('eventid',$eventStat)->count('studentid');
+						@endphp
+
+				    <tr>
+					    <td>{!!$eventSName!!}</td>
+					    <td>{!!$eventSDate!!}</td>
+					    <td>{!!$eventSVenue!!}</td>
+					    <td><a href="/viewevent/{!!$eventStat!!}/participantdetails" id="totalRegisterDetails">{!!$totalRegistered!!}</a></td>
+				    </tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div>
+</div>
 @endif
 @include('footer')
 @stop

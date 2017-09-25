@@ -166,6 +166,21 @@ class UserController extends Controller
         }
     }
 
+    public function checkCompanyApproval(Request $request)
+    {
+        $aCompany = $request->input('company');
+
+        if(!empty($aCompany))
+        {
+            $N = count($aCompany);
+            for ($i = 0; $i < $N; $i++)
+            {
+                DB::table('companies')->where('companyid',$aCompany[$i])->update(['companyApproval'=> 1]);
+            }
+        }
+       return view('/dashboard');
+    }
+
     public function signin(Request $request)
     {
         $email = $request->input('useremail');

@@ -27,6 +27,7 @@ class CreateCompaniesTable extends Migration
             $table->foreign('userid')
             ->references('id')->on('users')
             ->onDelete('cascade');
+            $table->integer('companyApproval')->default('0');
         });
     }
 

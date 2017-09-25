@@ -24,6 +24,7 @@ class CreateStudentsneventsTable extends Migration
             $table->foreign('eventid')
             ->references('eventid')->on('events')
             ->onDelete('cascade');
+            $table->integer('participate')->default('0');
         });
     }
 
