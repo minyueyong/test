@@ -245,6 +245,7 @@
 	    			<tr>
 	    				<th>Check Box</th>
 	    				<th>Event Name</th>
+	    				<th>Organizer</th>
 	    				<th>Date</th>
 	    				<th>Venue</th>
 	    			</tr>
@@ -256,6 +257,8 @@
 							$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
 							$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
 							$eventVenue = DB::table('events')->where('eventid', $event)->value('eventVenue'); 
+							$companyid = DB::table('events')->where('eventid',$event)->value('companyid');
+							$companyName = DB::table('companies')->where('companyid',$companyid)->value('companyName');
 						@endphp
 
 				    <tr>
@@ -263,6 +266,7 @@
 				    	<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
 				    	<td><input name="event[]" type="checkbox" value="{!!$event!!}"></td>
 					    <td>{!!$eventName!!}</td>
+					    <td>{!!$companyName!!}</td>
 					    <td>{!!$eventDate!!}</td>
 					    <td>{!!$eventVenue!!}</td>
 				    </tr>
@@ -284,9 +288,10 @@
 	    		<thead>
 	    			<tr>
 	    				<th>Event Name</th>
+	    				<th>Organizer</th>
 	    				<th>Date</th>
 	    				<th>Venue</th>
-	    				<th>Total Students Registered</th>
+	    				<th>Total Student</th>
 	    			</tr>
 	    		</thead>
 
@@ -297,10 +302,13 @@
 							$eventSDate = DB::table('events')->where('eventid', $eventStat)->value('eventDate');
 							$eventSVenue = DB::table('events')->where('eventid', $eventStat)->value('eventVenue'); 
 							$totalRegistered = DB::table('studentsnevents')->where('eventid',$eventStat)->count('studentid');
+							$companySid = DB::table('events')->where('eventid',$eventStat)->value('companyid');
+							$companySName = DB::table('companies')->where('companyid',$companySid)->value('companyName');
 						@endphp
 
 				    <tr>
 					    <td>{!!$eventSName!!}</td>
+					    <td>{!!$companySName!!}</td>
 					    <td>{!!$eventSDate!!}</td>
 					    <td>{!!$eventSVenue!!}</td>
 					    <td><a href="/viewevent/{!!$eventStat!!}/participantdetails" id="totalRegisterDetails">{!!$totalRegistered!!}</a></td>

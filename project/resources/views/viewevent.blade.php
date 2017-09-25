@@ -7,6 +7,7 @@
         $description = DB::table('events')->where('eventid', $id)->value('eventDescription');
         $companyid = DB::table('events')->where('eventid', $id)->value('companyid');
         $totalRegistered = DB::table('studentsnevents')->where('eventid',$id)->count('studentid');
+        $companyName = DB::table('companies')->where('companyid',$companyid)->value('companyName');
 @endphp
 
 <title>{!!$name!!}</title>
@@ -21,11 +22,12 @@
 
 	<img src = "{!!$image!!}" alt="eventpic" class="img-square img-responsive" style="height: 45%; width:35%; margin: auto;"/>
 	<div style="font-size:18px">Name: {!!$name!!} </div>
+    <div style="font-size:18px">Organizer: {!!$companyName!!} </div>
 	<div style="font-size:18px">Date: {!!$date!!} </div>
 	<div style="font-size:18px">Venue: {!!$venue!!} </div>
     <div style="font-size:18px">Fees: {!!$fees!!} </div>
 	<div style="font-size:18px">Description: <br>@php echo nl2br($description); @endphp </div>
-    <div style="font-size:18px">Total Students Registered: {!!$totalRegistered!!} </div>
+    <div style="font-size:18px">Total Student: {!!$totalRegistered!!} </div>
     
     @if(Auth::check())
         @php
