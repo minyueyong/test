@@ -69,7 +69,7 @@
 					@endphp
 				<div>
 					@if($eventDate < $currentDate && $studentParticipate == 1)
-						{!!$eventName!!}
+						 {!!$eventDate!!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!!$eventName!!}
 					@endif
 				</div>
 				@endforeach
@@ -176,7 +176,7 @@
 					$date = date('Y-m-d');
 				@endphp
 				@if($event->eventDate < $date && $event->eventApproval === 1)
-					{{$event->eventName}}<br>
+					{{$event->eventDate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$event->eventName}} <br>
 				@endif
 			@endforeach
 		</div>
