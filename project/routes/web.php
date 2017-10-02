@@ -114,8 +114,14 @@ Route::get('viewevent/{id}', function ($id)
 });
 
 Route::get('viewevent/{id}/participateevent','EventController@participateEvent');
-Route::post('/checkstudentattendance','EventController@checkStudentAttendance');
 Route::get('/viewevent/{id}/participantdetails','EventController@participantDetails');
+
+Route::post('/checkstudentattendance','EventController@checkStudentAttendance');
+
+Route::get('/viewevent/{id}/editevent','EventController@editEvent');
+Route::post('/updateevent','EventController@updateEvent');
+
+Route::post('/viewevent/{id}/postcomment','EventController@postComment');
 
 Route::get('forum', function () 
 {

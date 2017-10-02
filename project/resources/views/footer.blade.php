@@ -4,11 +4,11 @@
 	/* Style all font awesome icons */
 	.fa 
 	{
-	    padding: 10px;
+	    padding: 8px;
 	    font-size: 20px;
 	    text-align: center;
 	    text-decoration: none;
-	    border-radius: 50%;
+	    border-radius: 20%;
 	}
 
 	/* Add a hover effect if you want */

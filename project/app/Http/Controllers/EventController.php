@@ -115,7 +115,7 @@ class EventController extends Controller
             $join->on('companies.userid','=','users.id')->where('companies.userid','=', Auth::user()->id);
         })->value('companies.companyid');
         $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
-        return view('/viewevent')->with('id',$id);
+        return redirect()->intended('/dashboard');
     }
 
     public function participateEvent($eventid)
@@ -186,5 +186,80 @@ class EventController extends Controller
             }
         }
        return view('/dashboard');
+    }
+
+    public function editEvent($eventid)
+    {
+        if(Auth::user()->role === 2)
+        {
+            return view('/editevent')->with('eventid',$eventid);
+        }
+    }
+
+    public function updateEvent(Request $request)
+    {
+        $eventid = $request->input('eventid');
+        $name = $request->input('eventname');
+        $date = $request->input('eventdate');
+        $venue = $request->input('eventvenue');
+        if ($request->input('fees') == "paid")
+        {
+            $fees = $request->input('feespaid');
+        }
+        else
+        {
+            $fees = $request->input('fees');
+        }
+        $description = $request->input('eventdescription');
+        $image = $request->file('eventimage');
+
+        if (!empty($name))
+        {           
+            $eventname = $name;
+            DB::table('events')->where('eventid',$eventid)->update(['eventName'=> $eventname]);
+        }
+
+        if (!empty($date))
+        {           
+            $eventdate = $date;
+            DB::table('events')->where('eventid',$eventid)->update(['eventDate'=> $eventdate]);
+        }
+
+        if (!empty($venue))
+        {           
+            $eventvenue = $venue;
+            DB::table('events')->where('eventid',$eventid)->update(['eventVenue'=> $eventvenue]);
+        }
+
+        if (!empty($fees))
+        {           
+            $eventfees = $fees;
+            DB::table('events')->where('eventid',$eventid)->update(['eventFees'=> $eventfees]);
+        }
+
+        if (!empty($description))
+        {           
+            $eventdescription = $description;
+            DB::table('events')->where('eventid',$eventid)->update(['eventDescription'=> $eventdescription]);
+        }
+
+        if (!empty($image))
+        {
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('/images/eventpic/' . $filename);
+            Image::make($image->getRealPath())->resize(500, 550)->save($path);
+            $newimage = '/images/eventpic/'.$filename;
+            DB::table('events')->where('eventid',$eventid)->update(['eventImage'=> $newimage]);
+        }
+        return redirect()->intended('viewevent/'.$eventid);
+    }
+
+    public function postComment(Request $request, $eventid)
+    {
+        $comment = $request->input('comment');
+        $commentid = DB::table('comments')->insertGetId(['comment'=>$comment, 'created_at' => \Carbon\Carbon::now()->toDateTimeString(),'updated_at' => \Carbon\Carbon::now()->toDateTimeString()]);
+        $userid = Auth::user()->id;
+        DB::table('usersneventsncomments')->insert(['userid'=>$userid,'eventid'=>$eventid,'commentid'=>$commentid]); 
+        return redirect()->intended('viewevent/'.$eventid);       
     }
 }
