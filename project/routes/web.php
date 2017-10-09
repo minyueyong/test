@@ -87,6 +87,10 @@ Route::get('gallery', function ()
 {
     return view('gallery');
 });
+Route::get('gallery/{id}', function ($id) 
+{
+    return view('/pastphotos')->with('id',$id);
+});
 
 Route::get('events', function () 
 {

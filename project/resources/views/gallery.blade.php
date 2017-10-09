@@ -2,15 +2,6 @@
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
-<style>
-	.carousel-inner > .item > img,
-    .carousel-inner > .item > a > img 
-    {
-        width: 65%;
-        height: 55%;
-        margin: auto;
-    }
-</style>
 
 <div class = "container">
     <div class = "page-header">
@@ -23,8 +14,32 @@
 
     <div class = "page-header">
     </div>
+	
+	<h3 class = "text-uppercase">Past Events' Photos</h3>
 
-    
+    @php
+    	$id = DB::table('events')->pluck('eventid');
+    @endphp
+
+    <ul class="list-inline">
+	    @foreach ($id as $eventid)
+		  	@php
+	        	$currentDate = date('Y-m-d');
+	        	$eventname = DB::table('events')->where('eventid', $eventid)->value('eventName');
+	        	$date = DB::table('events')->where('eventid', $eventid)->value('eventDate');
+	            $approval = DB::table('events')->where('eventid',$eventid)->value('eventApproval');
+	    	@endphp
+	    		
+	    	@if($date < $currentDate && $approval === 1)
+				<li data-toggle="modal" data-target="#myModal">
+					<a href="/gallery/{!!$eventid!!}" id="thumbnail">
+			  		{!!$eventname!!}
+					</a>
+				</li>
+			@endif
+			<br>
+		@endforeach
+	</ul>
 </div>
 
 @include('footer')

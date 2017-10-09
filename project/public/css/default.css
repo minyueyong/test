@@ -60,7 +60,8 @@
         text-align: center;
     }
 
-    #viewevent:link, #viewevent:visited, #viewevent:active
+    #viewevent:link, #viewevent:visited, #viewevent:active, #thumbnail:link,
+    #thumbnail:visited
     {
         color: black;
     }
@@ -83,13 +84,13 @@
     }
 
     /* unvisited link */
-    #signup:link, #signin:link, #thumbnail:link, #totalRegisterDetails:link
+    #signup:link, #signin:link, #totalRegisterDetails:link
     {
         color: red;
     }
 
     /* visited link */
-    #signup:visited, #signin:visited, #thumbnail:visited, #totalRegisterDetails:visited
+    #signup:visited, #signin:visited, #totalRegisterDetails:visited
     {
         color: red;
     }
