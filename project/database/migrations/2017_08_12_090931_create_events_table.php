@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->date('eventDate');
             $table->string('eventVenue');
             $table->string('eventImage');
+            $table->String('eventInterest');
             $table->string('eventFees');
             $table->string('eventDescription');
             $table->integer('companyid')->unsigned();
@@ -37,6 +38,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        
     }
 }

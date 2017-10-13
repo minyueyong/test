@@ -2,6 +2,7 @@
         $name = DB::table('events')->where('eventid', $id)->value('eventName');
         $date = DB::table('events')->where('eventid', $id)->value('eventDate');
         $venue = DB::table('events')->where('eventid', $id)->value('eventVenue');
+        $interest = DB::table('events')->where('eventid',$id)->value('eventInterest');
         $fees = DB::table('events')->where('eventid',$id)->value('eventFees');
         $image = DB::table('events')->where('eventid', $id)->value('eventImage');
         $description = DB::table('events')->where('eventid', $id)->value('eventDescription');
@@ -25,6 +26,7 @@
     <div style="font-size:18px">Organizer: {!!$companyName!!} </div>
 	<div style="font-size:18px">Date: {!!$date!!} </div>
 	<div style="font-size:18px">Venue: {!!$venue!!} </div>
+    <div style="font-size:18px">Area of Interest: {!!$interest!!} </div>
     <div style="font-size:18px">Fees: {!!$fees!!} </div>
 	<div style="font-size:18px">Description: <br>@php echo nl2br($description); @endphp </div>
     <div style="font-size:18px">Total Student: {!!$totalRegistered!!} </div>

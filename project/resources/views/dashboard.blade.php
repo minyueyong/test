@@ -270,7 +270,7 @@ h3
 <!-- role1 -->
 
 @elseif (Auth::user()->role === 2)
-@if ($results[0]->companyApproval === 1)
+	@if ($results[0]->companyApproval === 1)
 	<div class="containerfluid2" >
 		<div class="row row-offcanvas row-offcanvas-right">
 			<div class="col-xs-12 col-sm-9 col-sm-push-3">
@@ -331,7 +331,7 @@ h3
 				<div class="row"  class = "collapse"  >
 					<div class="col-xs-6 col-sm-12">
 						<div style="font-size:18px" id = "demo3" hidden>
-							<h2 align ="center"><u>Upcoming Events</u></h2><br>
+							<h2><u>Upcoming Events</u></h2><br>
 							<div>
 								<table>
 									@php 
@@ -417,14 +417,13 @@ h3
 						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics</button>
 					</div>
 				</div><!--/.sidebar-offcanvas-->
-
 			</div><!-- xs-12 -->
 		</div><!-- row -->
-	</div><!-- container -->
 	@else
-		<h3 class ="text-uppercase" style="font-weight:bold">Still waiting for approval from admin</h3>
+		<div class="container">
+			<h3 class ="text-uppercase" style="font-weight:bold">Still waiting for approval from admin</h3>
+		</div>
 	@endif
-</div>
 <!-- role2 -->
 
 @elseif (Auth::user()->role === 3)

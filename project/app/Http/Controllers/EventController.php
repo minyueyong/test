@@ -95,6 +95,15 @@ class EventController extends Controller
         $name = $request->input('eventname');
         $date = $request->input('eventdate');
         $venue = $request->input('eventvenue');
+        if ($request->input('interest') == "other")
+        {
+            $interest = $request->input('OtherInterest');
+        }
+        else
+        {
+            $interest = $request->input('interest');
+        }
+        
         if ($request->input('fees') == "paid")
         {
             $fees = $request->input('feespaid');
@@ -114,7 +123,7 @@ class EventController extends Controller
         {
             $join->on('companies.userid','=','users.id')->where('companies.userid','=', Auth::user()->id);
         })->value('companies.companyid');
-        $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
+        $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventInterest'=>$interest,'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
         return redirect()->intended('/dashboard');
     }
 

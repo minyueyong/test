@@ -10,6 +10,14 @@
         else
             document.getElementById('div1').innerHTML='';
     }
+
+    function CheckInterest(interest)
+    {
+        if (interest == 'other')
+            document.getElementById('div2').innerHTML = '<span class="glyphicon glyphicon-list-alt"></span> <input type = "text" name = "OtherInterest" id = "OtherInterest" placeholder = "Area of Interest"/>'
+        else
+            document.getElementById('div2').innerHTML='';
+    }
 </script>
 	<div class="container">
         <div class = "page-header">
@@ -37,6 +45,21 @@
             	   </div>
                 </div>
 				
+                <div class="form-group">
+                    <div class="input-icon"> <span class="glyphicon glyphicon-list-alt"></span>
+                    <select name = "interest" id ="interest" onchange='CheckInterest(this.options[this.selectedIndex].value);' required>
+                        <option value = "" selected disabled>Area of Interest </option>
+                        <option value="Art">Art </option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Business">Business </option>
+                        <option value="Mass Comm">Mass Comm </option>
+                        <option value="Law">Law</option>
+                        <option value="other">Other </option>
+                    </select>
+                    <div id = "div2"></div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                 <div class="input-icon"> <span class="glyphicon glyphicon-shopping-cart"></span>
                 <select name = "fees" id ="fees" onchange='CheckFees(this.options[this.selectedIndex].value);' required>
