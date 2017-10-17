@@ -29,28 +29,6 @@
         border: 5px solid #f00;
         margin: 10px;
     }
-
-
-    @media (max-width: 500px)
-    {
-        .containerfluid1,
-        .row-offcanvas-right
-        {
-            width:100%;
-            overflow-y: auto;
-            _overflow: auto;
-            margin: 0 0 1em;
-        }
-
-        .table-responsive
-        {
-            width: 100%;
-            overflow-y: auto;
-            _overflow: auto;
-            margin: 0 0 1em;
-        }
-        
-    }
 </style>
 
 <div class = "containerfluid1">
@@ -111,7 +89,7 @@
                     </div>
                                 
                     <div class= "row" style="margin-left:1cm;">
-                        <h3 class = "text-uppercase" style="margin-left:2cm;">Comment Section</h3>
+                        <h3 class = "text-uppercase" style="margin-left:1cm;">Comment Section</h3>
                     
                         @if (Auth::user()->role === 1)
                             <div class="page-login-form box">

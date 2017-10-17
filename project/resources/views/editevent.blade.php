@@ -6,18 +6,6 @@
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
-<style>
-    @media (max-width: 500px)
-    {
-        .container
-        {
-            width:100%;
-            overflow-y: auto;
-            _overflow: auto;
-            margin: 0 0 1em;
-        }   
-    }
-</style>
 <script type="text/javascript">
     function CheckFees(fees)
     {

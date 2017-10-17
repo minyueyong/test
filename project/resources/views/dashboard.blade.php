@@ -34,92 +34,6 @@
 		font-family:Georgia;
 		color: cornflowerblue; 
 	}
-
-	/*
-	 * Off Canvas
-	 * --------------------------------------------------
-	 */
- 	@media (max-width: 500px)
-	{
-	  .row-offcanvas 
-	  {
-	    position: relative;
-	    -webkit-transition: all .25s ease-out;
-	         -o-transition: all .25s ease-out;
-	            transition: all .25s ease-out;
-	  }
-
-	  .row-offcanvas-right 
-	  {
-		width:100%;
-		overflow-y: auto;
-		_overflow: auto;
-		margin: 0 0 1em;
-	  }
-
-	  .row-offcanvas-left 
-	  {
-		width:100%;
-		overflow-y: auto;
-		_overflow: auto;
-		margin: 0 0 1em;
-	  }
-
-	  .row-offcanvas-right
-	  .sidebar-offcanvas 
-	  {
-		width:100%;
-		overflow-y: auto;
-		_overflow: auto;
-		margin: 0 0 1em;
-	  }
-
-	  .row-offcanvas-left
-	   {
-		width:100%;
-		overflow-y: auto;
-		_overflow: auto;
-		margin: 0 0 1em;
-	  }
-
-	  .row-offcanvas-right.active 
-	  {
-		width:100%;
-		overflow-y: auto;
-		_overflow: auto;
-		margin: 0 0 1em;
-	  }
-
-	  .row-offcanvas-left.active 
-	  {
-		width:100%;
-		overflow-y: auto;
-		_overflow: auto;
-		margin: 0 0 1em;
-	  }
-
-	  .sidebar-offcanvas 
-	  {
-		width:100%;
-		overflow-y: auto;
-		_overflow: auto;
-		margin: 0 0 1em;
-	    
-	  }
-
-	  .navbar-btn 
-	  {
-	      border-color: transparent;
-	      text-transform: uppercase;
-	  }
-
-	  .navbar-btn:hover 
-	  {
-	      color: white;
-	      background-color: red;
-	      border-color: transparent;
-	  }
-	}
 </style>
 
 <script>
@@ -136,7 +50,7 @@
 		{
 			visibleDivId = divId;
 		}
-	 hideNonVisibleDivs();
+	 	hideNonVisibleDivs();
 	}
 	function hideNonVisibleDivs() 
 	{
