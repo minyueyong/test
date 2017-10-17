@@ -3,102 +3,123 @@
 @section('content')
 
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/>
+
 <style>
-.containerfluid1
-{
-	padding: 60px;
-	margin-left : 1.5cm;
-}
+	.containerfluid1
+	{
+		padding: 60px;
+		margin-left : 2cm;
+	}
 
-.containerfluid2
-{
-	padding: 60px;
-	margin-left : -1cm;
-}
+	.containerfluid2
+	{
+		padding: 60px;
+		margin-left : -1cm;
+	}
 
-.containerfluid3
-{
-    padding : 80px;
-    margin-left : -1cm;
-}
+	.containerfluid3
+	{
+	    padding : 80px;
+	    margin-left : -1cm;
+	}
 
-.containerfluid3 h3
-{
-	text-align: center;
-}
+	.containerfluid3 h3
+	{
+		text-align: center;
+	}
 
-h2,
-h3
-{
-	font-family:Georgia;
-	color: cornflowerblue; 
-}
+	h2,
+	h3
+	{
+		font-family:Georgia;
+		color: cornflowerblue; 
+	}
 
-/*
- * Off Canvas
- * --------------------------------------------------
- */
-@media screen and (max-width: 767px) 
-{
-  .row-offcanvas 
-  {
-    position: relative;
-    -webkit-transition: all .25s ease-out;
-         -o-transition: all .25s ease-out;
-            transition: all .25s ease-out;
-  }
+	/*
+	 * Off Canvas
+	 * --------------------------------------------------
+	 */
+ 	@media (max-width: 500px)
+	{
+	  .row-offcanvas 
+	  {
+	    position: relative;
+	    -webkit-transition: all .25s ease-out;
+	         -o-transition: all .25s ease-out;
+	            transition: all .25s ease-out;
+	  }
 
-  .row-offcanvas-right 
-  {
-    right: 0;
-  }
+	  .row-offcanvas-right 
+	  {
+		width:100%;
+		overflow-y: auto;
+		_overflow: auto;
+		margin: 0 0 1em;
+	  }
 
-  .row-offcanvas-left 
-  {
-    left: 0;
-  }
+	  .row-offcanvas-left 
+	  {
+		width:100%;
+		overflow-y: auto;
+		_overflow: auto;
+		margin: 0 0 1em;
+	  }
 
-  .row-offcanvas-right
-  .sidebar-offcanvas 
-  {
-    right: 60%; /* 6 columns */
-  }
+	  .row-offcanvas-right
+	  .sidebar-offcanvas 
+	  {
+		width:100%;
+		overflow-y: auto;
+		_overflow: auto;
+		margin: 0 0 1em;
+	  }
 
-  .row-offcanvas-left
-  .sidebar-offcanvas
-  {
-    left: 60%; /* 6 columns */
-  }
+	  .row-offcanvas-left
+	   {
+		width:100%;
+		overflow-y: auto;
+		_overflow: auto;
+		margin: 0 0 1em;
+	  }
 
-  .row-offcanvas-right.active 
-  {
-    right: -60%; /* 6 columns */
-  }
+	  .row-offcanvas-right.active 
+	  {
+		width:100%;
+		overflow-y: auto;
+		_overflow: auto;
+		margin: 0 0 1em;
+	  }
 
-  .row-offcanvas-left.active 
-  {
-    left: -60%; /* 6 columns */
-  }
+	  .row-offcanvas-left.active 
+	  {
+		width:100%;
+		overflow-y: auto;
+		_overflow: auto;
+		margin: 0 0 1em;
+	  }
 
-  .sidebar-offcanvas 
-  {
-    position: absolute;
-    top: 0;
-    width: 60%; /* 6 columns */
-  }
+	  .sidebar-offcanvas 
+	  {
+		width:100%;
+		overflow-y: auto;
+		_overflow: auto;
+		margin: 0 0 1em;
+	    
+	  }
 
-  .navbar-btn 
-  {
-    border-color: transparent;
-    text-transform: uppercase;
-  }
+	  .navbar-btn 
+	  {
+	      border-color: transparent;
+	      text-transform: uppercase;
+	  }
 
-  .navbar-btn:hover
-  {
-    color: white;
-    background-color: red;
-    border-color: transparent;
-  }
+	  .navbar-btn:hover 
+	  {
+	      color: white;
+	      background-color: red;
+	      border-color: transparent;
+	  }
+	}
 </style>
 
 <script>
@@ -115,9 +136,8 @@ h3
 		{
 			visibleDivId = divId;
 		}
-	 	hideNonVisibleDivs();
+	 hideNonVisibleDivs();
 	}
-
 	function hideNonVisibleDivs() 
 	{
 		var i, divId, div;
@@ -149,44 +169,43 @@ h3
 				<table class="table table-condensed table-bordered">
 						<div class="row" id = "demo1" class = "collapse" >
 							<div class="col-xs-6 col-sm-6">
-								<div style="font-size:18px">
-									<h2><u>Community Stats</u></h2>
-									<div>Status: {!!$results[0]->status!!}</div>
-									<div>Experience: {!!$results[0]->experience!!}</div>
-									<div>Campus: {!!$results[0]->campus!!} University </div>
-									<div>Education: Bachelor of {!!$results[0]->education!!} </div>
-									<div>Area of Interest: {!!$results[0]->interest!!} </div>
-									<div>Birthday: {!!$results[0]->dob!!} </div>
-									<div>Gender: {!!$results[0]->gender!!} </div>
+								<div>
+									<h2  style="font-size:2vw;"><u>Community Stats</u></h2>
+									<div style="font-size:1.5vw;"><b>Status:</b> {!!$results[0]->status!!}</div>
+									<div style="font-size:1.5vw;"><b>Experience:</b> {!!$results[0]->experience!!}</div>
+									<div style="font-size:1.5vw;"><b>Campus:</b> {!!$results[0]->campus!!} University </div>
+									<div style="font-size:1.5vw;"><b>Education:</b> Bachelor of {!!$results[0]->education!!} </div>
+									<div style="font-size:1.5vw;"><b>Area of Interest:</b> {!!$results[0]->interest!!} </div>
+									<div style="font-size:1.5vw;"><b>Birthday:</b> {!!$results[0]->dob!!} </div>
+									<div style="font-size:1.5vw;"><b>Gender:</b> {!!$results[0]->gender!!} </div>
 								</div>
-							</div><!--/.col-xs-6.col-sm-6-->
+							</div>
 
 							<div class="col-xs-6 col-sm-6">
 								<div style="font-size:18px">
-									<h2><u>Contact Information</u></h2>
-									<div>Email: {!!$results[0]->email!!} </div>
-									<div>Phone: +60{!!$results[0]->phone!!} </div>
+									<h2 style="font-size:2vw;"><u>Contact Information</u></h2>
+									<div style="font-size:1.5vw;"><b>Email:</b> {!!$results[0]->email!!} </div>
+									<div style="font-size:1.5vw;"><b>Phone:</b> +60{!!$results[0]->phone!!} </div>
 								</div>
-							</div><!--/.col-xs-6.col-lg-4-->
+							</div>
 
 							<div class="col-xs-6 col-sm-6">
 								<div style="font-size:18px">
-									<h2><u>About Me</u></h2>
-									<div> @php echo nl2br($results[0]->aboutme); @endphp </div>
+									<h2 style="font-size:2vw;"><u>About Me</u></h2>
+									<div style="font-size:1.5vw;"><b> @php echo nl2br($results[0]->aboutme); @endphp</b> </div>
 								</div>
-							</div><!--/.col-xs-6.col-lg-4-->
-
-						</div><!--/row-->
+							</div>
+						</div>
 				</table>
 			</div>
 
-			<div class="table-responsive col-xs-6 col-sm-10">
+			<div class="table-responsive col-xs-6 col-sm-10" >
 				<table class="table table-condensed table-bordered">
 					<div class="row" id = "demo2" class = "collapse" hidden>
 						<div class="col-xs-6 col-sm-6">
 							<div style="font-size:18px">
-								<h2><u>Participated Activities</u></h2>
-								<div>
+								<h2 style="font-size:2vw;"><u>Participated Activities</u></h2>
+								<div style="font-size:1.5vw;"><b>
 									@php 
 										$events = DB::table('studentsnevents')->where('studentid', $results[0]->studentid)->pluck('eventid');
 									@endphp
@@ -198,20 +217,20 @@ h3
 											$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
 											$studentParticipate = DB::table('studentsnevents')->where('studentid',$results[0]->studentid)->where(DB::raw('eventid'), $event)->value('participate');
 										@endphp
-									<div>
+									<div style="font-size:2vw;">
 										@if($eventDate < $currentDate && $studentParticipate == 1)
 											{!!$eventDate!!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!!$eventName!!}
 										@endif
 									</div>
-									@endforeach
+									@endforeach</b>
 								</div>
 							</div>
-						</div><!--/.col-xs-6.col-sm-6-->
+						</div>
 
 						<div class="col-xs-6 col-sm-6">
 							<div style="font-size:18px" >
-								<h2><u>Upcoming Activities</u></h2>
-									<div>
+								<h2 style="font-size:2vw;"><u>Upcoming Activities</u></h2>
+									<div style="font-size:1.5vw;"><b>
 										@php 
 											$events = DB::table('studentsnevents')->where('studentid', $results[0]->studentid)->pluck('eventid');
 										@endphp
@@ -222,22 +241,20 @@ h3
 												$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
 												$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
 											@endphp
-										<div>
+										<div style="font-size:2vw;">
 											@if($eventDate >= $currentDate)
 												<a href="{{ url('viewevent/'.$event) }}" id="thumbnail">{!!$eventName!!}</a>
 											@endif
 										</div>
-										@endforeach
+										@endforeach</b>
 									</div>
 							</div>
-						</div><!--/.col-xs-6.col-sm-6-->
-
-					</div><!--/row-->
+						</div>
+					</div>
 				</table>
-		  </div>
-		</div><!--col-xs-12 col-sm-9 col-sm-push-3 -->
+		  	</div>
+		</div>
 
-		
 		<div class="col-xs-12 col-sm-3 col-sm-pull-10 sidebar-offcanvas" id="sidebar">
 			<table>
 				<tr>
@@ -245,154 +262,150 @@ h3
 						<img src = "{!!$results[0]->image!!}" alt="profilepic" class="img-circle img-responsive"/>
 					</td>
 					<td>
-						<h3 style="font-weight: bold">{!!$results[0]->firstName!!} {!!$results[0]->lastName!!}</h3>
+						<h3 style="font-weight: bold" style="font-size:2vw; padding-left:20px;" >{!!$results[0]->firstName!!} {!!$results[0]->lastName!!}</h3>
 					</td>
 				</tr>
 
 				<tr>
 					<td>
-						<h4 style="font-weight:bold">Member since {!!Auth::user()->created_at!!}</h4>
+						<h4 style="font-weight:bold" style="font-size:2vw;">Member since {!!Auth::user()->created_at!!}</h4>
 					</td>
 				</tr>
 			</table>
 			<br>
-			<div class= "list-group-item">
+			<div class= "list-group-item" style="font-size:2vw;">
 				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Profile</button>
 			</div>
 
-			<div class= "list-group-item">
+			<div class= "list-group-item" style="font-size:2vw;">
 				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');">Activities Review</button>
 			</div>
-	  </div><!--/.sidebar-offcanvas-->
-
-	</div><!--rowoffcanvas -->
-</div><!--containerfluid -->
-<!-- role1 -->
+	  </div>
+	</div>
+</div>
 
 @elseif (Auth::user()->role === 2)
 	@if ($results[0]->companyApproval === 1)
-	<div class="containerfluid2" >
-		<div class="row row-offcanvas row-offcanvas-right">
-			<div class="col-xs-12 col-sm-9 col-sm-push-3">
-				<button type="button" class="pull-left btn btn-default visible-xs" data-toggle="offcanvas" aria-expanded="false" aria-controls="navbar">
-				</button>
+		<div class="containerfluid2" >
+			<div class="row row-offcanvas row-offcanvas-right">
+				<div class="col-xs-12 col-sm-9 col-sm-push-3">
+					<button type="button" class="pull-left btn btn-default visible-xs" data-toggle="offcanvas" aria-expanded="false" aria-controls="navbar">
+					</button>
 
-				<div class="agenda" class="row"  class = "collapse">
-					<div class="table-responsive col-xs-6 col-sm-9">
-						<table class="table table-condensed table-bordered">
-							<thead>
-								<tr>
-									<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/postevent")}}'"><b>Create New Activity</b></button></th>
-									<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo2');"><b>View Past Activities</b></button></th>
-									<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo3');"><b>View Upcoming Activities</b></button></th>
-								</tr>
-							</thead>
-						</table>   
+					<div class="agenda" class="row"  class = "collapse">
+						<div class="table-responsive col-xs-6 col-sm-9">
+							<table class="table table-condensed table-bordered" style="font-size:1.5vw;" >
+								<thead>
+									<tr>
+										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/postevent")}}'"><b>Create New Activity</b></button></th>
+										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo2');"><b>View Past Activities</b></button></th>
+										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo3');"><b>View Upcoming Activities</b></button></th>
+									</tr>
+								</thead>
+							</table>   
+							
+						</div>
 						
-					</div>
-					
-					<div class="row col-xs-6 col-sm-3">  
-						<table class="table table-condensed table-bordered">
-							<thead>
-								<tr>
-									<thead>
-										<tr>
-											<th>Status : {!!$results[0]->status!!} </th>
-										</tr>
-										<tr>
-											<th>Expired : {!!$results[0]->membershipDate!!} </th>
-										</tr>
-									</thead>
-								</tr>
-							</thead>
-						</table>
-					</div>
-
-				</div><!--agenda -->
-
-				<div class="row" id = "demo1" class = "collapse">
-					<div class="col-xs-6 col-sm-6">
-						<div style="font-size:18px">
-							<h2><u>Contact Information</u></h2>
-							<div>Email: {!!$results[0]->email!!} </div>
-							<div>Phone: +60{!!$results[0]->phone!!} </div>
-							<div>Area of Interest: {!!$results[0]->interest!!} </div>
+						<div class="row col-xs-6 col-sm-3">  
+							<table class="table table-condensed table-bordered" style="font-size:1.2vw;">
+								<thead>
+									<tr>
+										<thead>
+											<tr>
+												<th>Status : {!!$results[0]->status!!} </th>
+											</tr>
+											<tr>
+												<th>Expired : {!!$results[0]->membershipDate!!} </th>
+											</tr>
+										</thead>
+									</tr>
+								</thead>
+							</table>
 						</div>
-					</div><!--/.col-xs-6.col-sm-6-->
+					</div>
 
-					<div class="col-xs-6 col-sm-6">
-						<div style="font-size:18px">
-							<h2><u>About Company</u></h2>
-							<div> @php echo nl2br($results[0]->aboutcompany); @endphp </div>
+					<div class="row" id = "demo1" class = "collapse">
+						<div class="col-xs-6 col-sm-6">
+							<div style="font-size:18px">
+								<h2 style="font-size:2vw;"><u>Contact Information</u></h2>
+								<div style="font-size:1.5vw;">Email: {!!$results[0]->email!!} </div>
+								<div style="font-size:1.5vw;">Phone: +60{!!$results[0]->phone!!} </div>
+								<div style="font-size:1.5vw;">Area of Interest: {!!$results[0]->interest!!} </div>
+							</div>
 						</div>
-					</div><!--/.col-xs-6.col-sm-6-->
-				</div>
 
-				<div class="row"  class = "collapse"  >
-					<div class="col-xs-6 col-sm-12">
-						<div style="font-size:18px" id = "demo3" hidden>
-							<h2><u>Upcoming Events</u></h2><br>
-							<div>
-								<table>
-									@php 
-										$userid = Auth::user()->id;
-										$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.companyid');
-										$events = DB::table('events')->where('events.companyid','=',$companyid)->get();
-									@endphp
-					
-									@foreach($events as $event)
-										@php
-											$date = date('Y-m-d');
+						<div class="col-xs-6 col-sm-6">
+							<div style="font-size:18px">
+								<h2 style="font-size:2vw;"><u>About Company</u></h2>
+								<div style="font-size:1.5vw;"> @php echo nl2br($results[0]->aboutcompany); @endphp </div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row"  class = "collapse">
+						<div class="col-xs-6 col-sm-12">
+							<div style="font-size:18px" id = "demo3" hidden>
+								<h2 style="font-size:2vw;"><u>Upcoming Activities</u></h2><br>
+								<div >
+									<table>
+										@php 
+											$userid = Auth::user()->id;
+											$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.companyid');
+											$events = DB::table('events')->where('events.companyid','=',$companyid)->get();
 										@endphp
-										@if($event->eventDate >= $date && $event->eventApproval === 1)
-										
-											<td align="center" style = " vertical-align:bottom;">
-												<b>{{$event->eventName}}</b>
-												<br>
-												<a id = "viewevent" href="{{ url('viewevent/'.$event->eventid) }}">
-													<img src ="{!!$event->eventImage!!}" class="img-thumbnail"  width ="350" height = "350" alt="eventImage" style="float:left, display:inline">
-												</a>
-												<br>
-												<b>{!!$event->eventDate!!}</b>
-											</td>
-										
-										@endif
-									@endforeach
-								</table>
+						
+										@foreach($events as $event)
+											@php
+												$date = date('Y-m-d');
+											@endphp
+											@if($event->eventDate >= $date && $event->eventApproval === 1)
+											
+												<td align="center" style = " vertical-align:bottom;">
+													<b>{{$event->eventName}}</b>
+													<br>
+													<a id = "viewevent" href="{{ url('viewevent/'.$event->eventid) }}">
+														<img src ="{!!$event->eventImage!!}" class="img-thumbnail"  width ="350" height = "350" alt="eventImage" style="float:left, display:inline">
+													</a>
+													<br>
+													<b>{!!$event->eventDate!!}</b>
+												</td>
+											
+											@endif
+										@endforeach
+									</table>
+								</div>
 							</div>
 						</div>
-					</div><!--/.col-xs-6.col-sm-6-->
 
-					<div class="col-xs-6 col-sm-7" >
-					<div style="font-size:18px" id="demo2" hidden>
-							<h2><u>Past Events</u></h2><br>
-							<div>
-							@php 
-								$userid = Auth::user()->id;
-								$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.companyid');
-								$events = DB::table('events')->where('events.companyid','=',$companyid)->get();
-							@endphp
-			
-							@foreach($events as $event)
-								@php
-									$date = date('Y-m-d');
+						<div class="col-xs-6 col-sm-7" >
+							<div style="font-size:18px" id="demo2" hidden>
+								<h2 style="font-size:2vw;"><u>Past Activities</u></h2><br>
+								<div>
+								@php 
+									$userid = Auth::user()->id;
+									$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.companyid');
+									$events = DB::table('events')->where('events.companyid','=',$companyid)->get();
 								@endphp
-								@if($event->eventDate < $date && $event->eventApproval === 1)
-									{{$event->eventDate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$event->eventName}} <br>
-								@endif
-							@endforeach
+				
+								@foreach($events as $event)
+									@php
+										$date = date('Y-m-d');
+									@endphp
+									@if($event->eventDate < $date && $event->eventApproval === 1)
+										{{$event->eventDate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$event->eventName}} <br>
+									@endif
+								@endforeach
+								</div>
 							</div>
 						</div>
-					</div><!--/.col-xs-6.col-sm-6-->
-				</div><!-- row -->
+					</div>
 
-				<div class="row" id = "demo2" class = "collapse">
+					<div class="row" id = "demo2" class = "collapse"  >
+					</div>
 				</div>
-
-			</div> <!--xs-12 -->
-
+				
 				<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
-					<table>
+					<table style="font-size:1.5vw;">
 						<tr>
 							<td rowspan="2">
 								<img src = "{!!$results[0]->image!!}" alt="profilepic" class="img-circle img-responsive"/>
@@ -408,23 +421,24 @@ h3
 							</td>
 						</tr>
 					</table>
+					
 					<br>
-					<div class= "list-group-item">
-						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Dashboard</button>
-					</div>
+						<div class= "list-group-item" style="font-size:1.5vw;">
+							<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Dashboard</button>
+						</div>
 
-					<div class= "list-group-item">
-						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics</button>
-					</div>
-				</div><!--/.sidebar-offcanvas-->
-			</div><!-- xs-12 -->
-		</div><!-- row -->
-	@else
-		<div class="container">
-			<h3 class ="text-uppercase" style="font-weight:bold">Still waiting for approval from admin</h3>
+						<div class= "list-group-item" style="font-size:1.5vw;">
+							<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics</button>
+						</div>
+				</div>
+			</div>
 		</div>
-	@endif
-<!-- role2 -->
+		
+		@else
+			<div class="container">
+				<h3 class ="text-uppercase" style="font-weight:bold">Still waiting for approval from admin</h3>
+			</div>
+		@endif
 
 @elseif (Auth::user()->role === 3)
 <div class="containerfluid3">
@@ -435,8 +449,8 @@ h3
 
 				<div class="row"  class = "collapse" id ="demo1">
 					<div class="table-responsive col-xs-6 col-sm-10" align = "center">
-						<h3 class ="text-uppercase" style="font-weight:bold">Waiting for Approval Company</h3><br>
-						<table class="table table-condensed table-bordered">
+						<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Company</u></h3><br>
+						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
 							@php
 								$companies = DB::table('companies')->where('companyApproval',0)->pluck('companyid');
 							@endphp
@@ -469,14 +483,14 @@ h3
 									@endforeach
 								</tbody>
 						</table>
-						<input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Approve">						
-					</div>	
-				</div><!--row -->
+						<br><input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Approve">						
+					</div>
+				</div>
 
 				<div class="row"  class = "collapse" id ="demo2" hidden>
 					<div class="table-responsive col-xs-6 col-sm-10" align = "center">
-						<h3 class ="text-uppercase" style="font-weight:bold">Waiting for Approval Events</h3><br>
-						<table class="table table-condensed table-bordered">
+						<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Events</u></h3><br>
+						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
 							@php
 								$events = DB::table('events')->where('eventApproval',0)->pluck('eventid');
 							@endphp
@@ -512,14 +526,14 @@ h3
 									@endforeach
 							</tbody>
 						</table>
-							<input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve" />						
+							<br><input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve" />						
 					</div>	
-				</div><!--row -->
+				</div>
 
 				<div class="row"  class = "collapse" id ="demo3" hidden>
 					<div class="table-responsive col-xs-6 col-sm-10">
-						<h3 class ="text-uppercase" style="font-weight:bold">All Events Statistics</h3><br>
-						<table class="table table-condensed table-bordered">
+						<h3 class ="text-uppercase" style="font-weight:bold "><u>All Events Statistics</u></h3><br>
+						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
 							@php
 								$eventsStats = DB::table('events')->where('eventApproval',1)->pluck('eventid');
 							@endphp
@@ -555,30 +569,25 @@ h3
 							</tbody>
 						</table>	
 					</div>	
-				</div><!--row -->
+				</div>
 
-			</div><!-- xs12 -->
-
+			</div>
 			<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
-	
 					<div class= "list-group-item">
 						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Company Approval</button>
 					</div>
 
-					<div class= "list-group-item">
+					<div class= "list-group-item" >
 						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');">Events Approval</button>
 					</div>
 
 					<div class= "list-group-item">
 						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo3');">View Events Statistics</button>
 					</div>
-				</div><!--/.sidebar-offcanvas-->
-
-			</div><!-- xs12 -->
-		</div><!-- <row -->
-</div><!-- container -->
-	
-<!-- role3 -->
+				</div>
+			</div>
+		</div>
+</div>
 @endif
 @include('footer')
 @stop

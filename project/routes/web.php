@@ -140,4 +140,18 @@ Route::get('forum', function ()
     }
 });
 
+Route::get('forum/createpost',function()
+{
+    if (Auth::check())
+    {
+        return view('/createpost');
+    }
+
+    else
+    {
+        return view('/signin');
+    }
+});
+Route::post('storepost', 'PostController@storePost');
+
 Route::get('logout','UserController@logout');
