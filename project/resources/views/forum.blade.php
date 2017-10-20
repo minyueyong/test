@@ -12,21 +12,49 @@
     	$id = DB::table('posts')->pluck('postid');
     @endphp
 
-    <ul class="list-inline">
-	    @foreach ($id as $postid)
-	    <li>
-		  	@php
-	        	$posttitle = DB::table('posts')->where('postid', $postid)->value('postTitle');
-	        	$userid = DB::table('posts')->where('postid', $postid)->value('userid');
-	        	$date = DB::table('posts')->where('postid',$postid)->value('created_at');
-	        	$role = DB::table('users')->where('id',$userid)->value('role');
-	    	@endphp
-	    	{!!$posttitle!!}
-	    	{!!$date!!}
-	    	{!!$role!!}
-	   	</li>
-	    @endforeach
-	</ul>
+    <div>
+    	<table class = "table table-condensed">
+    		<thead>
+    			<tr>
+    				<th>Post Title</th>
+    				<th>Posted Date</th>
+    				<th>Author</th>
+    			</tr>
+    		</thead>
+
+    		<tbody>
+		    @foreach ($id as $postid)
+			  	@php
+		        	$posttitle = DB::table('posts')->where('postid', $postid)->value('postTitle');
+		        	$userid = DB::table('posts')->where('postid', $postid)->value('userid');
+		        	$date = DB::table('posts')->where('postid',$postid)->value('created_at');
+		        	$role = DB::table('users')->where('id',$userid)->value('role');
+
+		        	if ($role == 1)
+		        	{
+		        		$name = DB::table('students')->where('userid',$userid)->value('firstName');
+		        	}
+
+		        	else if ($role == 2)
+		        	{
+		        		$name = DB::table('companies')->where('userid',$userid)->value('companyName');
+		        	}
+
+		        	else if ($role == 3)
+		        	{
+		        		$name = "admin";
+		        	}
+		    	@endphp
+
+		    	<tr>
+			    	<td><a href="{{ url('forum/'.$postid) }}" id="thumbnail">{!!$posttitle!!}</a></td>
+			    	<td>{!!$date!!}</td>
+			    	<td>{!!$name!!}</td>
+			   	</tr>
+		    @endforeach
+			</tbody>
+		</table>
+	</div>
     <a href="/forum/createpost" class="btn btn-default login-btn"> Create Post</a>
 </div>
 

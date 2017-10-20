@@ -155,7 +155,7 @@
 												$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
 												$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
 											@endphp
-										<div style="font-size:2vw;">
+										<div style="font-size:1.3vw;">
 											@if($eventDate >= $currentDate)
 												<a href="{{ url('viewevent/'.$event) }}" id="thumbnail">{!!$eventName!!}</a>
 											@endif

@@ -154,4 +154,9 @@ Route::get('forum/createpost',function()
 });
 Route::post('storepost', 'PostController@storePost');
 
+Route::get('forum/{id}', function ($id) 
+{
+    return view('/viewpost')->with('id',$id);
+});
+
 Route::get('logout','UserController@logout');
