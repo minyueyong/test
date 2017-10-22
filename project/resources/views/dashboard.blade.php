@@ -3,7 +3,6 @@
 @section('content')
 
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/>
-
 <style>
 	.containerfluid1
 	{
@@ -37,7 +36,7 @@
 </style>
 
 <script>
-	var divs = ["demo1", "demo2","demo3"];
+	var divs = ["demo1", "demo2","demo3", "demo4"];
 	var visibleDivId = null;
 
 	function toggleVisibility(divId) 
@@ -52,6 +51,7 @@
 		}
 	 	hideNonVisibleDivs();
 	}
+
 	function hideNonVisibleDivs() 
 	{
 		var i, divId, div;
@@ -93,7 +93,7 @@
 									<div style="font-size:1.5vw;"><b>Birthday:</b> {!!$results[0]->dob!!} </div>
 									<div style="font-size:1.5vw;"><b>Gender:</b> {!!$results[0]->gender!!} </div>
 								</div>
-							</div>
+							</div><!--/.col-xs-6.col-sm-6-->
 
 							<div class="col-xs-6 col-sm-6">
 								<div style="font-size:18px">
@@ -101,15 +101,16 @@
 									<div style="font-size:1.5vw;"><b>Email:</b> {!!$results[0]->email!!} </div>
 									<div style="font-size:1.5vw;"><b>Phone:</b> +60{!!$results[0]->phone!!} </div>
 								</div>
-							</div>
+							</div><!--/.col-xs-6.col-lg-4-->
 
 							<div class="col-xs-6 col-sm-6">
 								<div style="font-size:18px">
 									<h2 style="font-size:2vw;"><u>About Me</u></h2>
 									<div style="font-size:1.5vw;"><b> @php echo nl2br($results[0]->aboutme); @endphp</b> </div>
 								</div>
-							</div>
-						</div>
+							</div><!--/.col-xs-6.col-lg-4-->
+
+						</div><!--/row-->
 				</table>
 			</div>
 
@@ -139,12 +140,12 @@
 									@endforeach</b>
 								</div>
 							</div>
-						</div>
+						</div><!--/.col-xs-6.col-sm-6-->
 
 						<div class="col-xs-6 col-sm-6">
 							<div style="font-size:18px" >
 								<h2 style="font-size:2vw;"><u>Upcoming Activities</u></h2>
-									<div style="font-size:1.5vw;"><b>
+									<div style="font-size:1.2vw;"><b>
 										@php 
 											$events = DB::table('studentsnevents')->where('studentid', $results[0]->studentid)->pluck('eventid');
 										@endphp
@@ -163,13 +164,14 @@
 										@endforeach</b>
 									</div>
 							</div>
-						</div>
-					</div>
+						</div><!--/.col-xs-6.col-sm-6-->
+					</div><!--/row-->
 				</table>
 		  	</div>
-		</div>
+		</div><!--col-xs-12 col-sm-9 col-sm-push-3 -->
 
-		<div class="col-xs-12 col-sm-3 col-sm-pull-10 sidebar-offcanvas" id="sidebar">
+		
+		<div class="col-xs-12 col-sm-3 col-sm-pull-10 sidebar-offcanvas" id="sidebar"  >
 			<table>
 				<tr>
 					<td rowspan="2">
@@ -194,9 +196,10 @@
 			<div class= "list-group-item" style="font-size:2vw;">
 				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');">Activities Review</button>
 			</div>
-	  </div>
-	</div>
-</div>
+	  </div><!--/.sidebar-offcanvas-->
+	</div><!--rowoffcanvas -->
+</div><!--containerfluid -->
+<!-- role1 -->
 
 @elseif (Auth::user()->role === 2)
 	@if ($results[0]->companyApproval === 1)
@@ -208,12 +211,12 @@
 
 					<div class="agenda" class="row"  class = "collapse">
 						<div class="table-responsive col-xs-6 col-sm-9">
-							<table class="table table-condensed table-bordered" style="font-size:1.5vw;" >
+							<table class="table table-condensed table-bordered"  >
 								<thead>
 									<tr>
-										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/postevent")}}'"><b>Create New Activity</b></button></th>
-										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo2');"><b>View Past Activities</b></button></th>
-										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo3');"><b>View Upcoming Activities</b></button></th>
+										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/postevent")}}'" style="font-size:1vw;"><b>Create New Activity</b></button></th>
+										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo2');" style="font-size:1vw;"><b>View Past Activities</b></button></th>
+										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo3');" style="font-size:1vw;"><b>View Upcoming Activities</b></button></th>
 									</tr>
 								</thead>
 							</table>   
@@ -236,7 +239,7 @@
 								</thead>
 							</table>
 						</div>
-					</div>
+					</div><!--agenda -->
 
 					<div class="row" id = "demo1" class = "collapse">
 						<div class="col-xs-6 col-sm-6">
@@ -246,20 +249,20 @@
 								<div style="font-size:1.5vw;">Phone: +60{!!$results[0]->phone!!} </div>
 								<div style="font-size:1.5vw;">Area of Interest: {!!$results[0]->interest!!} </div>
 							</div>
-						</div>
+						</div><!--/.col-xs-6.col-sm-6-->
 
 						<div class="col-xs-6 col-sm-6">
 							<div style="font-size:18px">
 								<h2 style="font-size:2vw;"><u>About Company</u></h2>
 								<div style="font-size:1.5vw;"> @php echo nl2br($results[0]->aboutcompany); @endphp </div>
 							</div>
-						</div>
+						</div><!--/.col-xs-6.col-sm-6-->
 					</div>
 
-					<div class="row"  class = "collapse">
+					<div class="row"  class = "collapse"  >
 						<div class="col-xs-6 col-sm-12">
 							<div style="font-size:18px" id = "demo3" hidden>
-								<h2 style="font-size:2vw;"><u>Upcoming Activities</u></h2><br>
+								<h2 align ="center" style="font-size:2vw;"><u>Upcoming Activities</u></h2><br>
 								<div >
 									<table>
 										@php 
@@ -283,41 +286,40 @@
 													<br>
 													<b>{!!$event->eventDate!!}</b>
 												</td>
-											
 											@endif
 										@endforeach
 									</table>
 								</div>
 							</div>
-						</div>
+						</div><!--/.col-xs-6.col-sm-6-->
 
 						<div class="col-xs-6 col-sm-7" >
-							<div style="font-size:18px" id="demo2" hidden>
+						<div style="font-size:18px" id="demo2" hidden>
 								<h2 style="font-size:2vw;"><u>Past Activities</u></h2><br>
 								<div>
-								@php 
-									$userid = Auth::user()->id;
-									$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.companyid');
-									$events = DB::table('events')->where('events.companyid','=',$companyid)->get();
-								@endphp
-				
-								@foreach($events as $event)
-									@php
-										$date = date('Y-m-d');
+									@php 
+										$userid = Auth::user()->id;
+										$companyid = DB::table('companies')->where('companies.userid','=',$userid)->value('companies.companyid');
+										$events = DB::table('events')->where('events.companyid','=',$companyid)->get();
 									@endphp
-									@if($event->eventDate < $date && $event->eventApproval === 1)
-										{{$event->eventDate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$event->eventName}} <br>
-									@endif
-								@endforeach
+					
+									@foreach($events as $event)
+										@php
+											$date = date('Y-m-d');
+										@endphp
+										@if($event->eventDate < $date && $event->eventApproval === 1)
+											{{$event->eventDate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$event->eventName}} <br>
+										@endif
+									@endforeach
 								</div>
 							</div>
-						</div>
-					</div>
+						</div><!--/.col-xs-6.col-sm-6-->
+					</div><!-- row -->
 
-					<div class="row" id = "demo2" class = "collapse"  >
+					<div class="row" id = "demo2" class = "collapse">
 					</div>
-				</div>
-				
+				</div> <!--xs-12 -->
+					
 				<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
 					<table style="font-size:1.5vw;">
 						<tr>
@@ -337,73 +339,74 @@
 					</table>
 					
 					<br>
-						<div class= "list-group-item" style="font-size:1.5vw;">
-							<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Dashboard</button>
-						</div>
+					<div class= "list-group-item" style="font-size:1.5vw;">
+						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Dashboard</button>
+					</div>
 
-						<div class= "list-group-item" style="font-size:1.5vw;">
-							<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics</button>
-						</div>
-				</div>
-			</div>
-		</div>
-		
-		@else
-			<div class="container">
+					<div class= "list-group-item" style="font-size:1.5vw;">
+						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics</button>
+					</div>
+				</div><!--/.sidebar-offcanvas-->
+				
+				@else
 				<h3 class ="text-uppercase" style="font-weight:bold">Still waiting for approval from admin</h3>
-			</div>
-		@endif
+				@endif
+			</div><!-- xs-12 -->
+		</div><!-- row -->
+	</div><!-- container -->
+</div>
+<!-- role2 -->
 
 @elseif (Auth::user()->role === 3)
 <div class="containerfluid3">
-        <div class="row row-offcanvas row-offcanvas-right">
-            <div class="col-xs-12 col-sm-9 col-sm-push-3">
-                <button type="button" class="pull-left btn btn-default visible-xs" data-toggle="offcanvas" aria-expanded="false" aria-controls="navbar">
-                </button>
+    <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9 col-sm-push-3">
+            <button type="button" class="pull-left btn btn-default visible-xs" data-toggle="offcanvas" aria-expanded="false" aria-controls="navbar">
+            </button>
 
-				<div class="row"  class = "collapse" id ="demo1">
-					<div class="table-responsive col-xs-6 col-sm-10" align = "center">
-						<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Company</u></h3><br>
-						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
-							@php
-								$companies = DB::table('companies')->where('companyApproval',0)->pluck('companyid');
-							@endphp
-								<thead>
+			<div class="row"  class = "collapse" id ="demo1">
+				<div class="table-responsive col-xs-6 col-sm-10" align = "center">
+					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Company</u></h3><br>
+					<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
+						@php
+							$companies = DB::table('companies')->where('companyApproval',0)->pluck('companyid');
+						@endphp
+						<thead>
+							<tr>
+								<th>Check Box</th>
+								<th>Company Name</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							@foreach($companies as $company)
+								@php
+									$companyName = DB::table('companies')->where('companyid', $company)->value('companyName');
+									$companyUserId = DB::table('companies')->where('companyid', $company)->value('userid');
+									$companyApproval = DB::table('companies')->where('companyid',$company)->value('companyApproval');
+									$companyEmail = DB::table('users')->where('id',$companyUserId)->value('email');
+								@endphp
+
+								@if ($companyApproval === 0)
 									<tr>
-										<th>Check Box</th>
-										<th>Company Name</th>
-										<th>Email</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									@foreach($companies as $company)
-										@php
-											$companyName = DB::table('companies')->where('companyid', $company)->value('companyName');
-											$companyUserId = DB::table('companies')->where('companyid', $company)->value('userid');
-											$companyApproval = DB::table('companies')->where('companyid',$company)->value('companyApproval');
-											$companyEmail = DB::table('users')->where('id',$companyUserId)->value('email');
-										@endphp
-
-									@if ($companyApproval === 0)
-										<tr>
-											<form action="/checkcompanyapproval" method="post" enctype="multipart/form-data">
+										<form action="/checkcompanyapproval" method="post" enctype="multipart/form-data">
 											<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
 											<td><input name="company[]" type="checkbox" value="{!!$company!!}"></td>
 											<td>{!!$companyName!!}</td>
 											<td>{!!$companyEmail!!}</td>
-										</tr>
-									@endif
-									@endforeach
-								</tbody>
-						</table>
+									</tr>
+								@endif
+							@endforeach
+						</tbody>
+					</table>
 						<br><input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Approve">						
-					</div>
-				</div>
+				</div>	
+			</div><!--row -->
 
-				<div class="row"  class = "collapse" id ="demo2" hidden>
-					<div class="table-responsive col-xs-6 col-sm-10" align = "center">
-						<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Events</u></h3><br>
+			<div class="row"  class = "collapse" id ="demo2" hidden>
+				<div class="table-responsive col-xs-6 col-sm-10" align = "center">
+					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Events</u></h3><br>
 						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
 							@php
 								$events = DB::table('events')->where('eventApproval',0)->pluck('eventid');
@@ -440,13 +443,13 @@
 									@endforeach
 							</tbody>
 						</table>
-							<br><input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve" />						
-					</div>	
-				</div>
+							<br><input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve" />				
+				</div>	
+			</div><!--row -->
 
-				<div class="row"  class = "collapse" id ="demo3" hidden>
-					<div class="table-responsive col-xs-6 col-sm-10">
-						<h3 class ="text-uppercase" style="font-weight:bold "><u>All Events Statistics</u></h3><br>
+			<div class="row"  class = "collapse" id ="demo3" hidden>
+				<div class="table-responsive col-xs-6 col-sm-10">
+					<h3 class ="text-uppercase" style="font-weight:bold "><u>All Events Statistics</u></h3><br>
 						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
 							@php
 								$eventsStats = DB::table('events')->where('eventApproval',1)->pluck('eventid');
@@ -480,28 +483,56 @@
 										<td><a href="/viewevent/{!!$eventStat!!}/participantdetails" id="totalRegisterDetails">{!!$totalRegistered!!}</a></td>
 									</tr>
 									@endforeach
+								</tbody>
+					</table>	
+				</div>	
+			</div><!--row -->
+
+			<div class="row"  class = "collapse" id ="demo4" hidden>
+				<div class="table-responsive col-xs-6 col-sm-10">
+					<h3 class ="text-uppercase" style="font-weight:bold "><u>Analytics Review</u></h3><br>
+						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
+								<thead>
+									<tr>
+										<th>Total Students Registered</th>
+										<th>Total Companies Registered</th>
+										<th>Total Events Posted</th>
+									</tr>
+								</thead>
+
+								<tbody>				
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
 							</tbody>
 						</table>	
-					</div>	
-				</div>
+				</div>	
+			</div><!--row -->
+		</div><!-- xs12 -->
 
+		<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
+			<div class= "list-group-item">
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');" >Company Approval</button>
 			</div>
-			<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
-					<div class= "list-group-item">
-						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Company Approval</button>
-					</div>
 
-					<div class= "list-group-item" >
-						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');">Events Approval</button>
-					</div>
-
-					<div class= "list-group-item">
-						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo3');">View Events Statistics</button>
-					</div>
-				</div>
+			<div class= "list-group-item" >
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');" >Events Approval</button>
 			</div>
-		</div>
+
+			<div class= "list-group-item">
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo3');" >View Events Statistics</button>
+			</div>
+
+			<div class= "list-group-item">
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');" >Analytics Review</button>
+			</div>
+		</div><!--/.sidebar-offcanvas-->
+	</div>
 </div>
+<!-- role3 -->
 @endif
+
 @include('footer')
 @stop

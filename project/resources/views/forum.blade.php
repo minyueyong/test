@@ -42,7 +42,7 @@
 
 		        	else if ($role == 3)
 		        	{
-		        		$name = "admin";
+		        		$name = "Admin";
 		        	}
 		    	@endphp
 

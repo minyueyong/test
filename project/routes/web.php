@@ -158,5 +158,6 @@ Route::get('forum/{id}', function ($id)
 {
     return view('/viewpost')->with('id',$id);
 });
+Route::post('/forum/{id}/postcomment','PostController@postComment');
 
 Route::get('logout','UserController@logout');

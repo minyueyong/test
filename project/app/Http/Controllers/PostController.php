@@ -20,4 +20,13 @@ class PostController extends Controller
     	DB::table('posts')->insertGetId(['postTitle'=>$title,'postDescription'=>$description, 'userid'=>Auth::user()->id]);
         return redirect()->intended('/forum');
     }
+
+    public function postComment(Request $request, $postid)
+    {
+        $postcomment = $request->input('postcomment');
+        $postcommentid = DB::table('postcomments')->insertGetId(['postcomment'=>$postcomment, 'created_at' => \Carbon\Carbon::now()->toDateTimeString(),'updated_at' => \Carbon\Carbon::now()->toDateTimeString()]);
+        $userid = Auth::user()->id;
+        DB::table('usersnpostsncomments')->insert(['userid'=>$userid,'postid'=>$postid,'postcommentid'=>$postcommentid]); 
+        return redirect()->intended('forum/'.$postid);       
+    }
 }

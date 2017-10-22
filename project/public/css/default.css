@@ -12,7 +12,7 @@
     input[type=text], input[type=password], 
     input[type=number], input[type=email], input[type=file], #campus, #gender,
     #education, #interest, #aboutme, #eventdescription,#aboutcompany, #fees,
-    #comment, #postdescription
+    #comment, #postdescription, #postcomment
     {
         width: 40%;
         padding: 10px 15px;
