@@ -22,6 +22,10 @@ Route::get('home', function ()
 
 Route::get('dashboard', 'UserController@showDashboard');
 
+Route::get('totalstudentsdetails','UserController@totalStudentsDetails');
+Route::get('totalcompaniesdetails','UserController@totalCompaniesDetails');
+Route::get('totaleventsdetails','UserController@totalEventsDetails');
+
 Route::get('signin', function () 
 {
     if (Auth::check())

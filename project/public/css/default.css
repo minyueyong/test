@@ -84,25 +84,32 @@
     }
 
     /* unvisited link */
-    #signup:link, #signin:link, #totalRegisterDetails:link
+    #signup:link, #signin:link, #totalRegisterDetails:link, #totalStudentsDetails:link,
+    #totalCompaniesDetails:link, #totalEventsDetails:link
     {
         color: red;
     }
 
     /* visited link */
-    #signup:visited, #signin:visited, #totalRegisterDetails:visited
+    #signup:visited, #signin:visited, #totalRegisterDetails:visited, 
+    #totalStudentsDetails:visited, #totalCompaniesDetails:visited, 
+    #totalEventsDetails:visited
     {
         color: red;
     }
 
     /* mouse over link */
-    #signup:hover, #signin:hover, #thumbnail:hover, #totalRegisterDetails:hover
+    #signup:hover, #signin:hover, #thumbnail:hover, #totalRegisterDetails:hover,
+    #totalStudentsDetails:hover, #totalCompaniesDetails:hover,
+    #totalEventsDetails:hover
     {
         color: red !important;
     }
 
     /* selected link */
-    #signup:active, #signin:active, #thumbnail:active, #totalRegisterDetails:active
+    #signup:active, #signin:active, #thumbnail:active, #totalRegisterDetails:active,
+    #totalStudentsDetails:active, #totalCompaniesDetails:active,
+    #totalEventsDetails:active
     {
         color: red;
     }

@@ -15,7 +15,7 @@ class CreateStudentsneventsTable extends Migration
     {
         Schema::create('studentsnevents', function (Blueprint $table) 
         {
-            $table->increments('id');
+            $table->increments('studentneventid');
             $table->integer('studentid')->unsigned();
             $table->foreign('studentid')
             ->references('studentid')->on('students')

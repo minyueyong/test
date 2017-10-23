@@ -171,7 +171,7 @@
 		</div><!--col-xs-12 col-sm-9 col-sm-push-3 -->
 
 		
-		<div class="col-xs-12 col-sm-3 col-sm-pull-10 sidebar-offcanvas" id="sidebar"  >
+		<div class="col-xs-12 col-sm-3 col-sm-pull-10 sidebar-offcanvas" id="sidebar">
 			<table>
 				<tr>
 					<td rowspan="2">
@@ -259,10 +259,10 @@
 						</div><!--/.col-xs-6.col-sm-6-->
 					</div>
 
-					<div class="row"  class = "collapse"  >
+					<div class="row"  class = "collapse">
 						<div class="col-xs-6 col-sm-12">
 							<div style="font-size:18px" id = "demo3" hidden>
-								<h2 align ="center" style="font-size:2vw;"><u>Upcoming Activities</u></h2><br>
+								<h2 style="font-size:2vw;"><u>Upcoming Activities</u></h2><br>
 								<div >
 									<table>
 										@php 
@@ -347,15 +347,13 @@
 						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics</button>
 					</div>
 				</div><!--/.sidebar-offcanvas-->
-				
-				@else
-				<h3 class ="text-uppercase" style="font-weight:bold">Still waiting for approval from admin</h3>
-				@endif
-			</div><!-- xs-12 -->
-		</div><!-- row -->
-	</div><!-- container -->
-</div>
-<!-- role2 -->
+			</div>
+		</div>
+@else
+	<div class = "container">
+		<h3 class ="text-uppercase" style="font-weight:bold">Still waiting for approval from admin</h3>
+	</div>
+@endif
 
 @elseif (Auth::user()->role === 3)
 <div class="containerfluid3">
@@ -491,6 +489,11 @@
 			<div class="row"  class = "collapse" id ="demo4" hidden>
 				<div class="table-responsive col-xs-6 col-sm-10">
 					<h3 class ="text-uppercase" style="font-weight:bold "><u>Analytics Review</u></h3><br>
+						@php
+							$totalStudents = DB::table('students')->count('studentid');
+							$totalCompanies = DB::table('companies')->count('companyid');
+							$totalEvents = DB::table('events')->count('eventid');
+						@endphp
 						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
 								<thead>
 									<tr>
@@ -502,9 +505,9 @@
 
 								<tbody>				
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td><a href="/totalstudentsdetails" id="totalStudentsDetails">{!!$totalStudents!!}</a></td>
+										<td><a href="/totalcompaniesdetails" id="totalCompaniesDetails">{!!$totalCompanies!!}</a></td>
+										<td><a href="/totaleventsdetails" id="totalEventsDetails">{!!$totalEvents!!}</a></td>
 									</tr>
 							</tbody>
 						</table>	

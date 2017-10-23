@@ -2,6 +2,17 @@
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
+<style>
+	#post
+	{
+		color: red;
+	}
+
+	#post:hover
+	{
+		color: black;
+	}
+</style>
 
 <div class = "container">
     <div class = "page-header">
@@ -47,7 +58,7 @@
 		    	@endphp
 
 		    	<tr>
-			    	<td><a href="{{ url('forum/'.$postid) }}" id="thumbnail">{!!$posttitle!!}</a></td>
+			    	<td><a href="{{ url('forum/'.$postid) }}" id="post">{!!$posttitle!!}</a></td>
 			    	<td>{!!$date!!}</td>
 			    	<td>{!!$name!!}</td>
 			   	</tr>

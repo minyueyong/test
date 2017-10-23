@@ -175,4 +175,40 @@ class UserController extends Controller
         Auth::logout();
         return redirect()->intended('/signin');
     }
+
+    public function totalStudentsDetails()
+    {
+        if (Auth::check())
+        {
+            if (Auth::user()->role == 3)
+            {
+                return view('/totalstudentsdetails');
+            }
+        }
+        return redirect()->intended('/home');
+    }
+
+    public function totalCompaniesDetails()
+    {
+        if (Auth::check())
+        {
+            if (Auth::user()->role == 3)
+            {
+                return view('/totalcompaniesdetails');
+            }
+        }
+        return redirect()->intended('/home');
+    }
+
+    public function totalEventsDetails()
+    {
+        if (Auth::check())
+        {
+            if (Auth::user()->role == 3)
+            {
+                return view('/totaleventsdetails');
+            }
+        }
+        return redirect()->intended('/home');
+    }
 }
