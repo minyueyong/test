@@ -123,6 +123,7 @@ Route::get('viewevent/{id}', function ($id)
 
 Route::get('viewevent/{id}/participateevent','EventController@participateEvent');
 Route::get('/viewevent/{id}/participantdetails','EventController@participantDetails');
+Route::get('/viewevent/{id}/export2pdf','EventController@exportPDF');
 
 Route::post('/checkstudentattendance','EventController@checkStudentAttendance');
 

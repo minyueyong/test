@@ -42,6 +42,7 @@
 		    	@endforeach
 		    </tbody>
 		</table>
+		<a href="/viewevent/{!!$eventid!!}/export2pdf" class = "btn btn-default login-btn">Export to PDF</a>
     </div>
 </div>
 @include('footer')

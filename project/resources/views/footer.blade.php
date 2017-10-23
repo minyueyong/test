@@ -5,10 +5,10 @@
 	.fa 
 	{
 	    padding: 8px;
-	    font-size: 20px;
+	    
 	    text-align: center;
 	    text-decoration: none;
-	    border-radius: 20%;
+	    
 	}
 
 	/* Add a hover effect if you want */
@@ -23,14 +23,21 @@
 	{
 	    background: #3B5998;
 	    color: white;
+	    font-size: 25px;
+	    border-radius: 30%;
+	    width :40px;
+	    height :40px;
 	}
 
 	.fa-youtube
 	{
 	    background: red;
 	    color: white;
+	    font-size: 25px;
+	    border-radius: 30%;
+	    width :40px;
+	    height :40px;
 	}
-
 </style>
 
 <nav class = "navbar">

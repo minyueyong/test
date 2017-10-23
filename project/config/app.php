@@ -136,6 +136,7 @@ return [
     */
 
     'providers' => [
+        Anouar\Fpdf\FpdfServiceProvider::class,
         'Intervention\Image\ImageServiceProvider',
         /*
          * Laravel Framework Service Providers...
@@ -191,6 +192,7 @@ return [
     */
 
     'aliases' => [
+        'Fpdf' => Anouar\Fpdf\Facades\Fpdf::class,
         'Image' => 'Intervention\Image\Facades\Image',
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

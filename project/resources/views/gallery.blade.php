@@ -26,7 +26,7 @@
     <div class = "page-header">
     </div>
 	
-	<h3 class = "text-uppercase">Past Events' Photos</h3>
+	<h3 class = "text-uppercase">Past Events' Gallery</h3>
 
     @php
     	$id = DB::table('events')->pluck('eventid');
@@ -42,7 +42,7 @@
 	    	@endphp
 	    		
 	    	@if($date < $currentDate && $approval === 1)
-				<li data-toggle="modal" data-target="#myModal">
+				<li>
 					<a href="/gallery/{!!$eventid!!}" id="pastevent">
 			  		{!!$eventname!!}
 					</a>

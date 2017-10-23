@@ -79,6 +79,13 @@
 		</div>
 	<!--end myModal-->>
 	</div>
+
+	<div class = "page-header"></div>
+    <h3 class = "text-uppercase">Video of {!!$name!!}</h3>
+
+    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGoMonsta%2Fvideos%2F1974826629405407%2F&show_text=0&width=560" width="530" height="300" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+    <br>
+    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGoMonsta%2Fvideos%2F1955773327977404%2F&show_text=0&width=560" width="530" height="300" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
 </div>
 
 @include('footer')

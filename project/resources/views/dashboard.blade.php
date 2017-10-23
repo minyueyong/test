@@ -79,24 +79,31 @@
 				<i class="fa fa-navicon"></i>
 			</button>
 
-			<div class="table-responsive col-xs-4 col-sm-10">
+			<div class="table-responsive col-xs-4 col-sm-10" id = "demo1">
 				<table class="table table-condensed table-bordered">
-						<div class="row" id = "demo1" class = "collapse" >
+						<div class="row"  class = "collapse" >
+							<h2  style="font-size:2vw; margin-left:5cm;" ><u>Community Stats</u></h2>
 							<div class="col-xs-6 col-sm-6">
-								<div>
-									<h2  style="font-size:2vw;"><u>Community Stats</u></h2>
+								<div style = "margin-top:20px;">
 									<div style="font-size:1.5vw;"><b>Status:</b> {!!$results[0]->status!!}</div>
 									<div style="font-size:1.5vw;"><b>Experience:</b> {!!$results[0]->experience!!}</div>
 									<div style="font-size:1.5vw;"><b>Campus:</b> {!!$results[0]->campus!!} University </div>
 									<div style="font-size:1.5vw;"><b>Education:</b> Bachelor of {!!$results[0]->education!!} </div>
+								</div>
+							</div><!--/.col-xs-6.col-sm-6-->
+
+							<div class="col-xs-6 col-sm-6">
+								<div style = "margin-top:20px;">
 									<div style="font-size:1.5vw;"><b>Area of Interest:</b> {!!$results[0]->interest!!} </div>
 									<div style="font-size:1.5vw;"><b>Birthday:</b> {!!$results[0]->dob!!} </div>
 									<div style="font-size:1.5vw;"><b>Gender:</b> {!!$results[0]->gender!!} </div>
 								</div>
 							</div><!--/.col-xs-6.col-sm-6-->
+						</div><!--/row-->
 
-							<div class="col-xs-6 col-sm-6">
-								<div style="font-size:18px">
+						<div class ="row" class= "collapse">
+							<div class="col-xs-6 col-sm-6" >
+								<div style="font-size:18px" >
 									<h2 style="font-size:2vw;"><u>Contact Information</u></h2>
 									<div style="font-size:1.5vw;"><b>Email:</b> {!!$results[0]->email!!} </div>
 									<div style="font-size:1.5vw;"><b>Phone:</b> +60{!!$results[0]->phone!!} </div>
@@ -109,8 +116,7 @@
 									<div style="font-size:1.5vw;"><b> @php echo nl2br($results[0]->aboutme); @endphp</b> </div>
 								</div>
 							</div><!--/.col-xs-6.col-lg-4-->
-
-						</div><!--/row-->
+						</div><!-- row -->
 				</table>
 			</div>
 
@@ -119,49 +125,57 @@
 					<div class="row" id = "demo2" class = "collapse" hidden>
 						<div class="col-xs-6 col-sm-6">
 							<div style="font-size:18px">
-								<h2 style="font-size:2vw;"><u>Participated Activities</u></h2>
+								<h2 style="font-size:2vw; margin-left:1cm;"><u>Participated Activities</u></h2>
 								<div style="font-size:1.5vw;"><b>
 									@php 
 										$events = DB::table('studentsnevents')->where('studentid', $results[0]->studentid)->pluck('eventid');
 									@endphp
-					
-									@foreach($events as $event)
-										@php 
-											$currentDate = date('Y-m-d');
-											$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
-											$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
-											$studentParticipate = DB::table('studentsnevents')->where('studentid',$results[0]->studentid)->where(DB::raw('eventid'), $event)->value('participate');
-										@endphp
-									<div style="font-size:2vw;">
-										@if($eventDate < $currentDate && $studentParticipate == 1)
-											{!!$eventDate!!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!!$eventName!!}
-										@endif
-									</div>
-									@endforeach</b>
+
+									<ul>
+										@foreach($events as $event)
+											@php 
+												$currentDate = date('Y-m-d');
+												$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
+												$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
+												$studentParticipate = DB::table('studentsnevents')->where('studentid',$results[0]->studentid)->where(DB::raw('eventid'), $event)->value('participate');
+											@endphp
+											<div style="font-size:1.2vw;">
+												@if($eventDate < $currentDate && $studentParticipate == 1)
+												<li>
+													{!!$eventDate!!}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{!!$eventName!!}
+												</li>
+												@endif
+											</div>
+										@endforeach</b>
+									</ul>
 								</div>
 							</div>
 						</div><!--/.col-xs-6.col-sm-6-->
 
 						<div class="col-xs-6 col-sm-6">
 							<div style="font-size:18px" >
-								<h2 style="font-size:2vw;"><u>Upcoming Activities</u></h2>
-									<div style="font-size:1.2vw;"><b>
+								<h2 style="font-size:2vw; margin-left: 2cm;"><u>Upcoming Activities</u></h2>
+									<div style="font-size:1.2vw; margin-left: 1.8cm;" ><b>
 										@php 
 											$events = DB::table('studentsnevents')->where('studentid', $results[0]->studentid)->pluck('eventid');
 										@endphp
 
+										<ul>
 										@foreach($events as $event)
 											@php 
 												$currentDate = date('Y-m-d');
 												$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
 												$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
 											@endphp
-										<div style="font-size:1.3vw;">
+										<div style="font-size:1.2vw;">
 											@if($eventDate >= $currentDate)
-												<a href="{{ url('viewevent/'.$event) }}" id="thumbnail">{!!$eventName!!}</a>
+												<li>
+													<a href="{{ url('viewevent/'.$event) }}" id="thumbnail">{!!$eventName!!}</a>
+												</li>
 											@endif
 										</div>
 										@endforeach</b>
+										</ul>
 									</div>
 							</div>
 						</div><!--/.col-xs-6.col-sm-6-->
@@ -342,10 +356,6 @@
 					<div class= "list-group-item" style="font-size:1.5vw;">
 						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Dashboard</button>
 					</div>
-
-					<div class= "list-group-item" style="font-size:1.5vw;">
-						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics</button>
-					</div>
 				</div><!--/.sidebar-offcanvas-->
 			</div>
 		</div>
@@ -447,8 +457,8 @@
 
 			<div class="row"  class = "collapse" id ="demo3" hidden>
 				<div class="table-responsive col-xs-6 col-sm-10">
-					<h3 class ="text-uppercase" style="font-weight:bold "><u>All Events Statistics</u></h3><br>
-						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
+					<h3 class ="text-uppercase" style="font-weight:bold"><u>All Events Statistics</u></h3><br>
+						<table class="table table-condensed table-bordered" style="font-size:1.3vw;">
 							@php
 								$eventsStats = DB::table('events')->where('eventApproval',1)->pluck('eventid');
 							@endphp
@@ -517,19 +527,19 @@
 
 		<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');" >Company Approval</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Company Approval</button>
 			</div>
 
 			<div class= "list-group-item" >
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');" >Events Approval</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');">Events Approval</button>
 			</div>
 
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo3');" >View Events Statistics</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo3');">Events Statistics</button>
 			</div>
 
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');" >Analytics Review</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics Review</button>
 			</div>
 		</div><!--/.sidebar-offcanvas-->
 	</div>

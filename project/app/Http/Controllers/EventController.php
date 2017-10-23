@@ -11,6 +11,7 @@ use Auth;
 use App\User;
 use Illuminate\Support\Facades\Input;
 use Image;
+use Fpdf;
 
 class EventController extends Controller
 {
@@ -194,5 +195,42 @@ class EventController extends Controller
         $userid = Auth::user()->id;
         DB::table('usersneventsncomments')->insert(['userid'=>$userid,'eventid'=>$eventid,'commentid'=>$commentid]); 
         return redirect()->intended('viewevent/'.$eventid);       
+    }
+
+    public function exportPdf($eventid)
+    {
+        $students = DB::table('studentsnevents')->where('eventid', $eventid)->pluck('studentid');
+        $eventName = DB::table('events')->where('eventid',$eventid)->value('eventName');
+
+        $pdf = new Fpdf();
+        $pdf::AddPage();
+        $pdf::SetFont('Arial','B',18);
+        $pdf::Cell(0,10,"Participant Details of ".$eventName,0,"","C");
+        $pdf::Ln();
+        $pdf::Ln();
+        $pdf::SetFont('Arial','B',12);
+        $pdf::cell(35,8,"First Name",1,"","C");
+        $pdf::cell(35,8,"Last Name",1,"","C");
+        $pdf::cell(65,8,"Email",1,"","C");
+        $pdf::cell(55,8,"Phone",1,"","C");
+        $pdf::Ln();
+
+        foreach($students as $student)
+        {
+            $studentFirstName = DB::table('students')->where('studentid', $student)->value('firstName');
+            $studentLastName = DB::table('students')->where('studentid', $student)->value('lastName');
+            $studentUserId = DB::table('students')->where('studentid', $student)->value('userid');
+            $studentEmail = DB::table('users')->where('id',$studentUserId)->value('email');
+            $studentPhone = DB::table('students')->where('studentid',$student)->value('phone');
+
+            $pdf::SetFont("Arial","",10);
+            $pdf::cell(35,8,$studentFirstName,1,"","C");
+            $pdf::cell(35,8,$studentLastName,1,"","C");
+            $pdf::cell(65,8,$studentEmail,1,"","C");
+            $pdf::cell(55,8,"+60".$studentPhone,1,"","C");
+            $pdf::Ln();
+        }
+        $pdf::Output("participantdetails.pdf",'D');
+        exit;
     }
 }
