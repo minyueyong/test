@@ -40,7 +40,7 @@
     </div>
 
     <div align="center">
-        <table width="400" style ="background-color:#FFA07A;">
+        <table width="400" style ="background-color:#FFE2DC;">
             <tr>
                 <td>
                     by <b>{!!$name!!}</b>

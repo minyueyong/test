@@ -2,6 +2,17 @@
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
+<style>
+	#pastevent
+	{
+		color: red;
+	}
+
+	#pastevent:hover
+	{
+		color: black;
+	}
+</style>
 
 <div class = "container">
     <div class = "page-header">
@@ -32,7 +43,7 @@
 	    		
 	    	@if($date < $currentDate && $approval === 1)
 				<li data-toggle="modal" data-target="#myModal">
-					<a href="/gallery/{!!$eventid!!}" id="thumbnail">
+					<a href="/gallery/{!!$eventid!!}" id="pastevent">
 			  		{!!$eventname!!}
 					</a>
 				</li>

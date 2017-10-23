@@ -31,7 +31,7 @@
 	h3
 	{
 		font-family:Georgia;
-		color: cornflowerblue; 
+		color: #FF7171; 
 	}
 </style>
 

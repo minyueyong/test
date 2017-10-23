@@ -20,6 +20,7 @@
     				<th>First Name</th>
     				<th>Last Name</th>
     				<th>Email</th>
+    				<th>Phone</th>
     			</tr>
     		</thead>
 
@@ -30,11 +31,13 @@
 		    			$studentLastName = DB::table('students')->where('studentid', $student)->value('lastName');
 		    			$studentUserId = DB::table('students')->where('studentid', $student)->value('userid');
 		    			$studentEmail = DB::table('users')->where('id',$studentUserId)->value('email');
+		    			$studentPhone = DB::table('students')->where('studentid',$student)->value('phone');
 		    		@endphp
 			    	<tr>
 				    	<td>{!!$studentFirstName!!}</td>
 				    	<td>{!!$studentLastName!!}</td>
 				    	<td>{!!$studentEmail!!}</td>
+				    	<td>+60{!!$studentPhone!!}</td>
 			    	</tr>
 		    	@endforeach
 		    </tbody>

@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                     
-                                    <button type="submit" class = "btn btn-default login-btn" style="margin-left:3cm;display:block">Post Comment</button>
+                                    <button type="submit" class = "btn btn-default login-btn" style="margin-left:2.5cm;display:block">Post Comment</button>
                                 </form>
                             </div>
                     
@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
                     
-                                        <button type="submit" class = "btn btn-default login-btn" style="margin-left:3cm;display:block">Post Comment</button>
+                                        <button type="submit" class = "btn btn-default login-btn" style="margin-left:2.5cm;display:block">Post Comment</button>
                                     </form>
                                 </div>
                             @endif
@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
                     
-                                        <button type="submit" class = "btn btn-default login-btn" style="margin-left=3cm;display:block">Post Comment</button>
+                                        <button type="submit" class = "btn btn-default login-btn" style="margin-left=2.5cm;display:block">Post Comment</button>
                                 </form>
                             </div>
                         @endif
