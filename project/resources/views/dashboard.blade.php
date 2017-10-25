@@ -289,11 +289,11 @@
 								<div style="font-size:1.5vw;"> @php echo nl2br($results[0]->aboutcompany); @endphp </div>
 							</div>
 						</div><!--/.col-xs-6.col-sm-6-->
-					</div>
 
-					<div class ="row" align="right">
-						<a href="/editprofile" class="btn btn-default login-btn">Edit Profile</a>
-					</div><!-- row -->
+						<div class ="row" align="right">
+							<a href="/editprofile" class="btn btn-default login-btn">Edit Profile</a>
+						</div><!-- row -->
+					</div>
 
 					<div class="row"  class = "collapse">
 						<div class="col-xs-6 col-sm-12">
@@ -351,9 +351,6 @@
 							</div>
 						</div><!--/.col-xs-6.col-sm-6-->
 					</div><!-- row -->
-
-					<div class="row" id = "demo2" class = "collapse">
-					</div>
 				</div> <!--xs-12 -->
 					
 				<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
