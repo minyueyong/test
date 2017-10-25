@@ -22,6 +22,9 @@ Route::get('home', function ()
 
 Route::get('dashboard', 'UserController@showDashboard');
 
+Route::get('editprofile','UserController@editProfile');
+Route::post('updateprofile','UserController@updateProfile');
+
 Route::get('totalstudentsdetails','UserController@totalStudentsDetails');
 Route::get('totalcompaniesdetails','UserController@totalCompaniesDetails');
 Route::get('totaleventsdetails','UserController@totalEventsDetails');

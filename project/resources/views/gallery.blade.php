@@ -12,6 +12,13 @@
 	{
 		color: black;
 	}
+
+	ul 
+	{
+		list-style: disc;
+		display : inline-block;
+		line-height: 1em;
+	}
 </style>
 
 <div class = "container">
@@ -32,7 +39,7 @@
     	$id = DB::table('events')->pluck('eventid');
     @endphp
 
-    <ul class="list-inline">
+    <ul style ="margin-left : -1cm; font-size:1.3vw;">
 	    @foreach ($id as $eventid)
 		  	@php
 	        	$currentDate = date('Y-m-d');

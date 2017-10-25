@@ -35,7 +35,6 @@
     <div class="page-login-form box">
     <form role="form" class="login-form" method="POST" action="/checkcompanysignup" enctype="multipart/form-data">
         <input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
-           
            	<div class="form-group">
                 <div class="input-icon">
                     <span class="glyphicon glyphicon-user"></span> <input type="text" id="companyName" class="form-control" name="companyName" placeholder="Company Name" required>

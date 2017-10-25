@@ -88,6 +88,15 @@ class EventController extends Controller
             {
                 $experience = DB::table('students')->where('studentid',$aStudent[$i])->value('experience') + 100;
                 DB::table('students')->where('studentid',$aStudent[$i])->update(['experience'=> $experience]);
+                $currentExperience = DB::table('students')->where('studentid',$aStudent[$i])->value('experience');
+                if ($currentExperience >= 2000)
+                {
+                    DB::table('students')->where('studentid',$aStudent[$i])->update(['status'=> "Verified"]);
+                }
+                else if ($currentExperience >= 3000)
+                {
+                    DB::table('students')->where('studentid',$aStudent[$i])->update(['status'=> "Star"]);
+                }
                 DB::table('studentsnevents')->where('studentid',$aStudent[$i])->where(DB::raw('eventid'), $eventid)->update(['participate'=> 1]);
             }
         }

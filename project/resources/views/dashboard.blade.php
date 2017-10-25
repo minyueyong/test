@@ -82,7 +82,7 @@
 			<div class="table-responsive col-xs-4 col-sm-10" id = "demo1">
 				<table class="table table-condensed table-bordered">
 						<div class="row"  class = "collapse" >
-							<h2  style="font-size:2vw; margin-left:5cm;" ><u>Community Stats</u></h2>
+							<h2  style="font-size:2vw; margin-left:5cm;"><u>Community Stats</u></h2>
 							<div class="col-xs-6 col-sm-6">
 								<div style = "margin-top:20px;">
 									<div style="font-size:1.5vw;"><b>Status:</b> {!!$results[0]->status!!}</div>
@@ -116,6 +116,10 @@
 									<div style="font-size:1.5vw;"><b> @php echo nl2br($results[0]->aboutme); @endphp</b> </div>
 								</div>
 							</div><!--/.col-xs-6.col-lg-4-->
+						</div><!-- row -->
+
+						<div class ="row" align="right">
+							<a href="/editprofile" class="btn btn-default login-btn">Edit Profile</a>
 						</div><!-- row -->
 				</table>
 			</div>
@@ -225,10 +229,24 @@
 
 					<div class="agenda" class="row"  class = "collapse">
 						<div class="table-responsive col-xs-6 col-sm-9">
-							<table class="table table-condensed table-bordered"  >
+							<table class="table table-condensed table-bordered">
 								<thead>
 									<tr>
-										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/postevent")}}'" style="font-size:1vw;"><b>Create New Activity</b></button></th>
+										@php
+											$totalEvent = DB::table('events')->where('companyid',$results[0]->companyid)->count('eventid');
+										@endphp
+										@if ($results[0]->status == "Basic")
+											@if ($totalEvent < 1)
+												<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/postevent")}}'" style="font-size:1vw;"><b>Create New Activity</b></button></th>
+											@endif
+										@elseif ($results[0]->status == "Popular")
+											@if ($totalEvent < 5)
+												<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/postevent")}}'" style="font-size:1vw;"><b>Create New Activity</b></button></th>
+											@endif
+										@elseif ($results[0]->status == "Epic")
+											<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/postevent")}}'" style="font-size:1vw;"><b>Create New Activity</b></button></th>
+										@endif
+
 										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo2');" style="font-size:1vw;"><b>View Past Activities</b></button></th>
 										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo3');" style="font-size:1vw;"><b>View Upcoming Activities</b></button></th>
 									</tr>
@@ -243,10 +261,10 @@
 									<tr>
 										<thead>
 											<tr>
-												<th>Status : {!!$results[0]->status!!} </th>
+												<th>Status: {!!$results[0]->status!!} </th>
 											</tr>
 											<tr>
-												<th>Expired : {!!$results[0]->membershipDate!!} </th>
+												<th>Expired: {!!$results[0]->membershipDate!!} </th>
 											</tr>
 										</thead>
 									</tr>
@@ -272,6 +290,10 @@
 							</div>
 						</div><!--/.col-xs-6.col-sm-6-->
 					</div>
+
+					<div class ="row" align="right">
+						<a href="/editprofile" class="btn btn-default login-btn">Edit Profile</a>
+					</div><!-- row -->
 
 					<div class="row"  class = "collapse">
 						<div class="col-xs-6 col-sm-12">
