@@ -23,7 +23,7 @@
     		@endphp
 		<li data-toggle="modal" data-target="#myModal">
 			<a href="#myGallery" data-slide-to="0" id="thumbnail">
-			  	<img class="img-thumbnail" src="{!!$image!!}">
+			  	<img class="img-thumbnail img-responsive" src="{!!$image!!}">
 			  	<br>
 			</a>
 
@@ -50,11 +50,11 @@
 						@for($i = 0; $i <= $count; $i++)
 							@if ($i == 0)
 								<div class="item active"> 
-									<img src="{!!$imgArray[$i]!!}" alt="pastevent">
+									<img class="img-responsive" src="{!!$imgArray[$i]!!}" alt="pastevent">
 								</div>
 							@else
 								<div class="item"> 
-									<img src="{!!$imgArray[$i]!!}" alt="pastevent">
+									<img class="img-responsive" src="{!!$imgArray[$i]!!}" alt="pastevent">
 								</div>
 							@endif
 						@endfor
@@ -82,10 +82,9 @@
 
 	<div class = "page-header"></div>
     <h3 class = "text-uppercase">Video of {!!$name!!}</h3>
-
-    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGoMonsta%2Fvideos%2F1974826629405407%2F&show_text=0&width=560" width="530" height="300" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
-    <br>
-    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGoMonsta%2Fvideos%2F1955773327977404%2F&show_text=0&width=560" width="530" height="300" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+    <div class="embed-responsive embed-responsive-16by9">
+    	<iframe width="560" height="315" src="https://www.youtube.com/embed/BkMtiRQ6hdU?rel=0" frameborder="0" allowfullscreen></iframe>
+    </div>
 </div>
 
 @include('footer')

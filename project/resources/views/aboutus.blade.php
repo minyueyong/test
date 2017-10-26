@@ -37,9 +37,9 @@
                 </blockquote>
 
         <div class="image">
-                <img src="{{ asset('images/perks.jpg') }}" height = "300" width ="350" alt = "perks">
-                <img src="{{ asset('images/perks2.jpg') }}" height = "300" width ="350" alt = "perks2">
-                <img src="{{ asset('images/perks3.jpg') }}" height = "300" width ="350" alt = "perks3">
+                <img src="{{ asset('images/perks.jpg') }}" height = "300" width ="280" alt = "perks">
+                <img src="{{ asset('images/perks2.jpg') }}" height = "300" width ="280" alt = "perks2">
+                <img src="{{ asset('images/perks3.jpg') }}" height = "300" width ="280" alt = "perks3">
         </div>
 </div>
 

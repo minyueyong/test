@@ -18,38 +18,53 @@ class EventController extends Controller
     public function storeEvent (Request $request)
     {
         $name = $request->input('eventname');
+        $currentDate = date('Y-m-d');
         $date = $request->input('eventdate');
-        $venue = $request->input('eventvenue');
-        if ($request->input('interest') == "other")
+
+        if($date > $currentDate)
         {
-            $interest = $request->input('OtherInterest');
+            $venue = $request->input('eventvenue');
+            if ($request->input('interest') == "other")
+            {
+                $interest = $request->input('OtherInterest');
+            }
+            else
+            {
+                $interest = $request->input('interest');
+            }
+            
+            if ($request->input('fees') == "paid")
+            {
+                $fees = $request->input('feespaid');
+            }
+            else
+            {
+                $fees = $request->input('fees');
+            }
+            $image = $request->file('eventimage');
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('/images/eventpic/' . $filename);
+            Image::make($image->getRealPath())->resize(500, 550)->save($path);
+            $newimage = '/images/eventpic/'.$filename;
+            $description = $request->input('eventdescription');
+            $userid = Auth::user()->id;
+            $companyid = DB::table('companies')->join('users',function ($join)
+            {
+                $join->on('companies.userid','=','users.id')->where('companies.userid','=', Auth::user()->id);
+            })->value('companies.companyid');
+            $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventInterest'=>$interest,'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
+            echo '<script language="javascript">';
+            echo 'alert("The event is waiting for admin approval!")';
+            echo '</script>';
         }
+
         else
         {
-            $interest = $request->input('interest');
+            echo '<script language="javascript">';
+            echo 'alert("Create only upcoming events!")';
+            echo '</script>';
         }
-        
-        if ($request->input('fees') == "paid")
-        {
-            $fees = $request->input('feespaid');
-        }
-        else
-        {
-            $fees = $request->input('fees');
-        }
-        $image = $request->file('eventimage');
-        $filename  = time() . '.' . $image->getClientOriginalExtension();
-        $path = public_path('/images/eventpic/' . $filename);
-        Image::make($image->getRealPath())->resize(500, 550)->save($path);
-        $newimage = '/images/eventpic/'.$filename;
-        $description = $request->input('eventdescription');
-        $userid = Auth::user()->id;
-        $companyid = DB::table('companies')->join('users',function ($join)
-        {
-            $join->on('companies.userid','=','users.id')->where('companies.userid','=', Auth::user()->id);
-        })->value('companies.companyid');
-        $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventInterest'=>$interest,'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
-        return redirect()->intended('/dashboard');
+        return view('/landingpage');
     }
 
     public function participateEvent($eventid)

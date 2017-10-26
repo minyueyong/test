@@ -19,6 +19,15 @@
 		display : inline-block;
 		line-height: 1em;
 	}
+
+	/* Smartphones (portrait) ----------- */
+	@media only screen and (max-width : 480px)
+	{
+  		#pasteventlink
+  		{
+  			font-size: 4vw;
+  		}
+	}
 </style>
 
 <div class = "container">
@@ -49,7 +58,7 @@
 	    	@endphp
 	    		
 	    	@if($date < $currentDate && $approval === 1)
-				<li>
+				<li id = "pasteventlink">
 					<a href="/gallery/{!!$eventid!!}" id="pastevent">
 			  		{!!$eventname!!}
 					</a>
