@@ -232,38 +232,47 @@ class EventController extends Controller
 
     public function exportPdf($eventid)
     {
-        $students = DB::table('studentsnevents')->where('eventid', $eventid)->pluck('studentid');
-        $eventName = DB::table('events')->where('eventid',$eventid)->value('eventName');
-
-        $pdf = new Fpdf();
-        $pdf::AddPage();
-        $pdf::SetFont('Arial','B',18);
-        $pdf::Cell(0,10,"Participant Details of ".$eventName,0,"","C");
-        $pdf::Ln();
-        $pdf::Ln();
-        $pdf::SetFont('Arial','B',12);
-        $pdf::cell(35,8,"First Name",1,"","C");
-        $pdf::cell(35,8,"Last Name",1,"","C");
-        $pdf::cell(65,8,"Email",1,"","C");
-        $pdf::cell(55,8,"Phone",1,"","C");
-        $pdf::Ln();
-
-        foreach($students as $student)
+        if (Auth::user()->role == 2)
         {
-            $studentFirstName = DB::table('students')->where('studentid', $student)->value('firstName');
-            $studentLastName = DB::table('students')->where('studentid', $student)->value('lastName');
-            $studentUserId = DB::table('students')->where('studentid', $student)->value('userid');
-            $studentEmail = DB::table('users')->where('id',$studentUserId)->value('email');
-            $studentPhone = DB::table('students')->where('studentid',$student)->value('phone');
+            $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
+            if($companyApproval == 1)
+            {
+                $students = DB::table('studentsnevents')->where('eventid', $eventid)->pluck('studentid');
+                $eventName = DB::table('events')->where('eventid',$eventid)->value('eventName');
 
-            $pdf::SetFont("Arial","",10);
-            $pdf::cell(35,8,$studentFirstName,1,"","C");
-            $pdf::cell(35,8,$studentLastName,1,"","C");
-            $pdf::cell(65,8,$studentEmail,1,"","C");
-            $pdf::cell(55,8,"+60".$studentPhone,1,"","C");
-            $pdf::Ln();
+                $pdf = new Fpdf();
+                $pdf::AddPage();
+                $pdf::SetFont('Arial','B',18);
+                $pdf::Cell(0,10,"Participant Details of ".$eventName,0,"","C");
+                $pdf::Ln();
+                $pdf::Ln();
+                $pdf::SetFont('Arial','B',12);
+                $pdf::cell(35,8,"First Name",1,"","C");
+                $pdf::cell(35,8,"Last Name",1,"","C");
+                $pdf::cell(65,8,"Email",1,"","C");
+                $pdf::cell(55,8,"Phone",1,"","C");
+                $pdf::Ln();
+
+                foreach($students as $student)
+                {
+                    $studentFirstName = DB::table('students')->where('studentid', $student)->value('firstName');
+                    $studentLastName = DB::table('students')->where('studentid', $student)->value('lastName');
+                    $studentUserId = DB::table('students')->where('studentid', $student)->value('userid');
+                    $studentEmail = DB::table('users')->where('id',$studentUserId)->value('email');
+                    $studentPhone = DB::table('students')->where('studentid',$student)->value('phone');
+
+                    $pdf::SetFont("Arial","",10);
+                    $pdf::cell(35,8,$studentFirstName,1,"","C");
+                    $pdf::cell(35,8,$studentLastName,1,"","C");
+                    $pdf::cell(65,8,$studentEmail,1,"","C");
+                    $pdf::cell(55,8,"+60".$studentPhone,1,"","C");
+                    $pdf::Ln();
+                }
+                $pdf::Output($eventName.".pdf",'D');
+                exit;
+                return redirect()->intended("viewevent/".$eventid."/participantdetails");
+            }
         }
-        $pdf::Output($eventName.".pdf",'D');
-        exit;
+        return redirect()->intended('viewevent/'.$eventid);
     }
 }
