@@ -13,7 +13,7 @@
 		color: black;
 	}
 
-	ul 
+	#events
 	{
 		list-style: disc;
 		display : inline-block;
@@ -39,7 +39,7 @@
     	$id = DB::table('events')->pluck('eventid');
     @endphp
 
-    <ul style ="margin-left : -1cm; font-size:1.3vw;">
+    <ul id="events" style ="margin-left : -1cm; font-size:1.3vw;">
 	    @foreach ($id as $eventid)
 		  	@php
 	        	$currentDate = date('Y-m-d');

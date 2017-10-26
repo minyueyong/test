@@ -15,35 +15,54 @@
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 <style>
-    .containerfluid1
+    #row
     {
-        padding: 80px;
-        margin-left : 3cm;
+        margin-left: 0.5px;
     }
 
-    .row-offcanvas-right
+    /* Laptop ----------- */
+    @media only screen and (min-width: 1024px)
     {
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        border: 5px solid #f00;
-        margin: 10px;
+         .containerfluid1
+        {
+            padding: 80px;
+            margin-left : 3cm;
+        }
+
+        .row-offcanvas-right
+        {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            border: 5px solid #f00;
+            margin: 10px;
+        }
+
+        #commentsection
+        {
+            margin-left:1cm;
+        }
+
+        #row
+        {
+            margin-left:1cm;
+        }
     }
 </style>
 
 <div class = "containerfluid1">
     <div class="row row-offcanvas row-offcanvas-right">
-        <div class="table-responsive col-xs-4 col-sm-9">
-            <table class="table table-condensed table-bordered" >
+        <div class="table-responsive col-sm-9">
+            <table class="table table-condensed table-bordered">
                 <br>
                     <div class="row" >
-                        <div class="col-xs-6 col-sm-6">
+                        <div class="col-sm-6">
                             <div>
                                 <img src = "{!!$image!!}" alt="eventpic" class="img-square img-responsive" style="max-width:100%;height:auto;"/>
                             </div>
                         </div>
 
-                        <div class="col-xs-6 col-sm-6"style="padding-top:50px;" >
+                        <div class="col-sm-6" style="padding-top:50px;">
                             <div style="font-size:20px">
                                 <div><b>Name:</b> {!!$name!!} </div>
                                 <div><b>Organizer: </b>{!!$companyName!!} </div>
@@ -88,8 +107,8 @@
                         </div> 
                     </div>
                                 
-                    <div class= "row" style="margin-left:1cm;">
-                        <h3 class = "text-uppercase" style="margin-left:1cm;">Comment Section</h3>
+                    <div class= "row" id="row">
+                        <h3 class = "text-uppercase" id="commentsection">Comment Section</h3>
                     
                         @if (Auth::user()->role === 1)
                             <div class="page-login-form box">

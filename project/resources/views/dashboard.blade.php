@@ -33,6 +33,40 @@
 		font-family:Georgia;
 		color: #FF7171; 
 	}
+
+	#communitystats
+	{
+		margin-left: 220px;
+	}
+
+	#participatedactivities
+	{
+		margin-left: 1px;
+	}
+
+	#upcomingactiviteis
+	{
+		margin-left: 2cm;
+	}
+
+	#showupcomingactivities
+	{
+		margin-left: 1.8cm;
+	}
+
+	/* Smartphones (portrait) ----------- */
+	@media only screen and (max-width : 480px)
+	{
+  		#communitystats
+  		{
+  			margin-left: 15px;
+  		}
+
+  		#activitiesreview
+  		{
+  			font-size: 3.5vw;
+  		}
+	}
 </style>
 
 <script>
@@ -72,64 +106,60 @@
 </script>
 
 @if (Auth::user()->role === 1)
-<div class = "containerfluid1" >
-	<div class="row row-offcanvas row-offcanvas-right">
-		<div class="col-xs-12 col-sm-9 col-sm-push-3">
-			<button type="button" class="pull-left btn btn-default visible-xs" data-toggle="offcanvas" aria-expanded="false" aria-controls="navbar">
-				<i class="fa fa-navicon"></i>
-			</button>
-
-			<div class="table-responsive col-xs-4 col-sm-10" id = "demo1">
+<div class = "containerfluid1">
+	<div class="row">
+		<div class="col-sm-9 col-sm-push-3">
+			<div class="table-responsive col-sm-10" id = "demo1">
 				<table class="table table-condensed table-bordered">
 						<div class="row"  class = "collapse" >
-							<h2  style="font-size:2vw; margin-left:5cm;"><u>Community Stats</u></h2>
-							<div class="col-xs-6 col-sm-6">
+							<h2 style="font-size:2vw;" id="communitystats"><u>Community Stats</u></h2>
+							<div class="col-sm-6">
 								<div style = "margin-top:20px;">
 									<div style="font-size:1.5vw;"><b>Status:</b> {!!$results[0]->status!!}</div>
 									<div style="font-size:1.5vw;"><b>Experience:</b> {!!$results[0]->experience!!}</div>
 									<div style="font-size:1.5vw;"><b>Campus:</b> {!!$results[0]->campus!!} University </div>
 									<div style="font-size:1.5vw;"><b>Education:</b> Bachelor of {!!$results[0]->education!!} </div>
 								</div>
-							</div><!--/.col-xs-6.col-sm-6-->
+							</div>
 
-							<div class="col-xs-6 col-sm-6">
+							<div class="col-sm-6">
 								<div style = "margin-top:20px;">
 									<div style="font-size:1.5vw;"><b>Area of Interest:</b> {!!$results[0]->interest!!} </div>
 									<div style="font-size:1.5vw;"><b>Birthday:</b> {!!$results[0]->dob!!} </div>
 									<div style="font-size:1.5vw;"><b>Gender:</b> {!!$results[0]->gender!!} </div>
 								</div>
-							</div><!--/.col-xs-6.col-sm-6-->
-						</div><!--/row-->
+							</div>
+						</div>
 
 						<div class ="row" class= "collapse">
-							<div class="col-xs-6 col-sm-6" >
+							<div class="col-sm-6" >
 								<div style="font-size:18px" >
 									<h2 style="font-size:2vw;"><u>Contact Information</u></h2>
 									<div style="font-size:1.5vw;"><b>Email:</b> {!!$results[0]->email!!} </div>
 									<div style="font-size:1.5vw;"><b>Phone:</b> +60{!!$results[0]->phone!!} </div>
 								</div>
-							</div><!--/.col-xs-6.col-lg-4-->
+							</div>
 
-							<div class="col-xs-6 col-sm-6">
+							<div class="col-sm-6">
 								<div style="font-size:18px">
 									<h2 style="font-size:2vw;"><u>About Me</u></h2>
 									<div style="font-size:1.5vw;"><b> @php echo nl2br($results[0]->aboutme); @endphp</b> </div>
 								</div>
-							</div><!--/.col-xs-6.col-lg-4-->
-						</div><!-- row -->
+							</div>
+						</div>
 
 						<div class ="row" align="right">
 							<a href="/editprofile" class="btn btn-default login-btn">Edit Profile</a>
-						</div><!-- row -->
+						</div>
 				</table>
 			</div>
 
-			<div class="table-responsive col-xs-6 col-sm-10" >
+			<div class="table-responsive col-sm-10" >
 				<table class="table table-condensed table-bordered">
 					<div class="row" id = "demo2" class = "collapse" hidden>
-						<div class="col-xs-6 col-sm-6">
+						<div class="col-sm-6">
 							<div style="font-size:18px">
-								<h2 style="font-size:2vw; margin-left:1cm;"><u>Participated Activities</u></h2>
+								<h2 style="font-size:2vw;" id="participatedactivities"><u>Participated Activities</u></h2>
 								<div style="font-size:1.5vw;"><b>
 									@php 
 										$events = DB::table('studentsnevents')->where('studentid', $results[0]->studentid)->pluck('eventid');
@@ -154,12 +184,12 @@
 									</ul>
 								</div>
 							</div>
-						</div><!--/.col-xs-6.col-sm-6-->
+						</div>
 
-						<div class="col-xs-6 col-sm-6">
+						<div class="col-sm-6">
 							<div style="font-size:18px" >
-								<h2 style="font-size:2vw; margin-left: 2cm;"><u>Upcoming Activities</u></h2>
-									<div style="font-size:1.2vw; margin-left: 1.8cm;" ><b>
+								<h2 style="font-size:2vw;" id ="upcomingactivities"><u>Upcoming Activities</u></h2>
+									<div style="font-size:1.2vw;" id="showupcomingactivites"><b>
 										@php 
 											$events = DB::table('studentsnevents')->where('studentid', $results[0]->studentid)->pluck('eventid');
 										@endphp
@@ -182,14 +212,13 @@
 										</ul>
 									</div>
 							</div>
-						</div><!--/.col-xs-6.col-sm-6-->
-					</div><!--/row-->
+						</div>
+					</div>
 				</table>
 		  	</div>
-		</div><!--col-xs-12 col-sm-9 col-sm-push-3 -->
+		</div>
 
-		
-		<div class="col-xs-12 col-sm-3 col-sm-pull-10 sidebar-offcanvas" id="sidebar">
+		<div class="col-sm-3 col-sm-pull-10 id="sidebar">
 			<table>
 				<tr>
 					<td rowspan="2">
@@ -207,29 +236,26 @@
 				</tr>
 			</table>
 			<br>
-			<div class= "list-group-item" style="font-size:2vw;">
+			<div class= "list-group-item">
 				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Profile</button>
 			</div>
 
-			<div class= "list-group-item" style="font-size:2vw;">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');">Activities Review</button>
+			<div class= "list-group-item">
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');" id="activitiesreview">Activities Review</button>
 			</div>
-	  </div><!--/.sidebar-offcanvas-->
-	</div><!--rowoffcanvas -->
-</div><!--containerfluid -->
+	  </div>
+	</div>
+</div>
 <!-- role1 -->
 
 @elseif (Auth::user()->role === 2)
 	@if ($results[0]->companyApproval === 1)
 		<div class="containerfluid2" >
-			<div class="row row-offcanvas row-offcanvas-right">
-				<div class="col-xs-12 col-sm-9 col-sm-push-3">
-					<button type="button" class="pull-left btn btn-default visible-xs" data-toggle="offcanvas" aria-expanded="false" aria-controls="navbar">
-					</button>
-
+			<div class="row">
+				<div class="col-sm-9 col-sm-push-3">
 					<div class="agenda" class="row"  class = "collapse">
-						<div class="table-responsive col-xs-6 col-sm-9">
-							<table class="table table-condensed table-bordered">
+						<div class="col-sm-9">
+							<table class="table-responsive table-condensed table-bordered">
 								<thead>
 									<tr>
 										@php
@@ -255,7 +281,7 @@
 							
 						</div>
 						
-						<div class="row col-xs-6 col-sm-3">  
+						<div class="row col-sm-3">  
 							<table class="table table-condensed table-bordered" style="font-size:1.2vw;">
 								<thead>
 									<tr>
@@ -274,7 +300,7 @@
 					</div><!--agenda -->
 
 					<div class="row" id = "demo1" class = "collapse">
-						<div class="col-xs-6 col-sm-6">
+						<div class="col-sm-6">
 							<div style="font-size:18px">
 								<h2 style="font-size:2vw;"><u>Contact Information</u></h2>
 								<div style="font-size:1.5vw;">Email: {!!$results[0]->email!!} </div>
@@ -283,7 +309,7 @@
 							</div>
 						</div><!--/.col-xs-6.col-sm-6-->
 
-						<div class="col-xs-6 col-sm-6">
+						<div class="col-sm-6">
 							<div style="font-size:18px">
 								<h2 style="font-size:2vw;"><u>About Company</u></h2>
 								<div style="font-size:1.5vw;"> @php echo nl2br($results[0]->aboutcompany); @endphp </div>
@@ -296,7 +322,7 @@
 					</div>
 
 					<div class="row"  class = "collapse">
-						<div class="col-xs-6 col-sm-12">
+						<div class="col-sm-12">
 							<div style="font-size:18px" id = "demo3" hidden>
 								<h2 style="font-size:2vw;"><u>Upcoming Activities</u></h2><br>
 								<div >
@@ -317,7 +343,7 @@
 													<b>{{$event->eventName}}</b>
 													<br>
 													<a id = "viewevent" href="{{ url('viewevent/'.$event->eventid) }}">
-														<img src ="{!!$event->eventImage!!}" class="img-thumbnail"  width ="350" height = "350" alt="eventImage" style="float:left, display:inline">
+														<img src ="{!!$event->eventImage!!}" class="img-thumbnail img-responsive"  width ="350" height = "350" alt="eventImage" style="float:left, display:inline">
 													</a>
 													<br>
 													<b>{!!$event->eventDate!!}</b>
@@ -329,7 +355,7 @@
 							</div>
 						</div><!--/.col-xs-6.col-sm-6-->
 
-						<div class="col-xs-6 col-sm-7" >
+						<div class="col-sm-7" >
 						<div style="font-size:18px" id="demo2" hidden>
 								<h2 style="font-size:2vw;"><u>Past Activities</u></h2><br>
 								<div>
@@ -353,7 +379,7 @@
 					</div><!-- row -->
 				</div> <!--xs-12 -->
 					
-				<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
+				<div class="col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
 					<table style="font-size:1.5vw;">
 						<tr>
 							<td rowspan="2">
@@ -386,15 +412,12 @@
 
 @elseif (Auth::user()->role === 3)
 <div class="containerfluid3">
-    <div class="row row-offcanvas row-offcanvas-right">
-        <div class="col-xs-12 col-sm-9 col-sm-push-3">
-            <button type="button" class="pull-left btn btn-default visible-xs" data-toggle="offcanvas" aria-expanded="false" aria-controls="navbar">
-            </button>
-
+    <div class="row">
+        <div class="col-sm-9 col-sm-push-3">
 			<div class="row"  class = "collapse" id ="demo1">
-				<div class="table-responsive col-xs-6 col-sm-10" align = "center">
+				<div class="table-responsive col-sm-10" align = "center">
 					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Company</u></h3><br>
-					<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
+					<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
 						@php
 							$companies = DB::table('companies')->where('companyApproval',0)->pluck('companyid');
 						@endphp
@@ -431,10 +454,10 @@
 				</div>	
 			</div><!--row -->
 
-			<div class="row"  class = "collapse" id ="demo2" hidden>
-				<div class="table-responsive col-xs-6 col-sm-10" align = "center">
+			<div class="row" class = "collapse" id ="demo2" hidden>
+				<div class="table-responsive col-sm-10" align = "center">
 					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Events</u></h3><br>
-						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
+						<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
 							@php
 								$events = DB::table('events')->where('eventApproval',0)->pluck('eventid');
 							@endphp
@@ -475,9 +498,9 @@
 			</div><!--row -->
 
 			<div class="row"  class = "collapse" id ="demo3" hidden>
-				<div class="table-responsive col-xs-6 col-sm-10">
-					<h3 class ="text-uppercase" style="font-weight:bold"><u>All Events Statistics</u></h3><br>
-						<table class="table table-condensed table-bordered" style="font-size:1.3vw;">
+				<div class="table-responsive col-sm-10">
+					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>All Events Statistics</u></h3><br>
+						<table class="table-responsive table-condensed table-bordered" style="font-size:1.3vw;">
 							@php
 								$eventsStats = DB::table('events')->where('eventApproval',1)->pluck('eventid');
 							@endphp
@@ -516,14 +539,14 @@
 			</div><!--row -->
 
 			<div class="row"  class = "collapse" id ="demo4" hidden>
-				<div class="table-responsive col-xs-6 col-sm-10">
-					<h3 class ="text-uppercase" style="font-weight:bold "><u>Analytics Review</u></h3><br>
+				<div class="table-responsive col-sm-10">
+					<h3 class ="text-uppercase" style="font-weight:bold;font-size:2vw"><u>Analytics Review</u></h3><br>
 						@php
 							$totalStudents = DB::table('students')->count('studentid');
 							$totalCompanies = DB::table('companies')->count('companyid');
 							$totalEvents = DB::table('events')->count('eventid');
 						@endphp
-						<table class="table table-condensed table-bordered" style="font-size:1.5vw;">
+						<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
 								<thead>
 									<tr>
 										<th>Total Students Registered</th>
@@ -544,7 +567,7 @@
 			</div><!--row -->
 		</div><!-- xs12 -->
 
-		<div class="col-xs-6 col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
+		<div class="col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
 			<div class= "list-group-item">
 				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Company Approval</button>
 			</div>

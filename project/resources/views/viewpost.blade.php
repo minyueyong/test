@@ -40,7 +40,7 @@
     </div>
 
     <div align="center">
-        <table width="400" style ="background-color:#FFE2DC;">
+        <table class="table-responsive" width="300" style ="background-color:#FFE2DC;">
             <tr>
                 <td>
                     by <b>{!!$name!!}</b>
@@ -79,7 +79,7 @@
             @endphp
                     
             @if ($userrole == 1)
-                <table width="400">
+                <table class="table-responsive" width="300">
                     <tr>
                         <td>
                          by <b>{!!$studentFName!!}</b> on <b>{!!$created_at!!}</b>
@@ -93,7 +93,7 @@
                     </tr>
                 </table>
             @elseif ($userrole == 2)
-                <table width="400">
+                <table class="table-responsive" width="300">
                     <tr>
                         <td>
                             by <b>{!!$companyname!!}</b> on <b>{!!$created_at!!}</b>
@@ -108,7 +108,7 @@
                 </table>
 
             @elseif ($userrole == 3)
-                <table width="400">
+                <table class="table-responsive" width="300">
                     <tr>
                         <td>
                             by <b>Admin</b> on <b>{!!$created_at!!}</b>

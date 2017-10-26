@@ -24,7 +24,7 @@
     @endphp
 
     <div>
-    	<table class = "table table-condensed">
+    	<table class = "table table-responsive table-condensed">
     		<thead>
     			<tr>
     				<th>Post Title</th>
