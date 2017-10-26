@@ -20,7 +20,7 @@
 
         <div class = "form-group">
             <div class="input-icon">
-                <span class="glyphicon glyphicon-lock"></span> <input type="password" placeholder="Enter Password" name="userpw" id = "userpw" class = "form-control" required>
+                <span class="glyphicon glyphicon-lock"></span> <input type="password" placeholder="Enter Password" name="userpw" id = "userpw" class = "form-control" minlength="8" required>
             </div>
         </div>
 

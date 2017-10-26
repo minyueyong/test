@@ -87,7 +87,11 @@ class EventController extends Controller
 
         else if (Auth::user()->role == 2)
         {
-            return view('/markattendance')->with('eventid',$eventid);
+            $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
+            if ($companyApproval == 1)
+                return view('/markattendance')->with('eventid',$eventid);
+            else
+                return redirect()->intended('/dashboard');
         }
     }
 
@@ -128,6 +132,11 @@ class EventController extends Controller
         else if(Auth::user()->role === 3)
         {
             return view('/participantdetails')->with('eventid',$eventid);
+        }
+
+        else
+        {
+            return redirect()->intended('viewevent/'.$eventid);
         }
     }
 
@@ -254,7 +263,7 @@ class EventController extends Controller
             $pdf::cell(55,8,"+60".$studentPhone,1,"","C");
             $pdf::Ln();
         }
-        $pdf::Output("participantdetails.pdf",'D');
+        $pdf::Output($eventName.".pdf",'D');
         exit;
     }
 }

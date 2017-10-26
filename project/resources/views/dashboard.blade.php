@@ -10,16 +10,16 @@
 		margin-left : 2cm;
 	}
 
-	.containerfluid2
+    .containerfluid2
 	{
 		padding: 60px;
 		margin-left : -1cm;
 	}
 
-	.containerfluid3
+    .containerfluid3
 	{
-	    padding : 80px;
-	    margin-left : -1cm;
+		padding : 80px;
+		margin-left : -1cm;
 	}
 
 	.containerfluid3 h3
@@ -250,10 +250,10 @@
 
 @elseif (Auth::user()->role === 2)
 	@if ($results[0]->companyApproval === 1)
-		<div class="containerfluid2" >
+		<div class="containerfluid2">
 			<div class="row">
 				<div class="col-sm-9 col-sm-push-3">
-					<div class="agenda" class="row"  class = "collapse">
+					<div class="row" class = "collapse">
 						<div class="col-sm-9">
 							<table class="table-responsive table-condensed table-bordered">
 								<thead>
@@ -278,7 +278,6 @@
 									</tr>
 								</thead>
 							</table>   
-							
 						</div>
 						
 						<div class="row col-sm-3">  
@@ -297,7 +296,7 @@
 								</thead>
 							</table>
 						</div>
-					</div><!--agenda -->
+					</div>
 
 					<div class="row" id = "demo1" class = "collapse">
 						<div class="col-sm-6">
@@ -450,13 +449,14 @@
 							@endforeach
 						</tbody>
 					</table>
-						<br><input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Approve">						
+						<br><input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Approve">	
+						</form>					
 				</div>	
 			</div><!--row -->
 
 			<div class="row" class = "collapse" id ="demo2" hidden>
 				<div class="table-responsive col-sm-10" align = "center">
-					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Events</u></h3><br>
+					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>Waiting for Approval Events</u></h3><br>
 						<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
 							@php
 								$events = DB::table('events')->where('eventApproval',0)->pluck('eventid');
@@ -493,12 +493,13 @@
 									@endforeach
 							</tbody>
 						</table>
-							<br><input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve" />				
+						<br><input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve"/>		
+						</form>		
 				</div>	
 			</div><!--row -->
 
 			<div class="row"  class = "collapse" id ="demo3" hidden>
-				<div class="table-responsive col-sm-10">
+				<div class="table-responsive col-sm-10" align="center">
 					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>All Events Statistics</u></h3><br>
 						<table class="table-responsive table-condensed table-bordered" style="font-size:1.3vw;">
 							@php
@@ -539,7 +540,7 @@
 			</div><!--row -->
 
 			<div class="row"  class = "collapse" id ="demo4" hidden>
-				<div class="table-responsive col-sm-10">
+				<div class="table-responsive col-sm-10" align="center">
 					<h3 class ="text-uppercase" style="font-weight:bold;font-size:2vw"><u>Analytics Review</u></h3><br>
 						@php
 							$totalStudents = DB::table('students')->count('studentid');

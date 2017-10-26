@@ -83,13 +83,13 @@
 
             <div class="form-group">
                 <div class="input-icon">
-                    <span class="glyphicon glyphicon-lock"></span> <input type="password" id = "password" class="form-control" name="password" placeholder="Password" oninput="CheckPassword(this)">
+                    <span class="glyphicon glyphicon-lock"></span> <input type="password" id = "password" class="form-control" name="password" minlength="8" placeholder="Password" oninput="CheckPassword(this)">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="input-icon">
-                    <span class="glyphicon glyphicon-lock"></span> <input type="password" id = "confirmpw" name="confirmpw" class="form-control" placeholder="Retype Password" oninput="CheckPassword1(this)">
+                    <span class="glyphicon glyphicon-lock"></span> <input type="password" id = "confirmpw" name="confirmpw" minlength="8" class="form-control" placeholder="Retype Password" oninput="CheckPassword1(this)">
                 </div>               
             </div>
 
