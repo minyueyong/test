@@ -244,9 +244,22 @@ class UserController extends Controller
     public function editProfile()
     {
         if (Auth::check())
-            return view('/editprofile');
+        {
+            if (Auth::user()->role == 2)
+            {
+                $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
+                if ($companyApproval == 1)
+                    return view('/editprofile');
+            }
+            else
+            {
+                return view('/editprofile');
+            }
+        }
         else 
+        {
             return view('signin');
+        }
     }
 
     public function updateProfile(Request $request)
