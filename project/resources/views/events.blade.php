@@ -9,6 +9,17 @@
         height: 35%;
         margin: auto;
     }	
+
+    /* Smartphones (portrait) ----------- */
+    @media only screen and (max-width : 480px)
+    {
+        .img-thumbnail
+        {
+            width: 65%;
+            height: 25%;
+            margin: auto;
+        }
+    }
 </style>
 
 <div class = "container">

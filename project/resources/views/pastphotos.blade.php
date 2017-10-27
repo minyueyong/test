@@ -9,6 +9,19 @@
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
+<style>
+	/* Smartphones (portrait) ----------- */
+	@media only screen and (max-width : 480px)
+	{
+  		.carousel-inner > .item > img,
+    	.carousel-inner > .item > a > img 
+	    {
+	        width: 65%;
+	        height: 35%;
+	        margin: auto;
+	    }
+	}
+</style>
 
 <div class = "container">
 	<div class = "page-header">

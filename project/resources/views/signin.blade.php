@@ -26,9 +26,6 @@
 
         <button type="submit" class = "btn btn-default login-btn">Login</button> 
         <br>
-        <input type="checkbox"> Remember me
-
-        <br>
         <label>Don't have an account? <a href="signup" id = "signup">Sign up</a> now. </label>
         </form>
     </div>    
