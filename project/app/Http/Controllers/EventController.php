@@ -335,4 +335,10 @@ class EventController extends Controller
         }
         return view('/companydashboard')->with('companyid',$companyid);
     }
+
+    public function checkInterest(Request $request)
+    {
+        $interest = $request->input('interestdropdown');
+        return view('/newevents')->with('interest', $interest);
+    }
 }

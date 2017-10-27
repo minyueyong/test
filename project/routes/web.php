@@ -104,6 +104,7 @@ Route::get('events', function ()
 {
     return view('events');
 });
+Route::post('checkinterestoption', 'EventController@checkInterest');
 
 Route::get('postevent', function () 
 {

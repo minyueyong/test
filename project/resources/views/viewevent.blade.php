@@ -92,7 +92,7 @@
                                 <div><b>Date:</b> {!!$date!!}</div>
                                 <div><b>Venue: </b>{!!$venue!!} </div>
                                 <div><b>Fees:</b> {!!$fees!!} </div>
-                                <div><b>Interest:</b>{!!$interest!!}</div>
+                                <div><b>Interest:</b> {!!$interest!!}</div>
                                 <div><b>Description: </b> <br>@php echo nl2br($description); @endphp </div>
                                 <div><b>Seats Left: </b>{!!$seats - $totalRegistered!!}</div>
                                 <br>
