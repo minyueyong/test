@@ -71,29 +71,45 @@ class EventController extends Controller
 
     public function participateEvent($eventid)
     {
-        if(Auth::user()->role == 1)
+        if (Auth::check())
         {
-            $studentid = DB::table('students')->join('users',function ($join)
-            {
-                    $join->on('students.userid','=','users.id')->where('students.userid','=', Auth::user()->id);
-            })->value('students.studentid');
+            $eventSeats = DB::table('events')->where('eventid',$eventid)->value('eventSeats');
+            $totalRegistered = DB::table('studentsnevents')->where('eventid',$eventid)->count('studentid');
+            $currentDate = date('Y-m-d');
+            $eventDate = DB::table('events')->where('eventid',$eventid)->value('eventDate');
 
-            $studentParticipate = DB::table('studentsnevents')->where('studentid',$studentid)->where(DB::raw('eventid'), $eventid)->count();
-            
-            if ($studentParticipate == 0)
+            if(Auth::user()->role == 1 && $eventSeats > $totalRegistered)
             {
-                $id = DB::table('studentsnevents')->insert(['studentid'=>$studentid, 'eventid'=>$eventid]);
-            }
-            return redirect()->intended('/dashboard');
-        }
+                $studentid = DB::table('students')->join('users',function ($join)
+                {
+                        $join->on('students.userid','=','users.id')->where('students.userid','=', Auth::user()->id);
+                })->value('students.studentid');
 
-        else if (Auth::user()->role == 2)
-        {
-            $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
-            if ($companyApproval == 1)
-                return view('/markattendance')->with('eventid',$eventid);
-            else
+                $studentParticipate = DB::table('studentsnevents')->where('studentid',$studentid)->where(DB::raw('eventid'), $eventid)->count();
+                
+                if ($studentParticipate == 0)
+                {
+                    $id = DB::table('studentsnevents')->insert(['studentid'=>$studentid, 'eventid'=>$eventid]);
+                }
                 return redirect()->intended('/dashboard');
+            }
+
+            else if (Auth::user()->role == 2 && $eventDate == $currentDate)
+            {
+                $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
+                if ($companyApproval == 1)
+                    return view('/markattendance')->with('eventid',$eventid);
+                else
+                    return redirect()->intended('/dashboard');
+            }
+            else
+            {
+                return redirect()->intended('/dashboard');
+            }
+        }
+        else
+        {
+            return redirect()->intended('/dashboard');
         }
     }
 
@@ -166,9 +182,25 @@ class EventController extends Controller
 
     public function editEvent($eventid)
     {
-        if(Auth::user()->role === 2)
+        if(Auth::check())
         {
-            return view('/editevent')->with('eventid',$eventid);
+            if(Auth::user()->role === 2)
+            {
+                $companyid = DB::table('events')->where('eventid',$eventid)->value('companyid');
+                $owncompanyid = DB::table('companies')->where('userid',Auth::user()->id)->value('companyid');
+                if ($companyid == $owncompanyid)
+                    return view('/editevent')->with('eventid',$eventid);
+                else
+                    return redirect()->intended('viewevent/'.$eventid);
+            }
+            else if (Auth::user()->role === 3)
+            {
+                return view('/editevent')->with('eventid',$eventid);
+            }
+            else
+            {
+                return redirect()->intended('viewevent/'.$eventid);
+            }
         }
     }
 

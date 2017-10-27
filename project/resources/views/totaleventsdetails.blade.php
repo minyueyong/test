@@ -30,7 +30,7 @@
 		    			$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
 					    $eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
 					    $eventVenue = DB::table('events')->where('eventid', $event)->value('eventVenue');
-					    $eventSeats = DB::table('events')->where('eventid', $id)->value('eventSeats');
+					    $eventSeats = DB::table('events')->where('eventid', $event)->value('eventSeats');
 					    $totalRegistered = DB::table('studentsnevents')->where('eventid',$event)->count('studentid');
 					    $companyid = DB::table('events')->where('eventid', $event)->value('companyid');
 					    $companyName = DB::table('companies')->where('companyid',$companyid)->value('companyName');

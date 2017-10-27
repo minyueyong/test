@@ -136,7 +136,7 @@
                             $commentsid = DB::table('usersneventsncomments')->where('eventid',$id)->pluck('commentid');
                         @endphp                        
                         @if (count($commentsid) != 0)
-                            <h3 class = "text-uppercase" id="commentsection">Comment Section</h3>
+                            <h3 class = "text-uppercase" id="commentsection"><u>Comment Section</u></h3>
                             @foreach ($commentsid as $commentid)
                                 @php
                                     $comment = DB::table('comments')->where('commentid',$commentid)->value('comment');
@@ -165,6 +165,8 @@
                                 @endif
                                 <br>
                             @endforeach
+                        @else
+                            <h3 class = "text-uppercase" id="commentsection"><u>Comment Section</u></h3>
                         @endif
 
                         @if (Auth::user()->role === 1)

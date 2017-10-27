@@ -250,6 +250,8 @@ class UserController extends Controller
                 $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
                 if ($companyApproval == 1)
                     return view('/editprofile');
+                else
+                    return redirect()->intended('/dashboard');
             }
             else
             {
