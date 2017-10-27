@@ -94,22 +94,22 @@ class EventController extends Controller
                 return redirect()->intended('/dashboard');
             }
 
-            else if (Auth::user()->role == 2 && $eventDate == $currentDate)
+            else if ((Auth::user()->role == 2 || Auth::user()->role == 3) && $eventDate == $currentDate)
             {
                 $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
                 if ($companyApproval == 1)
                     return view('/markattendance')->with('eventid',$eventid);
                 else
-                    return redirect()->intended('/dashboard');
+                    return redirect()->intended('viewevent/'.$eventid);
             }
             else
             {
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('viewevent/'.$eventid);
             }
         }
         else
         {
-            return redirect()->intended('/dashboard');
+           return redirect()->intended('viewevent/'.$eventid);
         }
     }
 

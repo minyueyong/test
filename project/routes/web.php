@@ -136,37 +136,12 @@ Route::post('/updateevent','EventController@updateEvent');
 
 Route::post('/viewevent/{id}/postcomment','EventController@postComment');
 
-Route::get('forum', function () 
-{
-    if (Auth::check())
-    {
-        return view('/forum');
-    }
+Route::get('forum', 'PostController@viewForum');
 
-    else
-    {
-        return view('/signin');
-    }
-});
-
-Route::get('forum/createpost',function()
-{
-    if (Auth::check())
-    {
-        return view('/createpost');
-    }
-
-    else
-    {
-        return view('/signin');
-    }
-});
+Route::get('forum/createpost', 'PostController@createPost');
 Route::post('storepost', 'PostController@storePost');
 
-Route::get('forum/{id}', function ($id) 
-{
-    return view('/viewpost')->with('id',$id);
-});
+Route::get('forum/{id}', 'PostController@viewPost'); 
 Route::post('/forum/{id}/postcomment','PostController@postComment');
 
 Route::get('logout','UserController@logout');

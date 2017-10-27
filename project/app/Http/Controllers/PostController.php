@@ -29,4 +29,76 @@ class PostController extends Controller
         DB::table('usersnpostsncomments')->insert(['userid'=>$userid,'postid'=>$postid,'postcommentid'=>$postcommentid]); 
         return redirect()->intended('forum/'.$postid);       
     }
+
+    public function viewForum()
+    {
+        if (Auth::check())
+        {
+            if(Auth::user()->role == 2)
+            {
+                $companyid = DB::table('companies')->where('userid',Auth::user()->id)->value('companyid');
+                $companyApproval = DB::table('companies')->where('companyid',$companyid)->value('companyApproval');
+                if($companyApproval == 1)
+                    return view('/forum');
+                else
+                    return redirect()->intended('/dashboard');
+            }
+            else
+            {
+                return view('/forum');
+            }
+        }
+        else
+        {
+            return redirect()->intended('/signin');
+        }
+    }
+
+    public function createPost()
+    {
+        if (Auth::check())
+        {
+            if(Auth::user()->role == 2)
+            {
+                $companyid = DB::table('companies')->where('userid',Auth::user()->id)->value('companyid');
+                $companyApproval = DB::table('companies')->where('companyid',$companyid)->value('companyApproval');
+                if($companyApproval == 1)
+                    return view('/createpost');
+                else
+                    return redirect()->intended('/dashboard');
+            }
+            else
+            {
+                return view('/createpost');
+            }
+        }
+        else
+        {
+            return redirect()->intended('/signin');
+        }
+    }
+
+    public function viewPost($id)
+    {
+        if (Auth::check())
+        {
+            if(Auth::user()->role == 2)
+            {
+                $companyid = DB::table('companies')->where('userid',Auth::user()->id)->value('companyid');
+                $companyApproval = DB::table('companies')->where('companyid',$companyid)->value('companyApproval');
+                if($companyApproval == 1)
+                    return view('/viewpost')->with('id',$id);
+                else
+                    return redirect()->intended('/dashboard');
+            }
+            else
+            {
+                return view('/viewpost')->with('id',$id);
+            }
+        }
+        else
+        {
+            return redirect()->intended('/signin');
+        }
+    }
 }

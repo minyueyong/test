@@ -2,6 +2,7 @@
     $companyid = DB::table('companies')->where('userid',Auth::user()->id)->value('companyid');
     $totalEvent = DB::table('events')->where('companyid',$companyid)->count('eventid');
     $status = DB::table('companies')->where('companyid',$companyid)->value('status');
+    $companyApproval = DB::table('companies')->where('companyid',$companyid)->value('companyApproval');
 @endphp
 
 <title>Post an Activity</title>
@@ -101,7 +102,7 @@
             </form>
         </div>
 
-    @elseif (Auth::user()->role == 2)
+    @elseif (Auth::user()->role == 2 && $companyApproval == 1)
         @if ($status == "Basic")
             @if ($totalEvent < 1)
         		<div class="page-login-form box">
@@ -319,7 +320,11 @@
             </div>
         @endif
     @elseif (Auth::user()->role == 1)
-        <h3 class = "text-uppercase">Student is not allowed to post an event</h3>
+        <h3 class = "text-uppercase" style="font-family:Georgia;
+        color: #FF7171;">Student is not allowed to post an event</h3>
+    @else
+        <h3 class = "text-uppercase" style="font-family:Georgia;
+        color: #FF7171;">Still waiting for approval from admin</h3>
     @endif
 </div>
 @include('footer')
