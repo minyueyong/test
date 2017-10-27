@@ -19,6 +19,7 @@
     				<th>Event Name</th>
     				<th>Date</th>
     				<th>Venue</th>
+    				<th>Seats Left</th>
     				<th>Organizer</th>
     			</tr>
     		</thead>
@@ -29,13 +30,17 @@
 		    			$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
 					    $eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
 					    $eventVenue = DB::table('events')->where('eventid', $event)->value('eventVenue');
+					    $eventSeats = DB::table('events')->where('eventid', $id)->value('eventSeats');
+					    $totalRegistered = DB::table('studentsnevents')->where('eventid',$event)->count('studentid');
 					    $companyid = DB::table('events')->where('eventid', $event)->value('companyid');
 					    $companyName = DB::table('companies')->where('companyid',$companyid)->value('companyName');
+					    $seatsLeft = $eventSeats - $totalRegistered;
 		    		@endphp
 			    	<tr>
 				    	<td>{!!$eventName!!}</td>
 				    	<td>{!!$eventDate!!}</td>
 				    	<td>{!!$eventVenue!!}</td>
+				    	<td>{!!$seatsLeft!!}</td>
 				    	<td>{!!$companyName!!}</td>
 			    	</tr>
 		    	@endforeach

@@ -68,30 +68,36 @@
                             </div>
                         </div>
 
-                    <div class="form-group">
-                        <div class="input-icon"> <span class="glyphicon glyphicon-shopping-cart"></span>
-                        <select name = "fees" id ="fees" onchange='CheckFees(this.options[this.selectedIndex].value);' required>
-                            <option value = "" selected disabled>Fees </option>
-                            <option value="Free">Free </option>
-                            <option value="paid">Paid </option>
-                        </select>
-                        <div id = "div1"></div>
+                        <div class = "form-group">
+                           <div class="input-icon">
+                               <span class="glyphicon glyphicon-user"></span> <input type="text" placeholder="Activity Seats Available" name="eventseats" id = "eventseats" class = "form-control" required/>
+                           </div>
                         </div>
-                    </div>
 
-                    <div class = "form-group">
-                        <div class="input-icon">
-                            <span class="glyphicon glyphicon-camera"></span> <input type="file" placeholder=" Activity Image" name="eventimage" id = "eventimage" required/>
+                        <div class="form-group">
+                            <div class="input-icon"> <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <select name = "fees" id ="fees" onchange='CheckFees(this.options[this.selectedIndex].value);' required>
+                                <option value = "" selected disabled>Fees </option>
+                                <option value="Free">Free </option>
+                                <option value="paid">Paid </option>
+                            </select>
+                            <div id = "div1"></div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class = "form-group">
-                        <div class="input-icon">
-                            <span style="vertical-align:top;" class="glyphicon glyphicon-pencil"></span> <textarea rows="3" cols="60" maxlength="100" id="eventdescription" name="eventdescription" placeholder="Activity Description" required></textarea>
+                        <div class = "form-group">
+                            <div class="input-icon">
+                                <span class="glyphicon glyphicon-camera"></span> <input type="file" placeholder=" Activity Image" name="eventimage" id = "eventimage" required/>
+                            </div>
                         </div>
-                    </div>
-                        
-                    <button type="submit" class = "btn btn-default login-btn">Create It</button>
+
+                        <div class = "form-group">
+                            <div class="input-icon">
+                                <span style="vertical-align:top;" class="glyphicon glyphicon-pencil"></span> <textarea rows="3" cols="60" maxlength="100" id="eventdescription" name="eventdescription" placeholder="Activity Description" required></textarea>
+                            </div>
+                        </div>
+                            
+                        <button type="submit" class = "btn btn-default login-btn">Create It</button>
             </form>
         </div>
 
@@ -134,6 +140,12 @@
                             </div>
                         </div>
 
+                        <div class = "form-group">
+                           <div class="input-icon">
+                               <span class="glyphicon glyphicon-user"></span> <input type="text" placeholder="Activity Seats Available" name="eventseats" id = "eventseats" class = "form-control" required/>
+                           </div>
+                        </div>
+                        
                         <div class="form-group">
                         <div class="input-icon"> <span class="glyphicon glyphicon-shopping-cart"></span>
                         <select name = "fees" id ="fees" onchange='CheckFees(this.options[this.selectedIndex].value);' required>
@@ -201,6 +213,12 @@
                             </div>
                         </div>
 
+                        <div class = "form-group">
+                           <div class="input-icon">
+                               <span class="glyphicon glyphicon-user"></span> <input type="text" placeholder="Activity Seats Available" name="eventseats" id = "eventseats" class = "form-control" required/>
+                           </div>
+                        </div>
+
                         <div class="form-group">
                         <div class="input-icon"> <span class="glyphicon glyphicon-shopping-cart"></span>
                         <select name = "fees" id ="fees" onchange='CheckFees(this.options[this.selectedIndex].value);' required>
@@ -266,6 +284,12 @@
                         <div id = "div2"></div>
                         </div>
                     </div>
+
+                    <div class = "form-group">
+                           <div class="input-icon">
+                               <span class="glyphicon glyphicon-user"></span> <input type="text" placeholder="Activity Seats Available" name="eventseats" id = "eventseats" class = "form-control" required/>
+                           </div>
+                        </div>
 
                     <div class="form-group">
                     <div class="input-icon"> <span class="glyphicon glyphicon-shopping-cart"></span>

@@ -468,6 +468,7 @@
 										<th>Organizer</th>
 										<th>Date</th>
 										<th>Venue</th>
+										<th>Seats Available</th>
 									</tr>
 								</thead>
 
@@ -477,6 +478,7 @@
 											$eventName = DB::table('events')->where('eventid', $event)->value('eventName');
 											$eventDate = DB::table('events')->where('eventid', $event)->value('eventDate');
 											$eventVenue = DB::table('events')->where('eventid', $event)->value('eventVenue'); 
+											$eventSeats = DB::table('events')->where('eventid', $event)->value('eventSeats'); 
 											$companyid = DB::table('events')->where('eventid',$event)->value('companyid');
 											$companyName = DB::table('companies')->where('companyid',$companyid)->value('companyName');
 										@endphp
@@ -485,10 +487,11 @@
 										<form action="/checkeventapproval" method="post" enctype="multipart/form-data">
 										<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
 										<td><input name="event[]" type="checkbox" value="{!!$event!!}"></td>
-										<td>{!!$eventName!!}</td>
+										<td><a id = "viewevent" href="{{ url('viewevent/'.$event) }}">{!!$eventName!!}</a></td>
 										<td>{!!$companyName!!}</td>
 										<td>{!!$eventDate!!}</td>
 										<td>{!!$eventVenue!!}</td>
+										<td>{!!$eventSeats!!}</td>
 									</tr>
 									@endforeach
 							</tbody>

@@ -33,6 +33,8 @@ class EventController extends Controller
                 $interest = $request->input('interest');
             }
             
+            $seats = $request->input('eventseats');
+
             if ($request->input('fees') == "paid")
             {
                 $fees = $request->input('feespaid');
@@ -52,7 +54,7 @@ class EventController extends Controller
             {
                 $join->on('companies.userid','=','users.id')->where('companies.userid','=', Auth::user()->id);
             })->value('companies.companyid');
-            $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventInterest'=>$interest,'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
+            $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventInterest'=>$interest, 'eventSeats'=>$seats, 'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
             echo '<script language="javascript">';
             echo 'alert("The event is waiting for admin approval!")';
             echo '</script>';
@@ -124,16 +126,23 @@ class EventController extends Controller
 
     public function participantDetails($eventid)
     {
-        if(Auth::user()->role === 2)
+        if (Auth::check())
         {
-            return view('/participantdetails')->with('eventid',$eventid);
-        }
+            if(Auth::user()->role === 2)
+            {
+                return view('/participantdetails')->with('eventid',$eventid);
+            }
 
-        else if(Auth::user()->role === 3)
-        {
-            return view('/participantdetails')->with('eventid',$eventid);
-        }
+            else if(Auth::user()->role === 3)
+            {
+                return view('/participantdetails')->with('eventid',$eventid);
+            }
 
+            else
+            {
+                return redirect()->intended('viewevent/'.$eventid);
+            }
+        }
         else
         {
             return redirect()->intended('viewevent/'.$eventid);
@@ -232,47 +241,66 @@ class EventController extends Controller
 
     public function exportPdf($eventid)
     {
-        if (Auth::user()->role == 2)
+        if (Auth::check())
         {
-            $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
-            if($companyApproval == 1)
+            if (Auth::user()->role == 2 || Auth::user()->role == 3)
             {
-                $students = DB::table('studentsnevents')->where('eventid', $eventid)->pluck('studentid');
-                $eventName = DB::table('events')->where('eventid',$eventid)->value('eventName');
-
-                $pdf = new Fpdf();
-                $pdf::AddPage();
-                $pdf::SetFont('Arial','B',18);
-                $pdf::Cell(0,10,"Participant Details of ".$eventName,0,"","C");
-                $pdf::Ln();
-                $pdf::Ln();
-                $pdf::SetFont('Arial','B',12);
-                $pdf::cell(35,8,"First Name",1,"","C");
-                $pdf::cell(35,8,"Last Name",1,"","C");
-                $pdf::cell(65,8,"Email",1,"","C");
-                $pdf::cell(55,8,"Phone",1,"","C");
-                $pdf::Ln();
-
-                foreach($students as $student)
+                $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
+                if($companyApproval == 1 || Auth::user()->role == 3)
                 {
-                    $studentFirstName = DB::table('students')->where('studentid', $student)->value('firstName');
-                    $studentLastName = DB::table('students')->where('studentid', $student)->value('lastName');
-                    $studentUserId = DB::table('students')->where('studentid', $student)->value('userid');
-                    $studentEmail = DB::table('users')->where('id',$studentUserId)->value('email');
-                    $studentPhone = DB::table('students')->where('studentid',$student)->value('phone');
+                    $students = DB::table('studentsnevents')->where('eventid', $eventid)->pluck('studentid');
+                    $eventName = DB::table('events')->where('eventid',$eventid)->value('eventName');
 
-                    $pdf::SetFont("Arial","",10);
-                    $pdf::cell(35,8,$studentFirstName,1,"","C");
-                    $pdf::cell(35,8,$studentLastName,1,"","C");
-                    $pdf::cell(65,8,$studentEmail,1,"","C");
-                    $pdf::cell(55,8,"+60".$studentPhone,1,"","C");
+                    $pdf = new Fpdf();
+                    $pdf::AddPage();
+                    $pdf::SetFont('Arial','B',18);
+                    $pdf::Cell(0,10,"Participant Details of ".$eventName,0,"","C");
                     $pdf::Ln();
+                    $pdf::Ln();
+                    $pdf::SetFont('Arial','B',12);
+                    $pdf::cell(35,8,"First Name",1,"","C");
+                    $pdf::cell(35,8,"Last Name",1,"","C");
+                    $pdf::cell(65,8,"Email",1,"","C");
+                    $pdf::cell(55,8,"Phone",1,"","C");
+                    $pdf::Ln();
+
+                    foreach($students as $student)
+                    {
+                        $studentFirstName = DB::table('students')->where('studentid', $student)->value('firstName');
+                        $studentLastName = DB::table('students')->where('studentid', $student)->value('lastName');
+                        $studentUserId = DB::table('students')->where('studentid', $student)->value('userid');
+                        $studentEmail = DB::table('users')->where('id',$studentUserId)->value('email');
+                        $studentPhone = DB::table('students')->where('studentid',$student)->value('phone');
+
+                        $pdf::SetFont("Arial","",10);
+                        $pdf::cell(35,8,$studentFirstName,1,"","C");
+                        $pdf::cell(35,8,$studentLastName,1,"","C");
+                        $pdf::cell(65,8,$studentEmail,1,"","C");
+                        $pdf::cell(55,8,"+60".$studentPhone,1,"","C");
+                        $pdf::Ln();
+                    }
+                    $pdf::Output($eventName.".pdf",'D');
+                    exit;
                 }
-                $pdf::Output($eventName.".pdf",'D');
-                exit;
-                return redirect()->intended("viewevent/".$eventid."/participantdetails");
             }
         }
-        return redirect()->intended('viewevent/'.$eventid);
+        else
+        {
+            return redirect()->intended('viewevent/'.$eventid);
+        }
+    }
+
+    public function showCompany($companyid)
+    {
+        if (Auth::check())
+        {
+            if (Auth::user()->role == 2)
+            {
+                $owncompanyid = DB::table('companies')->where('userid',Auth::user()->id)->value('companyid');
+                if ($owncompanyid == $companyid)
+                    return redirect()->intended('dashboard');
+            }
+        }
+        return view('/companydashboard')->with('companyid',$companyid);
     }
 }

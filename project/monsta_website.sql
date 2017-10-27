@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2017 at 05:46 PM
+-- Generation Time: Oct 27, 2017 at 04:11 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -38,7 +38,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`commentid`, `comment`, `created_at`, `updated_at`) VALUES
-(1, 'Anticipate this event!', '2017-10-26 15:45:51', '2017-10-26 15:45:51');
+(1, 'Anticipate this event!', '2017-10-27 14:05:55', '2017-10-27 14:05:55'),
+(2, 'We will see you soon, Michelle :D', '2017-10-27 14:09:33', '2017-10-27 14:09:33');
 
 -- --------------------------------------------------------
 
@@ -64,9 +65,9 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`companyid`, `companyName`, `phone`, `image`, `aboutcompany`, `interest`, `status`, `membershipDate`, `userid`, `companyApproval`) VALUES
-(1, 'Tealive Sdn. Bhd.', 356232800, '/images/userpic/1509030500.jpg', 'HI :D\r\nWE ARE TEALIVE', 'Food&Beverages', 'Basic', '2017-11-26', 3, 1),
-(2, 'Microsoft Sdn. Bhd.', 31234312, '/images/userpic/1509031043.png', 'HI\r\nWE ARE MICROSOFT', 'Information Technology', 'Basic', '2017-11-26', 4, 0),
-(3, 'H&M Sdn. Bhd.', 34124564, '/images/userpic/1509031098.jpg', 'WE ARE H&M', 'Art', 'Epic', '2018-04-26', 5, 1);
+(1, 'Tealive Sdn. Bhd.', 356232800, '/images/userpic/1509112014.jpg', 'HI \r\nWE ARE TEALIVE', 'Food&Beverages', 'Basic', '2017-11-27', 3, 1),
+(2, 'Microsoft Sdn. Bhd.', 356232812, '/images/userpic/1509112042.png', 'WE ARE MICROSOFT', 'Information Technology', 'Basic', '2017-11-27', 4, 0),
+(3, 'H&M Sdn. Bhd.', 31243212, '/images/userpic/1509112102.jpg', 'H&M HERE', 'Art', 'Epic', '2017-11-27', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -81,6 +82,7 @@ CREATE TABLE `events` (
   `eventVenue` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `eventImage` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `eventInterest` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `eventSeats` int(11) NOT NULL,
   `eventFees` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `eventDescription` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `companyid` int(10) UNSIGNED NOT NULL,
@@ -91,10 +93,11 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`eventid`, `eventName`, `eventDate`, `eventVenue`, `eventImage`, `eventInterest`, `eventFees`, `eventDescription`, `companyid`, `eventApproval`) VALUES
-(1, 'When We Are Young', '2017-12-22', 'INTI Subang University', '/images/eventpic/1509031289.png', 'Business', 'Free', 'Meet with CEOs like Bryan Loo', 1, 1),
-(2, 'Gathering of Masters', '2017-11-29', 'Sunway Pyramid', '/images/eventpic/1509031366.png', 'Mass Comm', 'Free', 'Gather with masters like director of H&M', 3, 0),
-(3, 'MONSTA EXPERIENCE', '2017-10-25', 'HQ of H&M', '/images/eventpic/1509031438.png', 'Art', '50', 'Experience workshop!', 3, 1);
+INSERT INTO `events` (`eventid`, `eventName`, `eventDate`, `eventVenue`, `eventImage`, `eventInterest`, `eventSeats`, `eventFees`, `eventDescription`, `companyid`, `eventApproval`) VALUES
+(1, 'Gathering of Masters', '2017-12-22', 'INTI Subang University', '/images/eventpic/1509112321.png', 'Business', 3, 'Free', 'Gather with Bryan Loo', 1, 1),
+(2, 'MONSTA EXPERIENCE', '2017-10-26', 'Sunway Pyramid', '/images/eventpic/1509112945.png', 'Art', 5, '50', 'Experience with CEO of H&M', 3, 1),
+(3, 'When We Are Young', '2017-10-30', 'INTI Subang University', '/images/eventpic/1509112989.png', 'Mass Comm', 3, 'Free', 'Fashion Show :D', 3, 1),
+(4, 'Fashion Passion', '2018-01-11', 'Sunway Pyramid', '/images/eventpic/1509113299.jpg', 'Art', 3, 'Free', 'Fashion show in Sunway Pyramid', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -113,8 +116,10 @@ CREATE TABLE `eventsnimages` (
 --
 
 INSERT INTO `eventsnimages` (`eventnimageid`, `eventid`, `imageid`) VALUES
-(1, 3, 1),
-(2, 3, 2);
+(1, 2, 1),
+(2, 2, 2),
+(3, 2, 3),
+(4, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -200,7 +205,8 @@ CREATE TABLE `postcomments` (
 --
 
 INSERT INTO `postcomments` (`postcommentid`, `postcomment`, `created_at`, `updated_at`) VALUES
-(1, 'It''s a shame I have missed the chance to participate this event!', '2017-10-26 15:43:32', '2017-10-26 15:43:32');
+(1, 'It''s a shame that I missed to participate this event!', '2017-10-27 14:05:46', '2017-10-27 14:05:46'),
+(2, 'No worries definitely have a chance to join us again! :D', '2017-10-27 14:09:11', '2017-10-27 14:09:11');
 
 -- --------------------------------------------------------
 
@@ -221,7 +227,7 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`postid`, `postTitle`, `postDescription`, `created_at`, `userid`) VALUES
-(1, 'Monsta Experience is fun!', 'I have great experience there! Great organizing team!', '2017-10-26 15:42:46', 2);
+(1, 'Monsta Experience is fun!', 'Fun event!!!', '2017-10-27 14:05:25', 2);
 
 -- --------------------------------------------------------
 
@@ -251,8 +257,10 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`studentid`, `firstName`, `lastName`, `dob`, `phone`, `campus`, `gender`, `education`, `interest`, `image`, `aboutme`, `status`, `experience`, `userid`) VALUES
-(1, 'Evon', 'Siow', '1996-06-25', 162808062, 'INTI', 'Female', 'Computer Science', 'Information Technology', '/images/userpic/1509030323.jpg', 'HI :D\r\nIM EVON :D', 'Newbie', 1100, 2),
-(2, 'Nick', 'Lim', '1995-03-20', 125673212, 'TAYLOR', 'Male', 'Engineering', 'Information Technology', '/images/userpic/1509032319.jpg', 'HI NICK HERE :D', 'Newbie', 1000, 6);
+(1, 'Evon', 'Siow', '1996-06-25', 162808062, 'INTI', 'Female', 'Computer Science', 'Information Technology', '/images/userpic/1509111986.jpg', 'HI\r\nIM EVON', 'Newbie', 1100, 2),
+(2, 'Nick', 'Lim', '1992-03-22', 192043212, 'TAYLOR', 'Male', 'Engineering', 'Engineering', '/images/userpic/1509112494.jpg', 'HI IM NICK', 'Newbie', 1000, 6),
+(3, 'Michelle', 'Tan', '1995-03-20', 132342531, 'SEGI', 'Female', 'Commerce', 'Business', '/images/userpic/1509112611.jpg', 'MICHELLE HERE', 'Newbie', 1000, 7),
+(4, 'Michael', 'Chua', '1993-05-30', 164321243, 'SUNWAY', 'Male', 'Accounting', 'Mass Comm', '/images/userpic/1509112715.jpg', 'IM\r\nMICHAEL', 'Newbie', 1000, 8);
 
 -- --------------------------------------------------------
 
@@ -273,9 +281,11 @@ CREATE TABLE `studentsnevents` (
 
 INSERT INTO `studentsnevents` (`studentneventid`, `studentid`, `eventid`, `participate`) VALUES
 (1, 1, 1, 0),
-(2, 1, 3, 1),
-(3, 2, 1, 0),
-(4, 2, 3, 0);
+(2, 2, 1, 0),
+(3, 3, 1, 0),
+(4, 1, 2, 1),
+(5, 3, 2, 0),
+(8, 1, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -298,12 +308,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'evonmiyako.em@gmail.com', '$2y$10$cMLWoPtmQZLPv7TFl6oIZ.uOvjdlsP33ygiZdRa4.SixqxZKPbPHa', 'aynyrtXrKc547qCrT32KGkFMSOzNGUTgBJ7fOO18YwgUDydKAOh5UCyALvrk', 3, '2017-10-26 14:55:24', '2017-10-26 14:55:24'),
-(2, 'cqes231@uowmail.edu.au', '$2y$10$dsmAmOE7mL8amRWRfA/1HeSZ9BBy7.XNAFCzrINZmXJEShU70LTM6', 'YQCNrubU6M7MMWsqApcxQ7lUStFgkfnXJafNBk61AM2BGHX9cyBAr6V3Qq1n', 1, '2017-10-26 15:05:23', '2017-10-26 15:05:23'),
-(3, 'tealive@gmail.com', '$2y$10$hrhY1op6YlPnKMJeGO.aVe5HHwcf8iPAvulflyi4MFgnChwPn3XK2', 'raWoj3QsgK8emBsTknSf8mKxuoGcqHO788haGNk0mhgnH7MYvRr81rj1c5aI', 2, '2017-10-26 15:08:20', '2017-10-26 15:08:20'),
-(4, 'microsoft@gmail.com', '$2y$10$qNOLZpBGipjJ9WLbvbxvhuutZshtB4i2XZqf2eQAxON4CwwdHHdyu', 'IGKRcYoHlwfnjFE4MjnBtxsF30rKKkZ4eRZ8HbOgrnc1lFJc47HPX6HJAs8q', 2, '2017-10-26 15:17:23', '2017-10-26 15:17:23'),
-(5, 'hnm@gmail.com', '$2y$10$UfghIqkCSDriqClIxkIZ9OqvS9j6ANz7hcPO2TQTFVh6f579LFjQW', 'v5wuO39gwJ0HlHD1oXZAV8nQqcN7QPtLT5fUpffA1Tqy9TtHp0BWpQoTW73u', 2, '2017-10-26 15:18:18', '2017-10-26 15:18:18'),
-(6, 'adrian@gmail.com', '$2y$10$rs0LLPl8G2bVwzqH5gnNt.4UVZtkffGPpqlRROdp2nlcJtPcqLU2S', '0tTeb7cm10y7ZoGKJ0DsDwCrUE5v1tyvdIvEr5abN6pEHGu3ZwBlH8CIDQJC', 1, '2017-10-26 15:38:40', '2017-10-26 15:38:40');
+(1, 'evonmiyako.em@gmail.com', '$2y$10$4yLh25K7imlvvJHqxMnG1.ArfAe0MECI6RjPza5bA7JnaE88bfQua', 'MDudW53imSEblCR4oissy3MbDd6w4PT5xqqPIWMzj9SlvlyMCu0hGa75eCI3', 3, '2017-10-27 13:43:37', '2017-10-27 13:43:37'),
+(2, 'cqes231@uowmail.edu.au', '$2y$10$RY2AmOPLQ0MGyXmcJ2wk0em2PcnYkPg4.cbzDVkH1caXLixH.47H2', 'EAIy7VroMKE7yKZtLhP3tEjlBhggl4fDKL67yn6zQ6ozGJiwqeOlD4ptePXy', 1, '2017-10-27 13:46:27', '2017-10-27 13:46:27'),
+(3, 'tealive@gmail.com', '$2y$10$4C1yLF2fmo879Ox/caoeZ.8mepMqsMfaygWt6CrNsCb9uzjrJpiiW', 'eSmEkGATjkyGVlCxzbhHSU3snGziWTdyS6AhArK8Izz4vGi1WrhqibdhSh7o', 2, '2017-10-27 13:46:54', '2017-10-27 13:46:54'),
+(4, 'microsoft@gmail.com', '$2y$10$MaRNXxdDwWd7UgHB0pLQTuGaXGCdQ8PDYcW3unDR0vIOfzRagMP7i', 'r14emPrnqIvlTkjm7oup9uhOwKpbBR1xVfzZ9fXsFLDgpG7ziD2mzNt55ejv', 2, '2017-10-27 13:47:22', '2017-10-27 13:47:22'),
+(5, 'hnm@gmail.com', '$2y$10$8Wn6XG0Ex24VdakGmBHnS.4NoLfSggP19REQdHMXmX8Tr3Knzgwpi', '5p5EN5HigNtwdDr9qq5Id94h1bpyPu8cRrGc7kxizPAg6OzR3xihZU3QVQvP', 2, '2017-10-27 13:48:23', '2017-10-27 13:48:23'),
+(6, 'nick@gmail.com', '$2y$10$FWV7yQLPOJmfRz2SXeOObu9RQ7yZ5aJgPKEHuqv7FgNrvJDp1c7Wa', 'ux3trrVIlRUKibZOo1ws2VK5r4G6aQRCyFKrgwenYzkwEmfgzgry7d5KTNir', 1, '2017-10-27 13:54:55', '2017-10-27 13:54:55'),
+(7, 'michelle@gmail.com', '$2y$10$i62gZj1juQLw3XO0S0YqKecuNDk7JgUs8Y9G0a0yKETVk8Seyk6gm', 'Qe5F4oVYPeYCZc0YczXM2hGPK7Psftf3DcLkbhRDXBDnAd8UCQUB1LrphagS', 1, '2017-10-27 13:56:51', '2017-10-27 13:56:51'),
+(8, 'michael@gmail.com', '$2y$10$dngFtjx6M1qmxqsV0UcPqer8DO683cAaaqKmdpHg8tTMmjM5hVDum', 'l10xwCNN04hm3HjIrUygIxshHMMkBCOufBpsua0gaYY4Fc8czetrrDnvFFYR', 1, '2017-10-27 13:58:36', '2017-10-27 13:58:36');
 
 -- --------------------------------------------------------
 
@@ -323,7 +335,8 @@ CREATE TABLE `usersneventsncomments` (
 --
 
 INSERT INTO `usersneventsncomments` (`commentfid`, `userid`, `eventid`, `commentid`) VALUES
-(1, 6, 1, 1);
+(1, 7, 3, 1),
+(2, 5, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -343,7 +356,8 @@ CREATE TABLE `usersnpostsncomments` (
 --
 
 INSERT INTO `usersnpostsncomments` (`postcommentfid`, `userid`, `postid`, `postcommentid`) VALUES
-(1, 6, 1, 1);
+(1, 7, 1, 1),
+(2, 1, 1, 2);
 
 --
 -- Indexes for dumped tables
@@ -456,7 +470,7 @@ ALTER TABLE `usersnpostsncomments`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `commentid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `commentid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `companies`
 --
@@ -466,12 +480,12 @@ ALTER TABLE `companies`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `eventid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `eventid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `eventsnimages`
 --
 ALTER TABLE `eventsnimages`
-  MODIFY `eventnimageid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `eventnimageid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `images`
 --
@@ -486,7 +500,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `postcomments`
 --
 ALTER TABLE `postcomments`
-  MODIFY `postcommentid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `postcommentid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `posts`
 --
@@ -496,27 +510,27 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `studentid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `studentid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `studentsnevents`
 --
 ALTER TABLE `studentsnevents`
-  MODIFY `studentneventid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `studentneventid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `usersneventsncomments`
 --
 ALTER TABLE `usersneventsncomments`
-  MODIFY `commentfid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `commentfid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `usersnpostsncomments`
 --
 ALTER TABLE `usersnpostsncomments`
-  MODIFY `postcommentfid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `postcommentfid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --

@@ -61,9 +61,9 @@
     }
 
     #viewevent:link, #viewevent:visited, #viewevent:active, #thumbnail:link,
-    #thumbnail:visited
+    #thumbnail:visited, #thumbnail:active, #companydashboard:hover
     {
-        color: black;
+        color: black !important;
     }
 
     #viewevent:hover
@@ -85,7 +85,7 @@
 
     /* unvisited link */
     #signup:link, #signin:link, #totalRegisterDetails:link, #totalStudentsDetails:link,
-    #totalCompaniesDetails:link, #totalEventsDetails:link
+    #totalCompaniesDetails:link, #totalEventsDetails:link, #companydashboard:link
     {
         color: red;
     }
@@ -93,7 +93,7 @@
     /* visited link */
     #signup:visited, #signin:visited, #totalRegisterDetails:visited, 
     #totalStudentsDetails:visited, #totalCompaniesDetails:visited, 
-    #totalEventsDetails:visited
+    #totalEventsDetails:visited, #companydashboard:visited
     {
         color: red;
     }

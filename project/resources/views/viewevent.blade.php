@@ -3,6 +3,8 @@
     $date = DB::table('events')->where('eventid', $id)->value('eventDate');
     $venue = DB::table('events')->where('eventid', $id)->value('eventVenue');
     $fees = DB::table('events')->where('eventid',$id)->value('eventFees');
+    $seats = DB::table('events')->where('eventid', $id)->value('eventSeats');
+    $interest = DB::table('events')->where('eventid',$id)->value('eventInterest');
     $image = DB::table('events')->where('eventid', $id)->value('eventImage');
     $description = DB::table('events')->where('eventid', $id)->value('eventDescription');
     $companyid = DB::table('events')->where('eventid', $id)->value('companyid');
@@ -18,6 +20,11 @@
     #row
     {
         margin-left: 0.5px;
+    }   
+
+    #by
+    {
+        color: salmon; 
     }
 
     /* Laptop ----------- */
@@ -47,6 +54,22 @@
         {
             margin-left:1cm;
         }
+
+        #by
+        {
+            font-size: 1.2vw; 
+            margin-left: 1cm;
+        }
+
+        #commentPost
+        {
+            margin-left: 1cm;
+        }
+
+        #commentbutton
+        {
+            margin-left:2.5cm;
+        }
     }
 </style>
 
@@ -65,12 +88,13 @@
                         <div class="col-sm-6" style="padding-top:50px;">
                             <div style="font-size:20px">
                                 <div><b>Name:</b> {!!$name!!} </div>
-                                <div><b>Organizer: </b>{!!$companyName!!} </div>
+                                <div><b>Organizer: </b><a id = "companydashboard" href="{{ url('dashboard/'.$companyid) }}">{!!$companyName!!}</a></div>
                                 <div><b>Date:</b> {!!$date!!}</div>
                                 <div><b>Venue: </b>{!!$venue!!} </div>
                                 <div><b>Fees:</b> {!!$fees!!} </div>
+                                <div><b>Interest:</b>{!!$interest!!}</div>
                                 <div><b>Description: </b> <br>@php echo nl2br($description); @endphp </div>
-                                <div><b>Total Student: </b>{!!$totalRegistered!!} </div>
+                                <div><b>Seats Left: </b>{!!$seats - $totalRegistered!!}</div>
                                 <br>
 
                                 @if(Auth::check())
@@ -78,7 +102,7 @@
                                         $currentDate = date('Y-m-d');
                                     @endphp
                                     @if($date > $currentDate)
-                                        @if(Auth::user()->role === 1)
+                                        @if(Auth::user()->role === 1 && $seats > $totalRegistered)
                                             <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Participate It!</a>
                                         @elseif(Auth::user()->role === 2)
                                             @php
@@ -107,9 +131,42 @@
                         </div> 
                     </div>
                                 
-                    <div class= "row" id="row">
-                        <h3 class = "text-uppercase" id="commentsection">Comment Section</h3>
-                    
+                    <div class= "row" id="row">                        
+                        @php 
+                            $commentsid = DB::table('usersneventsncomments')->where('eventid',$id)->pluck('commentid');
+                        @endphp                        
+                        @if (count($commentsid) != 0)
+                            <h3 class = "text-uppercase" id="commentsection">Comment Section</h3>
+                            @foreach ($commentsid as $commentid)
+                                @php
+                                    $comment = DB::table('comments')->where('commentid',$commentid)->value('comment');
+                                    $created_at = DB::table('comments')->where('commentid',$commentid)->value('created_at');
+                                    $userid = DB::table('usersneventsncomments')->where('commentfid',$commentid)->value('userid');
+                                    $userrole = DB::table('users')->where('id',$userid)->value('role');
+                                    if ($userrole == 1)
+                                    {
+                                        $studentFName = DB::table('students')->where('userid',$userid)->value('firstName');
+                                    }
+                                    else if ($userrole == 2)
+                                    {
+                                        $companyname = DB::table('companies')->where('userid',$userid)->value('companyName');
+                                    }
+                                @endphp
+                        
+                                @if ($userrole == 1)
+                                    <b><div id = "by">by {!!$studentFName!!} on {!!$created_at!!}</div>
+                                    <div id = "commentPost">{!!$comment!!}</div></b>
+                                @elseif ($userrole == 2)
+                                    <b><div id = "by">by {!!$companyname!!} on {!!$created_at!!}</div>
+                                    <div id = "commentPost">{!!$comment!!}</div></b>
+                                @elseif ($userrole == 3)
+                                    <b><div id = "by">by Admin on {!!$created_at!!}</div>
+                                    <div id = "commentPost">{!!$comment!!}</div></b>
+                                @endif
+                                <br>
+                            @endforeach
+                        @endif
+
                         @if (Auth::user()->role === 1)
                             <div class="page-login-form box">
                                 <form role="form" class="login-form" method="POST" action="/viewevent/{!!$id!!}/postcomment" enctype="multipart/form-data">
@@ -120,7 +177,7 @@
                                         </div>
                                     </div>
                     
-                                    <button type="submit" class = "btn btn-default login-btn" style="margin-left:2.5cm;display:block">Post Comment</button>
+                                    <button type="submit" class = "btn btn-default login-btn" id="commentbutton" style="display:block">Post Comment</button>
                                 </form>
                             </div>
                     
@@ -141,7 +198,7 @@
                                             </div>
                                         </div>
                     
-                                        <button type="submit" class = "btn btn-default login-btn" style="margin-left:2.5cm;display:block">Post Comment</button>
+                                        <button type="submit" class = "btn btn-default login-btn" id="commentbutton" style="display:block">Post Comment</button>
                                     </form>
                                 </div>
                             @endif
@@ -155,42 +212,10 @@
                                             </div>
                                         </div>
                     
-                                        <button type="submit" class = "btn btn-default login-btn" style="margin-left=2.5cm;display:block">Post Comment</button>
+                                        <button type="submit" class = "btn btn-default login-btn" id="commentbutton" style="display:block">Post Comment</button>
                                 </form>
                             </div>
                         @endif
-                        <br><br>
-                        @php 
-                            $commentsid = DB::table('usersneventsncomments')->where('eventid',$id)->pluck('commentid');
-                        @endphp
-                    
-                        @foreach ($commentsid as $commentid)
-                            @php
-                                $comment = DB::table('comments')->where('commentid',$commentid)->value('comment');
-                                $created_at = DB::table('comments')->where('commentid',$commentid)->value('created_at');
-                                $userid = DB::table('usersneventsncomments')->where('commentfid',$commentid)->value('userid');
-                                $userrole = DB::table('users')->where('id',$userid)->value('role');
-                                if ($userrole == 1)
-                                {
-                                    $studentFName = DB::table('students')->where('userid',$userid)->value('firstName');
-                                }
-                                else if ($userrole == 2)
-                                {
-                                    $companyname = DB::table('companies')->where('userid',$userid)->value('companyName');
-                                }
-                            @endphp
-                    
-                            @if ($userrole == 1)
-                                by {!!$studentFName!!} on {!!$created_at!!}<br>
-                                {!!$comment!!}<br>
-                            @elseif ($userrole == 2)
-                                by {!!$companyname!!} on {!!$created_at!!}<br>
-                                {!!$comment!!}<br>
-                            @elseif ($userrole == 3)
-                                by Admin on {!!$created_at!!}<br>
-                                    {!!$comment!!}<br>
-                            @endif
-                        @endforeach
                     </div>
                     @endif
             </table>

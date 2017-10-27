@@ -38,8 +38,8 @@
 				{!!$eventname!!}
 			</a>
 			@endif
-		</li>
 		@endforeach
+        </li>
 	<!--end of thumbnails-->
 	</ul>
 </div>

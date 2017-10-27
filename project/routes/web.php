@@ -21,6 +21,7 @@ Route::get('home', function ()
 });
 
 Route::get('dashboard', 'UserController@showDashboard');
+Route::get('dashboard/{companyid}', 'EventController@showCompany');
 
 Route::get('editprofile','UserController@editProfile');
 Route::post('updateprofile','UserController@updateProfile');
