@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2017 at 04:11 PM
+-- Generation Time: Oct 27, 2017 at 04:17 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -285,7 +285,8 @@ INSERT INTO `studentsnevents` (`studentneventid`, `studentid`, `eventid`, `parti
 (3, 3, 1, 0),
 (4, 1, 2, 1),
 (5, 3, 2, 0),
-(8, 1, 3, 0);
+(6, 1, 3, 0),
+(7, 2, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -312,7 +313,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `role`, `creat
 (2, 'cqes231@uowmail.edu.au', '$2y$10$RY2AmOPLQ0MGyXmcJ2wk0em2PcnYkPg4.cbzDVkH1caXLixH.47H2', 'EAIy7VroMKE7yKZtLhP3tEjlBhggl4fDKL67yn6zQ6ozGJiwqeOlD4ptePXy', 1, '2017-10-27 13:46:27', '2017-10-27 13:46:27'),
 (3, 'tealive@gmail.com', '$2y$10$4C1yLF2fmo879Ox/caoeZ.8mepMqsMfaygWt6CrNsCb9uzjrJpiiW', 'eSmEkGATjkyGVlCxzbhHSU3snGziWTdyS6AhArK8Izz4vGi1WrhqibdhSh7o', 2, '2017-10-27 13:46:54', '2017-10-27 13:46:54'),
 (4, 'microsoft@gmail.com', '$2y$10$MaRNXxdDwWd7UgHB0pLQTuGaXGCdQ8PDYcW3unDR0vIOfzRagMP7i', 'r14emPrnqIvlTkjm7oup9uhOwKpbBR1xVfzZ9fXsFLDgpG7ziD2mzNt55ejv', 2, '2017-10-27 13:47:22', '2017-10-27 13:47:22'),
-(5, 'hnm@gmail.com', '$2y$10$8Wn6XG0Ex24VdakGmBHnS.4NoLfSggP19REQdHMXmX8Tr3Knzgwpi', '5p5EN5HigNtwdDr9qq5Id94h1bpyPu8cRrGc7kxizPAg6OzR3xihZU3QVQvP', 2, '2017-10-27 13:48:23', '2017-10-27 13:48:23'),
+(5, 'hnm@gmail.com', '$2y$10$8Wn6XG0Ex24VdakGmBHnS.4NoLfSggP19REQdHMXmX8Tr3Knzgwpi', 'TWKdcSK0XCdOfQcojZEgj3tXCMqb4Ty1IpuRTwEYFEdESOjKQLHkpC4HdRqx', 2, '2017-10-27 13:48:23', '2017-10-27 13:48:23'),
 (6, 'nick@gmail.com', '$2y$10$FWV7yQLPOJmfRz2SXeOObu9RQ7yZ5aJgPKEHuqv7FgNrvJDp1c7Wa', 'ux3trrVIlRUKibZOo1ws2VK5r4G6aQRCyFKrgwenYzkwEmfgzgry7d5KTNir', 1, '2017-10-27 13:54:55', '2017-10-27 13:54:55'),
 (7, 'michelle@gmail.com', '$2y$10$i62gZj1juQLw3XO0S0YqKecuNDk7JgUs8Y9G0a0yKETVk8Seyk6gm', 'Qe5F4oVYPeYCZc0YczXM2hGPK7Psftf3DcLkbhRDXBDnAd8UCQUB1LrphagS', 1, '2017-10-27 13:56:51', '2017-10-27 13:56:51'),
 (8, 'michael@gmail.com', '$2y$10$dngFtjx6M1qmxqsV0UcPqer8DO683cAaaqKmdpHg8tTMmjM5hVDum', 'l10xwCNN04hm3HjIrUygIxshHMMkBCOufBpsua0gaYY4Fc8czetrrDnvFFYR', 1, '2017-10-27 13:58:36', '2017-10-27 13:58:36');
@@ -515,7 +516,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `studentsnevents`
 --
 ALTER TABLE `studentsnevents`
-  MODIFY `studentneventid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `studentneventid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --
