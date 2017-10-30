@@ -3,19 +3,24 @@
     $userid = DB::table('posts')->where('postid', $id)->value('userid');
     $date = DB::table('posts')->where('postid',$id)->value('created_at');
     $role = DB::table('users')->where('id',$userid)->value('role');
+    $created_at = DB::table('users')->where('id',$userid)->value('created_at');
+    
     if ($role == 1)
     {
         $name = DB::table('students')->where('userid',$userid)->value('firstName');
+        $image = DB::table('students')->where('userid',$userid)->value('image');
     }
 
     else if ($role == 2)
     {
         $name = DB::table('companies')->where('userid',$userid)->value('companyName');
+        $image = DB::table('students')->where('userid',$userid)->value('image');
     }
 
     else if ($role == 3)
     {
-        $name = "admin";
+        $name = "Admin";
+        $image = "/images/userpic/admin.png";
     }     
     $postdescription = DB::table('posts')->where('postid',$id)->value('postDescription');   
 @endphp
