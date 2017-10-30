@@ -43,6 +43,7 @@
 	    				<th>Post Title</th>
 	    				<th>Posted Date</th>
 	    				<th>Author</th>
+	    				<th>Last Replied</th>
 	    			</tr>
 	    		</thead>
 
@@ -53,6 +54,9 @@
 			        	$userid = DB::table('posts')->where('postid', $postid)->value('userid');
 			        	$date = DB::table('posts')->where('postid',$postid)->value('created_at');
 			        	$role = DB::table('users')->where('id',$userid)->value('role');
+            			$postcommentsid = DB::table('usersnpostsncomments')->where('postid',$postid)->max('postcommentid');
+            			$lastreplieduserid = DB::table('usersnpostsncomments')->where('postcommentid',$postcommentsid)->value('userid');
+            			$lastrepliedrole = DB::table('users')->where('id',$lastreplieduserid)->value('role');
 
 			        	if ($role == 1)
 			        	{
@@ -68,12 +72,28 @@
 			        	{
 			        		$name = "Admin";
 			        	}
+
+			        	if ($lastrepliedrole == 1)
+			        	{
+			        		$lastrepliedname = DB::table('students')->where('userid',$lastreplieduserid)->value('firstName');
+			        	}
+
+			        	else if ($lastrepliedrole == 2)
+			        	{
+			        		$lastrepliedname = DB::table('companies')->where('userid',$lastreplieduserid)->value('companyName');
+			        	}
+
+			        	else if ($lastrepliedrole == 3)
+			        	{
+			        		$lastrepliedname = "Admin";
+			        	}
 			    	@endphp
 
 			    	<tr>
 				    	<td><a href="{{ url('forum/'.$postid) }}" id="post">{!!$posttitle!!}</a></td>
 				    	<td>{!!$date!!}</td>
 				    	<td>{!!$name!!}</td>
+				    	<td>{!!$lastrepliedname!!}</td>
 				   	</tr>
 			    @endforeach
 				</tbody>
