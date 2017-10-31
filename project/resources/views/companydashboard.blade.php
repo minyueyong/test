@@ -201,3 +201,5 @@
 			</div><!--/.sidebar-offcanvas-->
 		</div>
 </div>
+@include('footer')
+@stop
