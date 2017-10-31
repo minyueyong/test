@@ -167,30 +167,8 @@
                                 <h3 class = "text-uppercase" id="commentsection"><u>Comment Section</u></h3>
                             @endif
 
-                            @if (Auth::user()->role === 1)
-                                <div class="page-login-form box">
-                                    <form role="form" class="login-form" method="POST" action="/viewevent/{!!$id!!}/postcomment" enctype="multipart/form-data">
-                                        <input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
-                                        <div class = "form-group">
-                                            <div class="input-icon">
-                                                <span style="vertical-align:top;" class="glyphicon glyphicon-pencil"></span> 
-                                                <textarea style="width:85%;" rows="3" cols="60" maxlength="100" id="comment" name="comment" placeholder="Please comment here..."></textarea>
-                                            </div>
-                                        </div>
-                            
-                                        <button type="submit" class = "btn btn-default login-btn" id="commentbutton" style="display:block">Post Comment</button>
-                                    </form>
-                                </div>
-                            
-                            @elseif (Auth::user()->role === 2)
-                                @php
-                                    $verifyCompanyId = DB::table('companies')->join('users',function ($join)
-                                    {
-                                        $join->on('companies.userid','=','users.id')->where('companies.userid','=', Auth::user()->id);
-                                    })->value('companies.companyid');
-                                @endphp
-                                    
-                                @if($companyid === $verifyCompanyId)
+                            @if (Auth::check())
+                                @if (Auth::user()->role === 1)
                                     <div class="page-login-form box">
                                         <form role="form" class="login-form" method="POST" action="/viewevent/{!!$id!!}/postcomment" enctype="multipart/form-data">
                                             <input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
@@ -200,25 +178,49 @@
                                                     <textarea style="width:85%;" rows="3" cols="60" maxlength="100" id="comment" name="comment" placeholder="Please comment here..."></textarea>
                                                 </div>
                                             </div>
-                            
+                                
                                             <button type="submit" class = "btn btn-default login-btn" id="commentbutton" style="display:block">Post Comment</button>
                                         </form>
                                     </div>
-                                @endif
-                            @elseif (Auth::user()->role === 3)
-                                <div class="page-login-form box">
-                                    <form role="form" class="login-form" method="POST" action="/viewevent/{!!$id!!}/postcomment" enctype="multipart/form-data">
-                                        <input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
-                                            <div class = "form-group">
-                                                <div class="input-icon">
-                                                    <span style="vertical-align:top;" class="glyphicon glyphicon-pencil"></span> 
+                                
+                                @elseif (Auth::user()->role === 2)
+                                    @php
+                                        $verifyCompanyId = DB::table('companies')->join('users',function ($join)
+                                        {
+                                            $join->on('companies.userid','=','users.id')->where('companies.userid','=', Auth::user()->id);
+                                        })->value('companies.companyid');
+                                    @endphp
+                                        
+                                    @if($companyid === $verifyCompanyId)
+                                        <div class="page-login-form box">
+                                            <form role="form" class="login-form" method="POST" action="/viewevent/{!!$id!!}/postcomment" enctype="multipart/form-data">
+                                                <input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
+                                                <div class = "form-group">
+                                                    <div class="input-icon">
+                                                        <span style="vertical-align:top;" class="glyphicon glyphicon-pencil"></span> 
                                                         <textarea style="width:85%;" rows="3" cols="60" maxlength="100" id="comment" name="comment" placeholder="Please comment here..."></textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
-                            
-                                            <button type="submit" class = "btn btn-default login-btn" id="commentbutton" style="display:block">Post Comment</button>
-                                    </form>
-                                </div>
+                                
+                                                <button type="submit" class = "btn btn-default login-btn" id="commentbutton" style="display:block">Post Comment</button>
+                                            </form>
+                                        </div>
+                                    @endif
+                                @elseif (Auth::user()->role === 3)
+                                    <div class="page-login-form box">
+                                        <form role="form" class="login-form" method="POST" action="/viewevent/{!!$id!!}/postcomment" enctype="multipart/form-data">
+                                            <input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
+                                                <div class = "form-group">
+                                                    <div class="input-icon">
+                                                        <span style="vertical-align:top;" class="glyphicon glyphicon-pencil"></span> 
+                                                            <textarea style="width:85%;" rows="3" cols="60" maxlength="100" id="comment" name="comment" placeholder="Please comment here..."></textarea>
+                                                    </div>
+                                                </div>
+                                
+                                                <button type="submit" class = "btn btn-default login-btn" id="commentbutton" style="display:block">Post Comment</button>
+                                        </form>
+                                    </div>
+                                @endif
                             @endif
                         </div>
                     </div>
