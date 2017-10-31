@@ -96,7 +96,7 @@ CREATE TABLE `events` (
 INSERT INTO `events` (`eventid`, `eventName`, `eventDate`, `eventVenue`, `eventImage`, `eventInterest`, `eventSeats`, `eventFees`, `eventDescription`, `companyid`, `eventApproval`) VALUES
 (1, 'Gathering of Masters', '2017-12-22', 'INTI Subang University', '/images/eventpic/1509112321.png', 'Business', 3, 'Free', 'Gather with Bryan Loo', 1, 1),
 (2, 'MONSTA EXPERIENCE', '2017-10-26', 'Sunway Pyramid', '/images/eventpic/1509112945.png', 'Art', 5, '50', 'Experience with CEO of H&M', 3, 1),
-(3, 'When We Are Young', '2017-10-30', 'INTI Subang University', '/images/eventpic/1509112989.png', 'Mass Comm', 3, 'Free', 'Fashion Show :D', 3, 1),
+(3, 'When We Are Young', '2017-11-30', 'INTI Subang University', '/images/eventpic/1509112989.png', 'Mass Comm', 3, 'Free', 'Fashion Show :D', 3, 1),
 (4, 'Fashion Passion', '2018-01-11', 'Sunway Pyramid', '/images/eventpic/1509113299.jpg', 'Art', 3, 'Free', 'Fashion show in Sunway Pyramid', 3, 0);
 
 -- --------------------------------------------------------
