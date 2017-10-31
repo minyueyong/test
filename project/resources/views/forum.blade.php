@@ -14,6 +14,9 @@
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
+
 <style>
 	#post
 	{
@@ -24,7 +27,36 @@
 	{
 		color: black;
 	}
+
+	.pagination > li > a, .pagination > li > span
+	{
+		background-color: white;
+		color: red;
+	}
+
+	.pagination > li.active > a, .pagination > li.active > span
+	.pagination > li.active > a:visited, .pagination > li.active > span
+	{
+		background-color: red;
+		border-color: transparent;
+	}
+
+	.pagination > li.active > a:hover
+	{
+		background-color: grey;
+		color: white;
+	}
 </style>
+
+<script>
+$(document).ready(function() 
+{
+    $('#forumtable').DataTable({
+    	"aLengthMenu": [[1, 3, 5, -1], [1, 3, 5, "All"]],
+        "iDisplayLength": 1
+    });
+} );
+</script>
 
 <div class = "container">
     <div class = "page-header">
@@ -37,7 +69,7 @@
 	    @endphp
 
 	    <div>
-	    	<table class = "table table-responsive table-condensed">
+	    	<table id="forumtable" class="table table-striped row-border" cellspacing="0" width="100%">
 	    		<thead>
 	    			<tr>
 	    				<th>Post Title</th>
@@ -72,6 +104,8 @@
 			        	{
 			        		$name = "Admin";
 			        	}
+
+			        	$lastrepliedname = "None";
 
 			        	if ($lastrepliedrole == 1)
 			        	{

@@ -42,7 +42,7 @@
     <div class = "page-header">
     </div>
 	
-	<h3 class = "text-uppercase">Past Events' Gallery</h3>
+	<h3 class = "text-uppercase">Past Activities' Gallery</h3>
 
     @php
     	$id = DB::table('events')->pluck('eventid');

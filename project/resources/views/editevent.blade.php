@@ -2,7 +2,7 @@
         $name = DB::table('events')->where('eventid', $eventid)->value('eventName');
 @endphp
 
-<title>Edit Event</title>
+<title>Edit Activity</title>
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 

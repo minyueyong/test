@@ -10,6 +10,18 @@
     $companyid = DB::table('events')->where('eventid', $id)->value('companyid');
     $totalRegistered = DB::table('studentsnevents')->where('eventid',$id)->count('studentid');
     $companyName = DB::table('companies')->where('companyid',$companyid)->value('companyName');
+
+    $currentDate = date('Y-m-d');
+    $relatedUpcomingEventsID = DB::table('events')->pluck('eventid');
+
+    foreach($relatedUpcomingEventsID as $relatedUpcomingEventID)
+    {
+        $relatedDate = DB::table('events')->where('eventid', $relatedUpcomingEventID)->value('eventDate');
+        if ($relatedDate > $currentDate && $relatedUpcomingEventID != $id)
+        {
+            $relatedEventImage = DB::table('events')->where('eventid', $relatedUpcomingEventID)->value('eventImage');
+        }
+    }
 @endphp
 
 <title>{!!$name!!}</title>
@@ -98,9 +110,6 @@
                                 <br>
 
                                 @if(Auth::check())
-                                    @php
-                                        $currentDate = date('Y-m-d');
-                                    @endphp
                                     @if($date > $currentDate)
                                         @if(Auth::user()->role === 1 && $seats > $totalRegistered)
                                             <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Participate It!</a>
@@ -114,7 +123,7 @@
                                         
                                             @if($companyid === $verifyCompanyId)
                                                 <a href="/viewevent/{!!$id!!}/participantdetails" class = "btn btn-default login-btn">Stats Analytic</a>
-                                                <a href="/viewevent/{!!$id!!}/editevent" class = "btn btn-default login-btn">Edit Event</a>
+                                                <a href="/viewevent/{!!$id!!}/editevent" class = "btn btn-default login-btn">Edit Activity</a>
                                             @endif
                                         @elseif(Auth::user()->role === 3)
                                             <a href="/viewevent/{!!$id!!}/participantdetails" class = "btn btn-default login-btn">Stats Analytic</a>

@@ -5,10 +5,8 @@
 	.fa 
 	{
 	    padding: 8px;
-	    
 	    text-align: center;
 	    text-decoration: none;
-	    
 	}
 
 	/* Add a hover effect if you want */
