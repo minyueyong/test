@@ -46,7 +46,7 @@
         @endphp
 
         @foreach ($id as $eventid)
-        <li>
+        <li style="float:left">
             @php
                 $currentDate = date('Y-m-d');
                 $eventname = DB::table('events')->where('eventid', $eventid)->value('eventName');

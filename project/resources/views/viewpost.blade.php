@@ -3,7 +3,7 @@
     $userid = DB::table('posts')->where('postid', $id)->value('userid');
     $date = DB::table('posts')->where('postid',$id)->value('created_at');
     $role = DB::table('users')->where('id',$userid)->value('role');
-    $created_at = DB::table('users')->where('id',$userid)->value('created_at');
+    $created_at = DB::table('users')->where('id',$userid)->value('created_at'); 
     
     if ($role == 1)
     {
@@ -36,6 +36,8 @@
         border:1px solid black;
         border-spacing: 10px;
         border-collapse: separate;
+        width : 100%;
+        table-layout:fixed;
     }
 </style> 
 
@@ -44,25 +46,27 @@
         <h3 class = "text-uppercase">{!!$posttitle!!}</h3>
     </div>
 
-    <div align="center">
-        <table class="table-responsive" width="300" style ="background-color:#FFE2DC;">
-            <tr>
-                <td>
-                    by <b>{!!$name!!}</b>
-                    on {!!$date!!}
-                </td>
-            </tr>
+    <div>
+        <table class="table-responsive" style ="background-color:#FFE2DC;" cellpadding=0 cellspacing=0>
+        <tr>
+            <td>
+                by {!!$name!!} on {!!$date!!}
+            </td>
+            <td>
+                <b> @php echo nl2br($postdescription); @endphp</b>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <img src = "{!!$image!!}" alt="profilepic" class="img-rounded img-responsive"/>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <b>@php echo nl2br($postdescription); @endphp</b>
-                </td>
-            </tr>
         </table>
     </div>
 
     <br>
-    <div align="center">
+    <div>
         @php 
             $postcommentsid = DB::table('usersnpostsncomments')->where('postid',$id)->pluck('postcommentid');
         @endphp
@@ -76,53 +80,67 @@
                 if ($userrole == 1)
                 {
                     $studentFName = DB::table('students')->where('userid',$userid)->value('firstName');
+                    $image = DB::table('students')->where('userid',$userid)->value('image');
                 }
                 else if ($userrole == 2)
                 {
                     $companyname = DB::table('companies')->where('userid',$userid)->value('companyName');
+                    $image = DB::table('companies')->where('userid',$userid)->value('image');
+                }
+                else if ($userrole == 3)
+                {
+                    $image = "/images/userpic/admin.png";
                 }
             @endphp
                     
             @if ($userrole == 1)
-                <table class="table-responsive" width="300">
+                <table class="table-responsive" cellpadding=0 cellspacing=0>
                     <tr>
                         <td>
-                         by <b>{!!$studentFName!!}</b> on <b>{!!$created_at!!}</b>
+                            by {!!$studentFName!!} on {!!$created_at!!}
                         </td>
-                    </tr>
-
-                    <tr>
                         <td>
                             <b>{!!$postcomment!!}</b>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <img src = "{!!$image!!}" alt="profilepic" class="img-rounded img-responsive"/>
+                        </td>
+                    </tr>
+
                 </table>
             @elseif ($userrole == 2)
-                <table class="table-responsive" width="300">
+                <table class="table-responsive" cellpadding=0 cellspacing=0>
                     <tr>
                         <td>
-                            by <b>{!!$companyname!!}</b> on <b>{!!$created_at!!}</b>
+                            by {!!$companyname!!} on {!!$created_at!!}
+                        </td>
+                        <td>
+                            {!!$postcomment!!}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <img src = "{!!$image!!}" alt="profilepic" class="img-rounded img-responsive"/>
                         </td>
                     </tr>
 
-                    <tr>
-                        <td>
-                            <b>{!!$postcomment!!}</b>
-                        </td>
-                    </tr>
                 </table>
 
             @elseif ($userrole == 3)
-                <table class="table-responsive" width="300">
+                <table class="table-responsive" cellpadding=0 cellspacing=0>
                     <tr>
                         <td>
-                            by <b>Admin</b> on <b>{!!$created_at!!}</b>
+                             by Admin on {!!$created_at!!}
                         </td>
-                    </tr>
-
-                    <tr>
                         <td>
                             <b>{!!$postcomment!!}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src = "{!!$image!!}" alt="profilepic" class="img-rounded img-responsive"/>
                         </td>
                     </tr>
                 </table>
@@ -137,7 +155,7 @@
             <input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
                 <div class = "form-group">
                     <div class="input-icon">
-                        <span style="vertical-align:top;" class="glyphicon glyphicon-pencil"></span> <textarea rows="3" cols="60" maxlength="100" id="postcomment" name="postcomment" placeholder="Please comment here..."></textarea>
+                        <span style="vertical-align:top;" class="glyphicon glyphicon-pencil"></span> <textarea style="width:85%;" rows="3" cols="60" maxlength="100" id="postcomment" name="postcomment" placeholder="Please comment here..."></textarea>
                     </div>
                 </div>
                     

@@ -54,6 +54,16 @@
 		margin-left: 1.8cm;
 	}
 
+	#vieweventlink:hover
+	{
+		color: black !important;
+	}
+
+	#vieweventlink:link, #vieweventlink:active, #vieweventlink:visited
+	{
+		color: red;
+	}
+
 	/* Smartphones (portrait) ----------- */
 	@media only screen and (max-width : 480px)
 	{
@@ -315,9 +325,6 @@
 							</div>
 						</div><!--/.col-xs-6.col-sm-6-->
 
-						<div class ="row" align="right">
-							<a href="/editprofile" class="btn btn-default login-btn">Edit Profile</a>
-						</div><!-- row -->
 					</div>
 
 					<div class="row"  class = "collapse">
@@ -400,6 +407,14 @@
 					<div class= "list-group-item" style="font-size:1.5vw;">
 						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Dashboard</button>
 					</div>
+
+					<div class= "list-group-item" style="font-size:1.5vw;">
+						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Edit Profile</button>
+					</div>
+
+					<div class= "list-group-item" style="font-size:1.5vw;">
+						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Upgrade Membership</button>
+					</div>
 				</div><!--/.sidebar-offcanvas-->
 			</div>
 		</div>
@@ -425,6 +440,9 @@
 								<th>Check Box</th>
 								<th>Company Name</th>
 								<th>Email</th>
+								<th>Phone</th>
+								<th>Status</th>
+								<th>Created at</th>
 							</tr>
 						</thead>
 
@@ -435,6 +453,9 @@
 									$companyUserId = DB::table('companies')->where('companyid', $company)->value('userid');
 									$companyApproval = DB::table('companies')->where('companyid',$company)->value('companyApproval');
 									$companyEmail = DB::table('users')->where('id',$companyUserId)->value('email');
+									$companyPhone = DB::table('companies')->where('companyid',$company)->value('phone');
+									$companyStatus = DB::table('companies')->where('companyid',$company)->value('status');
+									$companyCreatedAt = DB::table('users')->where('id',$companyUserId)->value('created_at');
 								@endphp
 
 								@if ($companyApproval === 0)
@@ -444,19 +465,23 @@
 											<td><input name="company[]" type="checkbox" value="{!!$company!!}"></td>
 											<td>{!!$companyName!!}</td>
 											<td>{!!$companyEmail!!}</td>
+											<td>{!!$companyPhone!!}</td>
+											<td>{!!$companyStatus!!}</td>
+											<td>{!!$companyCreatedAt!!}</td>
 									</tr>
 								@endif
 							@endforeach
 						</tbody>
 					</table>
-						<br><input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Approve">	
+						<br><input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Approve">
+						<input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Deny"/>	
 						</form>					
 				</div>	
 			</div><!--row -->
 
 			<div class="row" class = "collapse" id ="demo2" hidden>
 				<div class="table-responsive col-sm-10" align = "center">
-					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>Waiting for Approval Events</u></h3><br>
+					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>Waiting for Approval Activities</u></h3><br>
 						<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
 							@php
 								$events = DB::table('events')->where('eventApproval',0)->pluck('eventid');
@@ -464,7 +489,7 @@
 								<thead>
 									<tr>
 										<th>Check Box</th>
-										<th>Event Name</th>
+										<th>Activity Name</th>
 										<th>Organizer</th>
 										<th>Date</th>
 										<th>Venue</th>
@@ -487,7 +512,7 @@
 										<form action="/checkeventapproval" method="post" enctype="multipart/form-data">
 										<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
 										<td><input name="event[]" type="checkbox" value="{!!$event!!}"></td>
-										<td><a id = "viewevent" href="{{ url('viewevent/'.$event) }}">{!!$eventName!!}</a></td>
+										<td><a id = "vieweventlink" href="{{ url('viewevent/'.$event) }}">{!!$eventName!!}</a></td>
 										<td>{!!$companyName!!}</td>
 										<td>{!!$eventDate!!}</td>
 										<td>{!!$eventVenue!!}</td>
@@ -496,21 +521,22 @@
 									@endforeach
 							</tbody>
 						</table>
-						<br><input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve"/>		
+						<br><input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve"/>
+						<input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Deny"/>		
 						</form>		
 				</div>	
 			</div><!--row -->
 
 			<div class="row"  class = "collapse" id ="demo3" hidden>
 				<div class="table-responsive col-sm-10" align="center">
-					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>All Events Statistics</u></h3><br>
+					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>All Activities Statistics</u></h3><br>
 						<table class="table-responsive table-condensed table-bordered" style="font-size:1.3vw;">
 							@php
 								$eventsStats = DB::table('events')->where('eventApproval',1)->pluck('eventid');
 							@endphp
 								<thead>
 									<tr>
-										<th>Event Name</th>
+										<th>Activity Name</th>
 										<th>Organizer</th>
 										<th>Date</th>
 										<th>Venue</th>
@@ -555,7 +581,7 @@
 									<tr>
 										<th>Total Students Registered</th>
 										<th>Total Companies Registered</th>
-										<th>Total Events Posted</th>
+										<th>Total Activities Posted</th>
 									</tr>
 								</thead>
 
@@ -577,11 +603,11 @@
 			</div>
 
 			<div class= "list-group-item" >
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');">Events Approval</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');">Activities Approval</button>
 			</div>
 
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo3');">Events Statistics</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo3');">Activities Statistics</button>
 			</div>
 
 			<div class= "list-group-item">

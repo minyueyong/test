@@ -287,6 +287,7 @@
                                             <img id="eventimage2" src = "{!!$relatedEventImage!!}" alt="eventpic" class="img-square img-responsive img-thumbnail"/>
                                         </a>
                                         <br>
+                                        <br>
                                     @endif
                                 @endforeach
                             </div>

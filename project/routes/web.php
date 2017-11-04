@@ -146,3 +146,5 @@ Route::get('forum/{id}', 'PostController@viewPost');
 Route::post('/forum/{id}/postcomment','PostController@postComment');
 
 Route::get('logout','UserController@logout');
+
+Route::get('sendemail','EmailController@sendEmail');

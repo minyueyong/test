@@ -3,9 +3,28 @@
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 <style>
+ 	.img-thumbnail
+    {
+        width: 55%;
+        height: 35%;
+        margin: auto;	
+    }   
+    
+    /* Smartphones (portrait) ----------- */
+    @media only screen and (max-width : 480px)
+    {
+        .img-thumbnail
+        {
+            width: 65%;
+            height: 25%;
+            margin: auto;
+        }
+    }
+
 	#pastevent
 	{
 		color: red;
+		
 	}
 
 	#pastevent:hover
@@ -15,9 +34,9 @@
 
 	#events
 	{
-		list-style: disc;
+		list-style:none;
 		display : inline-block;
-		line-height: 1em;
+		line-height: 1em;	
 	}
 
 	/* Smartphones (portrait) ----------- */
@@ -35,37 +54,30 @@
         <h3 class = "text-uppercase">Gallery</h3>
     </div>
 
-    <div class="embed-responsive embed-responsive-16by9">
-       	<iframe class = "embed-responsive-item" src="https://www.youtube.com/embed/EgMXxK4MtPM" allowfullscreen></iframe>
-    </div>
-
-    <div class = "page-header">
-    </div>
-	
-	<h3 class = "text-uppercase">Past Activities' Gallery</h3>
-
-    @php
+   @php
     	$id = DB::table('events')->pluck('eventid');
     @endphp
 
-    <ul id="events" style ="margin-left : -1cm; font-size:1.3vw;">
+    <ul class="list-inline">
 	    @foreach ($id as $eventid)
+		<li id = "pasteventlink" style="float:left">
 		  	@php
 	        	$currentDate = date('Y-m-d');
 	        	$eventname = DB::table('events')->where('eventid', $eventid)->value('eventName');
 	        	$date = DB::table('events')->where('eventid', $eventid)->value('eventDate');
 	            $approval = DB::table('events')->where('eventid',$eventid)->value('eventApproval');
+				$image = DB::table('events')->where('eventid',$eventid)->value('eventImage');
 	    	@endphp
 	    		
-	    	@if($date < $currentDate && $approval === 1)
-				<li id = "pasteventlink">
-					<a href="/gallery/{!!$eventid!!}" id="pastevent">
-			  		{!!$eventname!!}
-					</a>
-				</li>
+	    	@if($date < $currentDate && $approval === 1)				
+				<a href="/gallery/{!!$eventid!!}" id="pastevent">
+                	<img class="img-thumbnail" src="{!!$image!!}">
+                	<br>
+                	{!!$eventname!!}
+            	</a>
 			@endif
-			<br>
 		@endforeach
+		</li>
 	</ul>
 </div>
 

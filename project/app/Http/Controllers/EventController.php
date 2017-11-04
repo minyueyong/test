@@ -290,10 +290,12 @@ class EventController extends Controller
                     $pdf::Ln();
                     $pdf::Ln();
                     $pdf::SetFont('Arial','B',12);
-                    $pdf::cell(35,8,"First Name",1,"","C");
-                    $pdf::cell(35,8,"Last Name",1,"","C");
-                    $pdf::cell(65,8,"Email",1,"","C");
-                    $pdf::cell(55,8,"Phone",1,"","C");
+                    $pdf::cell(25,8,"First Name",1,"","C");
+                    $pdf::cell(25,8,"Last Name",1,"","C");
+                    $pdf::cell(55,8,"Email",1,"","C");
+                    $pdf::cell(25,8,"Phone",1,"","C");
+                    $pdf::cell(25,8,"Campus",1,"","C");
+                    $pdf::cell(35,8,"Education",1,"","C");
                     $pdf::Ln();
 
                     foreach($students as $student)
@@ -303,12 +305,16 @@ class EventController extends Controller
                         $studentUserId = DB::table('students')->where('studentid', $student)->value('userid');
                         $studentEmail = DB::table('users')->where('id',$studentUserId)->value('email');
                         $studentPhone = DB::table('students')->where('studentid',$student)->value('phone');
+                        $studentCampus = DB::table('students')->where('studentid',$student)->value('campus');
+                        $studentEducation = DB::table('students')->where('studentid',$student)->value('education');
 
                         $pdf::SetFont("Arial","",10);
-                        $pdf::cell(35,8,$studentFirstName,1,"","C");
-                        $pdf::cell(35,8,$studentLastName,1,"","C");
-                        $pdf::cell(65,8,$studentEmail,1,"","C");
-                        $pdf::cell(55,8,"+60".$studentPhone,1,"","C");
+                        $pdf::cell(25,8,$studentFirstName,1,"","C");
+                        $pdf::cell(25,8,$studentLastName,1,"","C");
+                        $pdf::cell(55,8,$studentEmail,1,"","C");
+                        $pdf::cell(25,8,"+60".$studentPhone,1,"","C");
+                        $pdf::cell(25,8,$studentCampus,1,"","C");
+                        $pdf::cell(35,8,$studentEducation,1,"","C");
                         $pdf::Ln();
                     }
                     $pdf::Output($eventName.".pdf",'D');
