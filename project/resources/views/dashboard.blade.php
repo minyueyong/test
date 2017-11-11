@@ -80,7 +80,7 @@
 </style>
 
 <script>
-	var divs = ["demo1", "demo2","demo3", "demo4"];
+	var divs = ["demo1", "demo2","demo3", "demo4", "demo5"];
 	var visibleDivId = null;
 
 	function toggleVisibility(divId) 
@@ -568,7 +568,7 @@
 				</div>	
 			</div><!--row -->
 
-			<div class="row"  class = "collapse" id ="demo4" hidden>
+			<div class="row" class = "collapse" id ="demo4" hidden>
 				<div class="table-responsive col-sm-10" align="center">
 					<h3 class ="text-uppercase" style="font-weight:bold;font-size:2vw"><u>Analytics Review</u></h3><br>
 						@php
@@ -595,6 +595,57 @@
 						</table>	
 				</div>	
 			</div><!--row -->
+
+			<div class="row" class = "collapse" id ="demo5" hidden>
+				<div class="table-responsive col-sm-10" align = "center">
+					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>Waiting for Upgrade Approval</u></h3><br>
+						<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
+							@php
+								$companies = DB::table('upgrademembership')->where('upgradeApproval',0)->pluck('companyid');
+							@endphp
+							<thead>
+								<tr>
+									<th>Check Box</th>
+									<th>Company Name</th>
+									<th>Email</th>
+									<th>Phone</th>
+									<th>New Status</th>
+									<th>Created at</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								@foreach($companies as $company)
+									@php
+										$companyName = DB::table('companies')->where('companyid', $company)->value('companyName');
+										$companyUserId = DB::table('companies')->where('companyid', $company)->value('userid');
+										$upgradeApproval = DB::table('upgrademembership')->where('companyid',$company)->value('upgradeApproval');
+										$companyEmail = DB::table('users')->where('id',$companyUserId)->value('email');
+										$companyPhone = DB::table('companies')->where('companyid',$company)->value('phone');
+										$companyNewStatus = DB::table('upgrademembership')->where('companyid',$company)->value('upgradeStatus');
+										$companyCreatedAt = DB::table('users')->where('id',$companyUserId)->value('created_at');
+									@endphp
+
+									@if ($upgradeApproval === 0)
+										<tr>
+											<form action="/checkupgrademembershipapproval" method="post" enctype="multipart/form-data">
+												<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
+												<td><input name="company[]" type="checkbox" value="{!!$company!!}"></td>
+												<td>{!!$companyName!!}</td>
+												<td>{!!$companyEmail!!}</td>
+												<td>{!!$companyPhone!!}</td>
+												<td>{!!$companyNewStatus!!}</td>
+												<td>{!!$companyCreatedAt!!}</td>
+										</tr>
+									@endif
+								@endforeach
+							</tbody>
+						</table>
+						<br><input type="submit" name="checkUpgrade" class = "btn btn-default login-btn" value="Approve"/>
+						<input type="submit" name="checkUpgrade" class = "btn btn-default login-btn" value="Deny"/>		
+						</form>		
+				</div>	
+			</div><!--row -->
 		</div><!-- xs12 -->
 
 		<div class="col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
@@ -612,6 +663,10 @@
 
 			<div class= "list-group-item">
 				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics Review</button>
+			</div>
+
+			<div class= "list-group-item">
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo5');">Upgrade Approval</button>
 			</div>
 		</div><!--/.sidebar-offcanvas-->
 	</div>

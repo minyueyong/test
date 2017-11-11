@@ -546,11 +546,18 @@ class UserController extends Controller
     public function checkUpgradeMembership(Request $request)
     {
         $status = $request->input('status');
-        
-        //DB::table('companies')->insertGetId(['companyName'=>$companyName]);
+        $companyid = DB::table('companies')->where('userid',Auth::user()->id)->value('companyid');
+        $foundUpgradesApproval = DB::table('upgrademembership')->where('companyid',$companyid)->pluck('upgradeApproval');
+        foreach ($foundUpgradesApproval as $foundUpgradeApproval)
+        {
+            if ($foundUpgradeApproval == 0)
+                return redirect()->intended('/dashboard');
+        }
+        DB::table('upgrademembership')->insertGetId(['companyid'=>$companyid,'upgradeStatus'=>$status]);
         return redirect()->intended('/dashboard');
     }
-    /*public function checkUpgradeMembershipApproval(Request $request)
+
+    public function checkUpgradeMembershipApproval(Request $request)
     {
         $aCompany = $request->input('company');
 
@@ -559,9 +566,23 @@ class UserController extends Controller
             $N = count($aCompany);
             for ($i = 0; $i < $N; $i++)
             {
-                DB::table('companies')->where('companyid',$aCompany[$i])->update(['companyApproval'=> 1]);
+                DB::table('upgrademembership')->where('companyid',$aCompany[$i])->update(['upgradeApproval'=> 1]);
+                $status = DB::table('upgrademembership')->where('companyid',$aCompany[$i])->value('upgradeStatus');
+                $membershipDate = DB::table('companies')->where('companyid',$aCompany[$i])->value('membershipDate');
+                $oneMonthDate = date('Y-m-d', strtotime("+1 months", strtotime($membershipDate)));
+                $threeMonthDate = date('Y-m-d', strtotime("+3 months", strtotime($membershipDate)));
+                $sixMonthDate = date('Y-m-d', strtotime("+6 months", strtotime($membershipDate)));
+
+                if ($status == "Basic")
+                    $membershipDate = $oneMonthDate;
+                else if ($status == "Popular")
+                    $membershipDate = $threeMonthDate;
+                else if ($status == "Epic")
+                    $membershipDate = $sixMonthDate;
+
+                DB::table('companies')->where('companyid',$aCompany[$i])->update(['status'=>$status,'membershipDate'=>$membershipDate]);
             }
         }
        return view('/dashboard');
-    }*/
+    }
 }

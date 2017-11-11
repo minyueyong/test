@@ -28,6 +28,7 @@ Route::post('updateprofile','UserController@updateProfile');
 
 Route::get('upgrademembership','UserController@upgradeMembership');
 Route::post('checkupgrademembership', 'UserController@checkUpgradeMembership');
+Route::post('/checkupgrademembershipapproval','UserController@checkUpgradeMembershipApproval');
 
 Route::get('totalstudentsdetails','UserController@totalStudentsDetails');
 Route::get('totalcompaniesdetails','UserController@totalCompaniesDetails');
