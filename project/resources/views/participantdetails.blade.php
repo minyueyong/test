@@ -49,6 +49,7 @@
 		    </tbody>
 		</table>
 		<a href="/viewevent/{!!$eventid!!}/export2pdf" class = "btn btn-default login-btn">Export to PDF</a>
+		<a href="/viewevent/{!!$eventid!!}/export2excel" class = "btn btn-default login-btn">Export to Excel</a>
     </div>
 </div>
 @include('footer')

@@ -12,6 +12,10 @@ use App\User;
 use Illuminate\Support\Facades\Input;
 use Image;
 use Carbon\Carbon;
+use Mail;
+use App\Http\Controllers\Controller;
+use PHPMailerAutoload; 
+use PHPMailer;
 
 class UserController extends Controller
 {
@@ -90,8 +94,7 @@ class UserController extends Controller
             $interest = $request->input('interest');
         }
 
-        $status = "Basic";
-
+        $status = $request->input('status');
         if ($status == "Basic")
             $membershipDate = Carbon::now()->addMonths(1);
         else if ($status == "Popular")
@@ -180,7 +183,31 @@ class UserController extends Controller
 
                 if ($currentDate <= $membershipDate)
                 {
-                    return redirect()->intended('/dashboard');
+                    $threeDayDate = date('Y-m-d', strtotime("-3 days", strtotime($membershipDate)));
+                    $twoWeekDate = date('Y-m-d', strtotime("-2 weeks", strtotime($membershipDate)));
+                    $oneMonthDate = date('Y-m-d', strtotime("-1 months", strtotime($membershipDate)));
+
+                    if ($currentDate >= $threeDayDate)
+                    {
+                        echo '<script language="javascript">';
+                        echo 'alert("Your membership expired date is within 3 days!")';
+                        echo '</script>';
+                        return redirect()->action('UserController@sendEmail');
+                    }
+                    else if ($currentDate >= $twoWeekDate)
+                    {
+                        echo '<script language="javascript">';
+                        echo 'alert("Your membership expired date is within 2 weeks!")';
+                        echo '</script>';
+                        return redirect()->action('UserController@sendEmail');
+                    }
+                    else if ($currentDate >= $oneMonthDate)
+                    {
+                        echo '<script language="javascript">';
+                        echo 'alert("Your membership expired date is within 1 month!")';
+                        echo '</script>';
+                        return redirect()->action('UserController@sendEmail');
+                    }
                 }
                 else
                 {
@@ -195,8 +222,98 @@ class UserController extends Controller
 
         else
         {
+            echo '<script language="javascript">';
+            echo 'alert("Invalid UserName or Password")';
+            echo '</script>';
             return view('/signin');
         }
+    }
+
+    public function sendEmail()
+    {
+        $mail = new PHPMailer\PHPMailer\PHPMailer(true); // notice the \  you have to use root namespace here
+        $membershipDate = DB::table('companies')->where('userid',Auth::user()->id)->value('membershipDate');
+        $companyName = DB::table('companies')->where('userid',Auth::user()->id)->value('companyName');
+        $companyEmail = DB::table('users')->where('id',Auth::user()->id)->value('email');
+        $currentDate = date('Y-m-d');
+
+        if ($currentDate <= $membershipDate)
+        {
+            $threeDayDate = date('Y-m-d', strtotime("-3 days", strtotime($membershipDate)));
+            $twoWeekDate = date('Y-m-d', strtotime("-2 weeks", strtotime($membershipDate)));
+            $oneMonthDate = date('Y-m-d', strtotime("-1 months", strtotime($membershipDate)));
+
+            if ($currentDate >= $threeDayDate)
+            {
+                echo '<script language="javascript">';
+                echo 'alert("Your membership expired date is within 3 days!")';
+                echo '</script>';
+            }
+            else if ($currentDate >= $twoWeekDate)
+            {
+                echo '<script language="javascript">';
+                echo 'alert("Your membership expired date is within 2 weeks!")';
+                echo '</script>';
+            }
+            else if ($currentDate >= $oneMonthDate)
+            {
+                echo '<script language="javascript">';
+                echo 'alert("Your membership expired date is within 1 month!")';
+                echo '</script>';
+            }
+        }
+
+        try 
+        {
+          $mail->isSMTP(); // tell to use smtp
+          $mail->CharSet = "utf-8"; // set charset to utf8
+          $mail->SMTPAuth = true;  // use smpt auth
+          $mail->SMTPSecure = "ssl"; // or ssl
+          $mail->Host = "smtp.sendgrid.net";
+          $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing. 
+          $mail->Username = "apikey";
+          $mail->Password = "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";
+          $mail->setFrom("monsta@gmail.com", "MONSTA Asia");
+          $mail->Subject = "Membership Renewal Reminder";
+          $mail->MsgHTML("Hi $companyName,
+          <br>
+          <br>This is a reminder that your membership with Monsta will be expiring on $membershipDate.
+          <br>
+          <br>
+          If you’re still deciding whether or not to renew, or just haven’t gotten around to it yet, please let us remind you of what you’ll be missing if you do not renew. 
+          <br>
+          <br>
+          The attached image is the benefits you could get if you renew your membership. 
+          <br>
+          <br>
+          It couldn’t be easier - just click this link: http://monstabitnamiapp.com/upgrademembership to renew!
+          <br>
+          We hope that you will take the time to renew your membership and remain part of our community. 
+          <br>
+          <br>
+          <br>
+          Kind regards,
+          <br>
+          Monsta");
+
+          $mail->addAttachment(public_path('\images\subscriptionfees.png'));
+          $mail->addAddress($companyEmail, $companyName);
+          $mail->send();
+        } 
+        catch (phpmailerException $e) 
+        {
+          dd($e);
+        } 
+        catch (Exception $e) 
+        {
+          dd($e);
+        }
+
+        $results = DB::table('companies')->join('users',function ($join)
+        {
+            $join->on('companies.userid','=','users.id')->where('companies.userid','=',Auth::user()->id);
+        })->get();
+        return view('/dashboard')->with('results',$results);
     }
 
     public function logOut()
@@ -402,4 +519,49 @@ class UserController extends Controller
         }
         return redirect()->intended('dashboard');
     }
+
+    public function upgradeMembership()
+    {
+        if (Auth::check())
+        {
+            if (Auth::user()->role == 2)
+            {
+                $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
+                if ($companyApproval == 1)
+                    return view('/upgrademembership');
+                else
+                    return redirect()->intended('/dashboard');
+            }
+            else
+            {
+                return redirect()->intended('/dashboard');
+            }
+        }
+        else
+        {
+            return redirect()->intended('signin');
+        }
+    }
+
+    public function checkUpgradeMembership(Request $request)
+    {
+        $status = $request->input('status');
+        
+        //DB::table('companies')->insertGetId(['companyName'=>$companyName]);
+        return redirect()->intended('/dashboard');
+    }
+    /*public function checkUpgradeMembershipApproval(Request $request)
+    {
+        $aCompany = $request->input('company');
+
+        if(!empty($aCompany))
+        {
+            $N = count($aCompany);
+            for ($i = 0; $i < $N; $i++)
+            {
+                DB::table('companies')->where('companyid',$aCompany[$i])->update(['companyApproval'=> 1]);
+            }
+        }
+       return view('/dashboard');
+    }*/
 }

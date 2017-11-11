@@ -26,6 +26,9 @@ Route::get('dashboard/{companyid}', 'EventController@showCompany');
 Route::get('editprofile','UserController@editProfile');
 Route::post('updateprofile','UserController@updateProfile');
 
+Route::get('upgrademembership','UserController@upgradeMembership');
+Route::post('checkupgrademembership', 'UserController@checkUpgradeMembership');
+
 Route::get('totalstudentsdetails','UserController@totalStudentsDetails');
 Route::get('totalcompaniesdetails','UserController@totalCompaniesDetails');
 Route::get('totaleventsdetails','UserController@totalEventsDetails');
@@ -43,6 +46,7 @@ Route::get('signin', function ()
     }
 });
 Route::post('checksignin','UserController@signin');
+Route::get('sendemail','UserController@sendEmail');
 
 Route::get('signup', function () 
 {  
@@ -129,6 +133,7 @@ Route::get('viewevent/{id}', function ($id)
 Route::get('viewevent/{id}/participateevent','EventController@participateEvent');
 Route::get('/viewevent/{id}/participantdetails','EventController@participantDetails');
 Route::get('/viewevent/{id}/export2pdf','EventController@exportPDF');
+Route::get('/viewevent/{id}/export2excel','EventController@exportexcel');
 
 Route::post('/checkstudentattendance','EventController@checkStudentAttendance');
 
@@ -146,5 +151,3 @@ Route::get('forum/{id}', 'PostController@viewPost');
 Route::post('/forum/{id}/postcomment','PostController@postComment');
 
 Route::get('logout','UserController@logout');
-
-Route::get('sendemail','EmailController@sendEmail');

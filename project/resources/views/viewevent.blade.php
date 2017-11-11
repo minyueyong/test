@@ -261,6 +261,8 @@
                                             <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Mark Attendance</a>
                                         @endif
                                     @endif
+                                @else
+                                    <a href="/viewevent/{!!$id!!}/participateevent" class = "btn btn-default login-btn">Participate It!</a>
                                 @endif
                         </div>
                         <br>    

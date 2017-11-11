@@ -136,6 +136,7 @@ return [
     */
 
     'providers' => [
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         Anouar\Fpdf\FpdfServiceProvider::class,
         'Intervention\Image\ImageServiceProvider',
         /*
@@ -192,6 +193,7 @@ return [
     */
 
     'aliases' => [
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Fpdf' => Anouar\Fpdf\Facades\Fpdf::class,
         'Image' => 'Intervention\Image\Facades\Image',
         'App' => Illuminate\Support\Facades\App::class,

@@ -80,6 +80,16 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="input-icon"> <span class="glyphicon glyphicon-user"></span>
+                <select name = "status" id ="status" required>
+                    <option value = "" selected disabled>Membership Status </option>
+                    <option value="Basic">Basic </option>
+                    <option value="Popular">Popular </option>
+                    <option value="Epic">Epic </option>
+                </select>
+            </div>
+
              <div class="form-group">
                 <div class="input-icon"> <span class="glyphicon glyphicon-camera"></span> <input type="file" id="image" name="image" required/>
                 </div>

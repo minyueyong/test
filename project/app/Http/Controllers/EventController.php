@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Support\Facades\Input;
 use Image;
 use Fpdf;
+use Excel;
 
 class EventController extends Controller
 {
@@ -109,7 +110,7 @@ class EventController extends Controller
         }
         else
         {
-           return redirect()->intended('viewevent/'.$eventid);
+           return redirect()->intended('signin');
         }
     }
 
@@ -210,14 +211,7 @@ class EventController extends Controller
         $name = $request->input('eventname');
         $date = $request->input('eventdate');
         $venue = $request->input('eventvenue');
-        if ($request->input('fees') == "paid")
-        {
-            $fees = $request->input('feespaid');
-        }
-        else
-        {
-            $fees = $request->input('fees');
-        }
+    
         $description = $request->input('eventdescription');
         $image = $request->file('eventimage');
 
@@ -237,12 +231,6 @@ class EventController extends Controller
         {           
             $eventvenue = $venue;
             DB::table('events')->where('eventid',$eventid)->update(['eventVenue'=> $eventvenue]);
-        }
-
-        if (!empty($fees))
-        {           
-            $eventfees = $fees;
-            DB::table('events')->where('eventid',$eventid)->update(['eventFees'=> $eventfees]);
         }
 
         if (!empty($description))
@@ -325,6 +313,63 @@ class EventController extends Controller
         else
         {
             return redirect()->intended('viewevent/'.$eventid);
+        }
+    }
+
+    public function exportexcel($eventid) 
+    {
+        // Execute the query used to retrieve the data. In this example
+        // we're joining hypothetical users and payments tables, retrieving
+        // the payments table's primary key, the user's first and last name, 
+        // the user's e-mail address, the amount paid, and the payment
+        // timestamp.
+        if (Auth::check())
+        {
+            if (Auth::user()->role == 2 || Auth::user()->role == 3)
+            {
+                $companyApproval = DB::table('companies')->where('userid',Auth::user()->id)->value('companyApproval');
+                if ($companyApproval == 1 || Auth::user()->role == 3) 
+                {
+                    $eventName = DB::table('events')->where('eventid',$eventid)->value('eventName');
+                    $eventdetails= DB::table('studentsnevents')
+                        ->join('students', 'students.studentid', '=', 'studentsnevents.studentid')
+                        ->join('events', 'events.eventid', '=', 'studentsnevents.eventid')
+                        ->join('users', 'users.id', '=' ,'studentsnevents.eventid')
+                        ->where('studentsnevents.eventid', '=', $eventid)
+                        ->select('students.firstName', 'students.lastName', 'users.email', 'students.phone','students.campus','students.education')
+                        ->get();
+    
+                    // Initialize the array which will be passed into the Excel
+                    // generator.
+                    $eventArray = []; 
+                
+                    // Define the Excel spreadsheet headers
+                    $eventArray[] = ['First Name', 'Last Name','Email','Phone','Campus', 'Education'];
+        
+                    // Convert each member of the returned collection into an array,
+                    // and append it to the payments array.
+                    foreach ($eventdetails as $eventdetail) 
+                    {
+                        $eventArray[] = (array)$eventdetail;
+                    }
+        
+                    // Generate and return the spreadsheet
+                    Excel::create($eventName, function($excel) use ($eventArray) 
+                    {
+                        // Set the spreadsheet title, creator, and description
+                        $excel->setTitle("Event Details");
+                        $excel->setCreator('Monsta')->setCompany('Monsta');
+                        $excel->setDescription("Event Details");
+                
+                        // Build the spreadsheet, passing in the payments array
+                        $excel->sheet('sheet1', function($sheet) use ($eventArray) 
+                        {
+                            $sheet->fromArray($eventArray, null, 'A1', false, false);
+                        });
+                
+                    })->download('xlsx');
+                }
+            }
         }
     }
 

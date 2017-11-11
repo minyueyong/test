@@ -409,11 +409,11 @@
 					</div>
 
 					<div class= "list-group-item" style="font-size:1.5vw;">
-						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Edit Profile</button>
+						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="window.location ='{{ url("/editprofile")}}'">Edit Profile</button>
 					</div>
 
 					<div class= "list-group-item" style="font-size:1.5vw;">
-						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Upgrade Membership</button>
+						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="window.location ='{{ url("/upgrademembership")}}'">Upgrade Membership</button>
 					</div>
 				</div><!--/.sidebar-offcanvas-->
 			</div>
