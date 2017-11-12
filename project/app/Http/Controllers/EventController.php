@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Input;
 use Image;
 use Fpdf;
 use Excel;
+use Mail;
+use App\Http\Controllers\Controller;
+use PHPMailerAutoload; 
+use PHPMailer;
 
 class EventController extends Controller
 {
@@ -67,7 +71,11 @@ class EventController extends Controller
             echo 'alert("Create only upcoming events!")';
             echo '</script>';
         }
-        return view('/landingpage');
+        $results = DB::table('companies')->join('users',function ($join)
+        {
+            $join->on('companies.userid','=','users.id')->where('companies.userid','=',Auth::user()->id);
+        })->get();
+        return view('/dashboard')->with('results',$results);
     }
 
     public function participateEvent($eventid)
@@ -169,16 +177,71 @@ class EventController extends Controller
     public function checkEventApproval(Request $request)
     {
         $aEvent = $request->input('event');
+        $approval = $request->input('checkEvent');
 
-        if(!empty($aEvent))
+        if ($approval == "Approve")
         {
-            $N = count($aEvent);
-            for ($i = 0; $i < $N; $i++)
+            if(!empty($aEvent))
             {
-                DB::table('events')->where('eventid',$aEvent[$i])->update(['eventApproval'=> 1]);
+                $N = count($aEvent);
+                for ($i = 0; $i < $N; $i++)
+                {
+                    DB::table('events')->where('eventid',$aEvent[$i])->update(['eventApproval'=> 1]);
+                }
             }
         }
-       return view('/dashboard');
+        else if ($approval == "Deny")
+        {
+            $mail = new PHPMailer\PHPMailer\PHPMailer(true); 
+            $reason = $request->input('reason');
+            if(!empty($aEvent))
+            {
+                $N = count($aEvent);
+                for ($i = 0; $i < $N; $i++)
+                {
+                    $companyid = DB::table('events')->where('eventid',$aEvent[$i])->value('companyid');
+                    $eventName = DB::table('events')->where('eventid',$aEvent[$i])->value('eventName');
+                    $companyUserID = DB::table('companies')->where('companyid',$companyid)->value('userid');
+                    $companyemail = DB::table('users')->where('id',$companyUserID)->value('email');
+                    $companyName = DB::table('companies')->where('companyid',$companyid)->value('companyName');
+
+                    try 
+                    {
+                      $mail->isSMTP(); // tell to use smtp
+                      $mail->CharSet = "utf-8"; // set charset to utf8
+                      $mail->SMTPAuth = true;  // use smpt auth
+                      $mail->SMTPSecure = "ssl"; // or ssl
+                      $mail->Host = "smtp.sendgrid.net";
+                      $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing. 
+                      $mail->Username = "apikey";
+                      $mail->Password = "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";
+                      $mail->setFrom("monsta@gmail.com", "MONSTA Asia");
+                      $mail->Subject = "Rejection of event approval";
+                      $mail->MsgHTML("Dear $companyName, <br><br>
+                        Please note that your approval of upcoming activity, $eventName to be held has been rejected because of inappropriate $reason.  
+                        <br>
+                        Please feel free to contact us for more information regarding this matter. 
+                        <br><br><br>
+                        Yours sincerely, <br>
+                        MONSTA
+                        ");
+                      $mail->addAddress($companyemail, $companyName);
+                      $mail->send();
+                      $mail->ClearAllRecipients();
+                    } 
+                    catch (phpmailerException $e) 
+                    {
+                      dd($e);
+                    } 
+                    catch (Exception $e) 
+                    {
+                      dd($e);
+                    }
+                    DB::table('events')->where('eventid',$aEvent[$i])->delete();
+                }
+            }
+        }
+        return redirect()->intended('/dashboard');
     }
 
     public function editEvent($eventid)
@@ -246,6 +309,90 @@ class EventController extends Controller
             Image::make($image->getRealPath())->resize(500, 550)->save($path);
             $newimage = '/images/eventpic/'.$filename;
             DB::table('events')->where('eventid',$eventid)->update(['eventImage'=> $newimage]);
+        }
+
+        $mail = new PHPMailer\PHPMailer\PHPMailer(true); // notice the \  you have to use root namespace here
+        $students = DB::table('studentsnevents')->where('eventid', $eventid)->pluck('studentid');
+
+        foreach ($students as $student)
+        {
+            $studentUserID = DB::table('students')->where('studentid',$student)->value('userid');
+            $studentFName = DB::table('students')->where('studentid',$student)->value('firstName');
+            $studentEmail = DB::table('users')->where('id',$studentUserID)->value('email');
+            $eventName = DB::table('events')->where('eventid',$eventid)->value('eventName');
+            $eventDate = DB::table('events')->where('eventid',$eventid)->value('eventDate');
+            $eventVenue = DB::table('events')->where('eventid',$eventid)->value('eventVenue');
+            $companyid = DB::table('events')->where('eventid',$eventid)->value('companyid');
+            $companyName = DB::table('companies')->where('companyid',$companyid)->value('companyName');
+            $companyUserID = DB::table('companies')->where('companyid',$companyid)->value('userid');
+            $companyemail = DB::table('users')->where('id',$companyUserID)->value('email');
+
+            try 
+            {
+              $mail->isSMTP(); // tell to use smtp
+              $mail->CharSet = "utf-8"; // set charset to utf8
+              $mail->SMTPAuth = true;  // use smpt auth
+              $mail->SMTPSecure = "ssl"; // or ssl
+              $mail->Host = "smtp.sendgrid.net";
+              $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing. 
+              $mail->Username = "apikey";
+              $mail->Password = "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";
+              $mail->setFrom($companyemail, $companyName);
+              $mail->Subject = "Notification of Changing Activity Details";
+              $mail->MsgHTML("Dear $studentFName, <br><br>
+                Please note that the details for our upcoming activity $eventName, to be held on $eventDate.<br><br>
+                Due to unforeseen circumstances, it has become necessary for us to change our details. We apologize for any inconvenience this may cause. <br><br>
+                The activity will now be held at: $eventVenue.
+                <br><br><br>
+                Yours sincerely, <br>
+                $companyName
+                ");
+
+              $mail->addAddress($studentEmail, $studentFName);
+              $mail->send();
+              $mail->ClearAllRecipients();
+            } 
+            catch (phpmailerException $e) 
+            {
+              dd($e);
+            } 
+            catch (Exception $e) 
+            {
+              dd($e);
+            }
+        }
+
+        try 
+        {
+          $mail->isSMTP(); // tell to use smtp
+          $mail->CharSet = "utf-8"; // set charset to utf8
+          $mail->SMTPAuth = true;  // use smpt auth
+          $mail->SMTPSecure = "ssl"; // or ssl
+          $mail->Host = "smtp.sendgrid.net";
+          $mail->Port = 465; // most likely something different for you. This is the mailtrap.io port i use for testing. 
+          $mail->Username = "apikey";
+          $mail->Password = "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";
+          $mail->setFrom($companyemail, $companyName);
+          $mail->Subject = "Notification of Changing Activity Details";
+          $mail->MsgHTML("Dear Admin, <br><br>
+            Please note that the details for our upcoming activity, $eventName to be held on $eventDate.<br><br>
+            Due to unforeseen circumstances, it has become necessary for us to change our details. We apologize for any inconvenience this may cause. <br><br>
+            The activity will now be held at: $eventVenue.
+            <br><br><br>
+            Yours sincerely,<br> 
+            $companyName
+            ");
+
+          $mail->addAddress("evonmiyako.em@gmail.com", "Admin");
+          $mail->send();
+        } 
+        catch (phpmailerException $e) 
+        {
+          dd($e);
+        } 
+        catch (Exception $e) 
+        {
+          dd($e);
         }
         return redirect()->intended('viewevent/'.$eventid);
     }

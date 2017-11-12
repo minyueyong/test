@@ -44,7 +44,7 @@
 		margin-left: 1px;
 	}
 
-	#upcomingactiviteis
+	#upcomingactivities
 	{
 		margin-left: 2cm;
 	}
@@ -80,7 +80,7 @@
 </style>
 
 <script>
-	var divs = ["demo1", "demo2","demo3", "demo4", "demo5"];
+	var divs = ["review1", "review2","review3", "review4", "review5"];
 	var visibleDivId = null;
 
 	function toggleVisibility(divId) 
@@ -113,13 +113,22 @@
 			}
 		}
 	}
+
+	function showReason(div1)
+	{
+		var e = document.getElementById(div1);
+       	if(e.style.display == 'block')
+          	e.style.display = 'none';
+       	else
+          	e.style.display = 'block';
+	}
 </script>
 
 @if (Auth::user()->role === 1)
 <div class = "containerfluid1">
 	<div class="row">
 		<div class="col-sm-9 col-sm-push-3">
-			<div class="table-responsive col-sm-10" id = "demo1">
+			<div class="table-responsive col-sm-10" id = "review1">
 				<table class="table table-condensed table-bordered">
 						<div class="row"  class = "collapse" >
 							<h2 style="font-size:2vw;" id="communitystats"><u>Community Stats</u></h2>
@@ -166,7 +175,7 @@
 
 			<div class="table-responsive col-sm-10" >
 				<table class="table table-condensed table-bordered">
-					<div class="row" id = "demo2" class = "collapse" hidden>
+					<div class="row" id = "review2" class = "collapse" hidden>
 						<div class="col-sm-6">
 							<div style="font-size:18px">
 								<h2 style="font-size:2vw;" id="participatedactivities"><u>Participated Activities</u></h2>
@@ -247,11 +256,11 @@
 			</table>
 			<br>
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Profile</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('review1');">Profile</button>
 			</div>
 
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');" id="activitiesreview">Activities Review</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('review2');" id="activitiesreview">Activities Review</button>
 			</div>
 	  </div>
 	</div>
@@ -283,8 +292,8 @@
 											<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/postevent")}}'" style="font-size:1vw;"><b>Create New Activity</b></button></th>
 										@endif
 
-										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo2');" style="font-size:1vw;"><b>View Past Activities</b></button></th>
-										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo3');" style="font-size:1vw;"><b>View Upcoming Activities</b></button></th>
+										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('review2');" style="font-size:1vw;"><b>View Past Activities</b></button></th>
+										<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('review3');" style="font-size:1vw;"><b>View Upcoming Activities</b></button></th>
 									</tr>
 								</thead>
 							</table>   
@@ -308,7 +317,7 @@
 						</div>
 					</div>
 
-					<div class="row" id = "demo1" class = "collapse">
+					<div class="row" id = "review1" class = "collapse">
 						<div class="col-sm-6">
 							<div style="font-size:18px">
 								<h2 style="font-size:2vw;"><u>Contact Information</u></h2>
@@ -329,7 +338,7 @@
 
 					<div class="row"  class = "collapse">
 						<div class="col-sm-12">
-							<div style="font-size:18px" id = "demo3" hidden>
+							<div style="font-size:18px" id = "review3" hidden>
 								<h2 style="font-size:2vw;"><u>Upcoming Activities</u></h2><br>
 								<div >
 									<table>
@@ -362,7 +371,7 @@
 						</div><!--/.col-xs-6.col-sm-6-->
 
 						<div class="col-sm-7" >
-						<div style="font-size:18px" id="demo2" hidden>
+						<div style="font-size:18px" id="review2" hidden>
 								<h2 style="font-size:2vw;"><u>Past Activities</u></h2><br>
 								<div>
 									@php 
@@ -405,7 +414,7 @@
 					
 					<br>
 					<div class= "list-group-item" style="font-size:1.5vw;">
-						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Dashboard</button>
+						<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('review1');">Dashboard</button>
 					</div>
 
 					<div class= "list-group-item" style="font-size:1.5vw;">
@@ -428,7 +437,7 @@
 <div class="containerfluid3">
     <div class="row">
         <div class="col-sm-9 col-sm-push-3">
-			<div class="row"  class = "collapse" id ="demo1">
+			<div class="row"  class = "collapse" id ="review1">
 				<div class="table-responsive col-sm-10" align = "center">
 					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw "><u>Waiting for Approval Company</u></h3><br>
 					<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
@@ -474,12 +483,12 @@
 						</tbody>
 					</table>
 						<br><input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Approve">
-						<input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Deny"/>	
-						</form>					
+						<input type="submit" name="checkCompany" class = "btn btn-default login-btn" value="Deny"/>	
+							</form>					
 				</div>	
 			</div><!--row -->
 
-			<div class="row" class = "collapse" id ="demo2" hidden>
+			<div class="row" class = "collapse" id ="review2" hidden>
 				<div class="table-responsive col-sm-10" align = "center">
 					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>Waiting for Approval Activities</u></h3><br>
 						<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
@@ -522,12 +531,72 @@
 							</tbody>
 						</table>
 						<br><input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve"/>
-						<input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Deny"/>		
+						<input type="submit" name="checkEventReason" class = "btn btn-default login-btn" value="Deny" onclick="showReason('div1')"/>	
+						<div id="div1" style="display:none;">
+							<br>
+							<span class="glyphicon glyphicon-list-alt"></span>
+                            <select name = "reason" id ="reason">
+                                <option value = "" selected disabled>Deny Reason</option>
+                                <option value="image">Inappropriate Image </option>
+                                <option value="name">Inappropriate Event Name </option>
+                                <option value="seats">Inappropriate Seats Available</option>
+                            </select>
+                            <input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Deny"/>
+						</div>
 						</form>		
 				</div>	
 			</div><!--row -->
 
-			<div class="row"  class = "collapse" id ="demo3" hidden>
+			<div class="row" class = "collapse" id ="review3" hidden>
+				<div class="table-responsive col-sm-10" align = "center">
+					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>Waiting for Upgrade Approval</u></h3><br>
+						<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
+							@php
+								$companies = DB::table('upgrademembership')->where('upgradeApproval',0)->pluck('companyid');
+							@endphp
+							<thead>
+								<tr>
+									<th>Check Box</th>
+									<th>Company Name</th>
+									<th>Email</th>
+									<th>Phone</th>
+									<th>New Status</th>
+									<th>Created at</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								@foreach($companies as $company)
+									@php
+										$companyName = DB::table('companies')->where('companyid', $company)->value('companyName');
+										$companyUserId = DB::table('companies')->where('companyid', $company)->value('userid');
+										$upgradeApproval = DB::table('upgrademembership')->where('companyid',$company)->value('upgradeApproval');
+										$companyEmail = DB::table('users')->where('id',$companyUserId)->value('email');
+										$companyPhone = DB::table('companies')->where('companyid',$company)->value('phone');
+										$companyNewStatus = DB::table('upgrademembership')->where('companyid',$company)->value('upgradeStatus');
+										$companyCreatedAt = DB::table('users')->where('id',$companyUserId)->value('created_at');
+									@endphp
+
+									<tr>
+										<form action="/checkupgrademembershipapproval" method="post" enctype="multipart/form-data">
+											<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
+											<td><input name="company[]" type="checkbox" value="{!!$company!!}"></td>
+											<td>{!!$companyName!!}</td>
+											<td>{!!$companyEmail!!}</td>
+											<td>{!!$companyPhone!!}</td>
+											<td>{!!$companyNewStatus!!}</td>
+											<td>{!!$companyCreatedAt!!}</td>
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
+						<br><input type="submit" name="checkUpgrade" class = "btn btn-default login-btn" value="Approve"/>
+						<input type="submit" name="checkUpgrade" class = "btn btn-default login-btn" value="Deny"/>		
+						</form>		
+				</div>	
+			</div><!--row -->
+
+			<div class="row"  class = "collapse" id ="review4" hidden>
 				<div class="table-responsive col-sm-10" align="center">
 					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>All Activities Statistics</u></h3><br>
 						<table class="table-responsive table-condensed table-bordered" style="font-size:1.3vw;">
@@ -568,7 +637,7 @@
 				</div>	
 			</div><!--row -->
 
-			<div class="row" class = "collapse" id ="demo4" hidden>
+			<div class="row" class = "collapse" id ="review5" hidden>
 				<div class="table-responsive col-sm-10" align="center">
 					<h3 class ="text-uppercase" style="font-weight:bold;font-size:2vw"><u>Analytics Review</u></h3><br>
 						@php
@@ -595,78 +664,27 @@
 						</table>	
 				</div>	
 			</div><!--row -->
-
-			<div class="row" class = "collapse" id ="demo5" hidden>
-				<div class="table-responsive col-sm-10" align = "center">
-					<h3 class ="text-uppercase" style="font-weight:bold; font-size:2vw"><u>Waiting for Upgrade Approval</u></h3><br>
-						<table class="table-responsive table-condensed table-bordered" style="font-size:1.5vw;">
-							@php
-								$companies = DB::table('upgrademembership')->where('upgradeApproval',0)->pluck('companyid');
-							@endphp
-							<thead>
-								<tr>
-									<th>Check Box</th>
-									<th>Company Name</th>
-									<th>Email</th>
-									<th>Phone</th>
-									<th>New Status</th>
-									<th>Created at</th>
-								</tr>
-							</thead>
-
-							<tbody>
-								@foreach($companies as $company)
-									@php
-										$companyName = DB::table('companies')->where('companyid', $company)->value('companyName');
-										$companyUserId = DB::table('companies')->where('companyid', $company)->value('userid');
-										$upgradeApproval = DB::table('upgrademembership')->where('companyid',$company)->value('upgradeApproval');
-										$companyEmail = DB::table('users')->where('id',$companyUserId)->value('email');
-										$companyPhone = DB::table('companies')->where('companyid',$company)->value('phone');
-										$companyNewStatus = DB::table('upgrademembership')->where('companyid',$company)->value('upgradeStatus');
-										$companyCreatedAt = DB::table('users')->where('id',$companyUserId)->value('created_at');
-									@endphp
-
-									@if ($upgradeApproval === 0)
-										<tr>
-											<form action="/checkupgrademembershipapproval" method="post" enctype="multipart/form-data">
-												<input type = "hidden" name = "_token" value = "<?php echo csrf_token();?>">
-												<td><input name="company[]" type="checkbox" value="{!!$company!!}"></td>
-												<td>{!!$companyName!!}</td>
-												<td>{!!$companyEmail!!}</td>
-												<td>{!!$companyPhone!!}</td>
-												<td>{!!$companyNewStatus!!}</td>
-												<td>{!!$companyCreatedAt!!}</td>
-										</tr>
-									@endif
-								@endforeach
-							</tbody>
-						</table>
-						<br><input type="submit" name="checkUpgrade" class = "btn btn-default login-btn" value="Approve"/>
-						<input type="submit" name="checkUpgrade" class = "btn btn-default login-btn" value="Deny"/>		
-						</form>		
-				</div>	
-			</div><!--row -->
 		</div><!-- xs12 -->
 
 		<div class="col-sm-3 col-sm-pull-9 sidebar-offcanvas" id="sidebar">
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Company Approval</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('review1');">Company Approval</button>
 			</div>
 
 			<div class= "list-group-item" >
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo2');">Activities Approval</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('review2');">Activities Approval</button>
 			</div>
 
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo3');">Activities Statistics</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('review3');">Upgrade Approval</button>
 			</div>
 
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo4');">Analytics Review</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('review4');">Activities Statistics</button>
 			</div>
 
 			<div class= "list-group-item">
-				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo5');">Upgrade Approval</button>
+				<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('review5');">Analytics Review</button>
 			</div>
 		</div><!--/.sidebar-offcanvas-->
 	</div>

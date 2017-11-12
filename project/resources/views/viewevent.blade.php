@@ -273,19 +273,15 @@
                             <div>
                                 <p style = "font-size:20px; color:red; margin-left:0.5cm;"><u><b> Related Activities</b></u></p>
                                 @php
-                                    $relatedUpcomingEventsID = DB::table('events')->pluck('eventid');
+                                    $relatedUpcomingEvents = DB::table('events')->where('eventDate','>',$currentDate)->take(4)->get();
                                 @endphp
 
-                                @foreach($relatedUpcomingEventsID as $relatedUpcomingEventID)
-                                    @php
-                                        $relatedDate = DB::table('events')->where('eventid', $relatedUpcomingEventID)->value('eventDate');
-                                    @endphp
-                                    
-                                    @if ($relatedDate > $currentDate && $relatedUpcomingEventID != $id)
+                                @foreach($relatedUpcomingEvents as $relatedUpcomingEvent)
+                                    @if ($relatedUpcomingEvent->eventid != $id)
                                         @php
-                                            $relatedEventImage = DB::table('events')->where('eventid', $relatedUpcomingEventID)->value('eventImage');
+                                            $relatedEventImage = DB::table('events')->where('eventid', $relatedUpcomingEvent->eventid)->value('eventImage');
                                         @endphp
-                                        <a href="{{ url('viewevent/'.$relatedUpcomingEventID) }}" id="thumbnail">
+                                        <a href="{{ url('viewevent/'.$relatedUpcomingEvent->eventid) }}" id="thumbnail">
                                             <img id="eventimage2" src = "{!!$relatedEventImage!!}" alt="eventpic" class="img-square img-responsive img-thumbnail"/>
                                         </a>
                                         <br>

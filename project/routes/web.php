@@ -139,7 +139,7 @@ Route::get('/viewevent/{id}/export2excel','EventController@exportexcel');
 Route::post('/checkstudentattendance','EventController@checkStudentAttendance');
 
 Route::get('/viewevent/{id}/editevent','EventController@editEvent');
-Route::post('/updateevent','EventController@updateEvent');
+Route::post('updateevent','EventController@updateEvent');
 
 Route::post('/viewevent/{id}/postcomment','EventController@postComment');
 

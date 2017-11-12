@@ -22,7 +22,7 @@
 </style>
 
 <script>
-	var divs = ["demo1", "demo2","demo3", "demo4"];
+	var divs = ["review1", "review2","review3", "review4"];
 	var visibleDivId = null;
 
 	function toggleVisibility(divId) 
@@ -69,8 +69,8 @@
 									$totalEvent = DB::table('events')->where('companyid',$companyid)->count('eventid');
 								@endphp
 
-								<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo2');" style="font-size:1vw;"><b>View Past Activities</b></button></th>
-								<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('demo3');" style="font-size:1vw;"><b>View Upcoming Activities</b></button></th>
+								<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('review2');" style="font-size:1vw;"><b>View Past Activities</b></button></th>
+								<th><button type = "button" class = "btn btn-default navbar-btn login-btn" onclick="toggleVisibility('review3');" style="font-size:1vw;"><b>View Upcoming Activities</b></button></th>
 							</tr>
 						</thead>
 					</table>   
@@ -94,7 +94,7 @@
 				</div>
 			</div>
 
-			<div class="row" id = "demo1" class = "collapse">
+			<div class="row" id = "review1" class = "collapse">
 				<div class="col-sm-6">
 					<div style="font-size:18px">
 						@php 
@@ -119,7 +119,7 @@
 
 			<div class="row"  class = "collapse">
 				<div class="col-sm-12">
-					<div style="font-size:18px" id = "demo3" hidden>
+					<div style="font-size:18px" id = "review3" hidden>
 						<h2 style="font-size:2vw; font-family:Georgia; color: #FF7171;"><u>Upcoming Activities</u></h2><br>
 							<div>
 								<table>
@@ -150,7 +150,7 @@
 					</div>
 
 					<div class="col-sm-7">
-						<div style="font-size:18px" id="demo2" hidden>
+						<div style="font-size:18px" id="review2" hidden>
 						<h2 style="font-size:2vw; font-family:Georgia; color: #FF7171;"><u>Past Activities</u></h2><br>
 							<div>
 								@php 
@@ -196,7 +196,7 @@
 					
 				<br>
 				<div class= "list-group-item" style="font-size:1.5vw;">
-					<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('demo1');">Dashboard</button>
+					<button class = "btn btn-default navbar-btn" data-toggle="collapse" onclick="toggleVisibility('review1');">Dashboard</button>
 				</div>
 			</div><!--/.sidebar-offcanvas-->
 		</div>
