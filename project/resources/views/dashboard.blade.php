@@ -531,7 +531,7 @@
 							</tbody>
 						</table>
 						<br><input type="submit" name="checkEvent" class = "btn btn-default login-btn" value="Approve"/>
-						<input type="submit" name="checkEventReason" class = "btn btn-default login-btn" value="Deny" onclick="showReason('div1')"/>	
+						<input type="button" style="width: 2cm;" name="checkEventReason" class = "btn btn-default login-btn" value="Deny" onclick="showReason('div1')"/>	
 						<div id="div1" style="display:none;">
 							<br>
 							<span class="glyphicon glyphicon-list-alt"></span>

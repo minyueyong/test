@@ -194,6 +194,7 @@ class EventController extends Controller
         {
             $mail = new PHPMailer\PHPMailer\PHPMailer(true); 
             $reason = $request->input('reason');
+
             if(!empty($aEvent))
             {
                 $N = count($aEvent);
@@ -216,9 +217,9 @@ class EventController extends Controller
                       $mail->Username = "apikey";
                       $mail->Password = "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";
                       $mail->setFrom("monsta@gmail.com", "MONSTA Asia");
-                      $mail->Subject = "Rejection of event approval";
+                      $mail->Subject = "Rejection of activity approval";
                       $mail->MsgHTML("Dear $companyName, <br><br>
-                        Please note that your approval of upcoming activity, $eventName to be held has been rejected because of inappropriate $reason.  
+                        Please note that your approval of upcoming activity, $eventName to be held has been rejected because of inappropriate activity $reason.  
                         <br>
                         Please feel free to contact us for more information regarding this matter. 
                         <br><br><br>
