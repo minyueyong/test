@@ -273,7 +273,7 @@
                             <div>
                                 <p style = "font-size:20px; color:red; margin-left:0.5cm;"><u><b> Related Activities</b></u></p>
                                 @php
-                                    $relatedUpcomingEvents = DB::table('events')->where('eventDate','>',$currentDate)->take(4)->get();
+                                    $relatedUpcomingEvents = DB::table('events')->where('eventDate','>',$currentDate)->where(DB::raw('eventApproval'), 1)->take(4)->get();
                                 @endphp
 
                                 @foreach($relatedUpcomingEvents as $relatedUpcomingEvent)

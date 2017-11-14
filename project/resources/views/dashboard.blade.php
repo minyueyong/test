@@ -51,7 +51,7 @@
 
 	#showupcomingactivities
 	{
-		margin-left: 1.8cm;
+		margin-left: 1cm;
 	}
 
 	#vieweventlink:hover

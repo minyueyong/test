@@ -52,9 +52,9 @@
 $(document).ready(function() 
 {
     $('#forumtable').DataTable({
-    	"aLengthMenu": [[1, 3, 5, -1], [1, 3, 5, "All"]],
-        "iDisplayLength": 1
-    });
+    	"aLengthMenu": [[3, 5, 7, -1], [3, 5, 7, "All"]],
+        "iDisplayLength": 3
+    }); 
 } );
 </script>
 

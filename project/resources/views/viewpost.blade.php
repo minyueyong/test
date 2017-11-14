@@ -14,7 +14,7 @@
     else if ($role == 2)
     {
         $name = DB::table('companies')->where('userid',$userid)->value('companyName');
-        $image = DB::table('students')->where('userid',$userid)->value('image');
+        $image = DB::table('companies')->where('userid',$userid)->value('image');
     }
 
     else if ($role == 3)

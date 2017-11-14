@@ -305,7 +305,7 @@ class UserController extends Controller
           The attached image is the benefits you could get if you renew your membership. 
           <br>
           <br>
-          It couldn’t be easier - just click this link: http://monstabitnamiapp.com/upgrademembership to renew!
+          It couldn’t be easier - just click this link: http://monsta.bitnamiapp.com/upgrademembership to renew!
           <br>
           We hope that you will take the time to renew your membership and remain part of our community. 
           <br>
@@ -315,7 +315,7 @@ class UserController extends Controller
           <br>
           Monsta");
 
-          $mail->addAttachment(public_path('\images\subscriptionfees.png'));
+          $mail->addAttachment(public_path('images/subscriptionfees.png'));
           $mail->addAddress($companyEmail, $companyName);
           $mail->send();
         } 

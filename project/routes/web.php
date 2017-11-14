@@ -26,6 +26,8 @@ Route::get('dashboard/{companyid}', 'EventController@showCompany');
 Route::get('editprofile','UserController@editProfile');
 Route::post('updateprofile','UserController@updateProfile');
 
+Route::get('upgrademembershipemail','UserController@upgrademembershipemail');
+
 Route::get('upgrademembership','UserController@upgradeMembership');
 Route::post('checkupgrademembership', 'UserController@checkUpgradeMembership');
 Route::post('/checkupgrademembershipapproval','UserController@checkUpgradeMembershipApproval');
