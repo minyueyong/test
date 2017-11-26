@@ -193,7 +193,7 @@
           Join Monsta University Network to build your EXPERIENCE <br>
           to discover your PASSION and MAKE AN IMPACT.
           </b> <br> <br>
-          <button type = "button" id="lbutton" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/events")}}'">HAVE A LOOK</button>
+          <button type = "button" id="lbutton" class = "btn btn-default navbar-btn login-btn" onclick="window.location ='{{ url("/events")}}'">VIEW ACTIVITIES</button>
         </p>
       </div>
   </div>

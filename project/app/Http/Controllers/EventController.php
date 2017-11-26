@@ -61,14 +61,14 @@ class EventController extends Controller
             })->value('companies.companyid');
             $id = DB::table('events')->insertGetId(['eventName'=>$name, 'eventDate'=>$date, 'eventVenue'=>$venue, 'eventInterest'=>$interest, 'eventSeats'=>$seats, 'eventFees'=>$fees, 'eventimage'=>$newimage, 'eventDescription'=>$description,'companyid'=>$companyid]);
             echo '<script language="javascript">';
-            echo 'alert("The event is waiting for admin approval!")';
+            echo 'alert("The activity is waiting for admin approval!")';
             echo '</script>';
         }
 
         else
         {
             echo '<script language="javascript">';
-            echo 'alert("Create only upcoming events!")';
+            echo 'alert("Create only upcoming activities!")';
             echo '</script>';
         }
         $results = DB::table('companies')->join('users',function ($join)

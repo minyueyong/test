@@ -46,7 +46,7 @@
 
 	#upcomingactivities
 	{
-		margin-left: 2cm;
+		margin-left: 1cm;
 	}
 
 	#showupcomingactivities

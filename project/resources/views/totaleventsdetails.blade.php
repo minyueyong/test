@@ -2,21 +2,21 @@
 	$events = DB::table('events')->pluck('eventid');
 @endphp
 
-<title>Total Events Details</title>
+<title>Total Activities Details</title>
 @extends('header')
 @section('content')
 <link href="{{ asset('/css/default.css') }}" rel="stylesheet"/> 
 
 <div class = "container">
     <div class = "page-header">
-    	<h3 class = "text-uppercase">Total Events Details</h3>
+    	<h3 class = "text-uppercase">Total Activities Details</h3>
     </div>
 
     <div>
     	<table class = "table table-responsive table-condensed">
     		<thead>
     			<tr>
-    				<th>Event Name</th>
+    				<th>Activity Name</th>
     				<th>Date</th>
     				<th>Venue</th>
     				<th>Seats Left</th>
